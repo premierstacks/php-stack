@@ -97,27 +97,29 @@ Leverage the extensive utilities provided by PHP Util in your PHP projects, enha
 
 declare(strict_types=1);
 
-use Tomchochola\PhpUtil\Mixed\Check;
 use Tomchochola\PhpUtil\IO\ResourceObject;
+use Tomchochola\PhpUtil\Mixed\Assert;
+use Tomchochola\PhpUtil\Mixed\Check;
+use Tomchochola\PhpUtil\Mixed\Is;
 use Tomchochola\PhpUtil\Support\Resources;
 
 // Runtime check for mixed types
-$listOfInts = Check::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a));
-$listOfArraysOfStrings = Check::arrayOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b)));
+$listOfInt = Check::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a)); // [1, 2, 3]
+$listOfArrayOfString = Check::listOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b))); // [['key' => 'value']]
 
 // Assertion check for mixed types
-$listOfInts = Assert::listOf($_GET['ints'], static fn (mixed $a): int => Assert::int($a));
-$listOfArraysOfStrings = Assert::arrayOf($_POST['arrays'], static fn (mixed $a): array => Assert::arrayOf($a, static fn (mixed $b): string => Assert::string($b)));
+$listOfInts = Assert::listOf($_GET['ints'], static fn (mixed $a): int => Assert::int($a)); // [1, 2, 3]
+$listOfArrayOfString = Assert::listOf($_POST['arrays'], static fn (mixed $a): array => Assert::arrayOf($a, static fn (mixed $b): string => Assert::string($b))); // [['key' => 'value']]
 
 // Is check for mixed types
-$isListOfInts = Is::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a));
-$isListOfArraysOfStrings = Is::arrayOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b)));
+$isListOfInt = Is::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a)); // [1, 2, 3]
+$isListOfArrayOfString = Is::listOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b))); // [['key' => 'value']]
 
 // Resources object wrapper
 $resource = new ResourceObject(Resources::temp());
 $resource->fputcsv(['a', 'b', 'c']);
 $resource->rewind();
-$resource->fpassthru();
+$resource->fpassthru(); // prints a,b,c
 ```
 
 ### 4️⃣ Attribution
