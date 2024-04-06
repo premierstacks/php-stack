@@ -85,12 +85,40 @@ Add the following to your `composer.json`:
 Then, execute:
 
 ```shell
-composer require --dev tomchochola/php-util:@dev
+composer require tomchochola/php-util:@dev
 ```
 
 ### 3️⃣ Utilize PHP Util
 
 Leverage the extensive utilities provided by PHP Util in your PHP projects, enhancing functionality and efficiency with ease.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Tomchochola\PhpUtil\Mixed\Check;
+use Tomchochola\PhpUtil\IO\ResourceObject;
+use Tomchochola\PhpUtil\Support\Resources;
+
+// Runtime check for mixed types
+$listOfInts = Check::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a));
+$listOfArraysOfStrings = Check::arrayOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b)));
+
+// Assertion check for mixed types
+$listOfInts = Assert::listOf($_GET['ints'], static fn (mixed $a): int => Assert::int($a));
+$listOfArraysOfStrings = Assert::arrayOf($_POST['arrays'], static fn (mixed $a): array => Assert::arrayOf($a, static fn (mixed $b): string => Assert::string($b)));
+
+// Is check for mixed types
+$isListOfInts = Is::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a));
+$isListOfArraysOfStrings = Is::arrayOf($_POST['arrays'], static fn (mixed $a): array => Check::arrayOf($a, static fn (mixed $b): string => Check::string($b)));
+
+// Resources object wrapper
+$resource = new ResourceObject(Resources::temp());
+$resource->fputcsv(['a', 'b', 'c']);
+$resource->rewind();
+$resource->fpassthru();
+```
 
 ### 4️⃣ Attribution
 
