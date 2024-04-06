@@ -1,0 +1,40 @@
+{
+  "name": "@tomchochola/php-util",
+  "description": "php util",
+  "keywords": [
+    "tomchochola",
+    "php-util"
+  ],
+  "homepage": "https://github.com/tomchochola/php-util",
+  "bugs": {
+    "email": "chocholatom1997@gmail.com",
+    "url": "https://github.com/tomchochola/php-util/issues"
+  },
+  "license": "SEE LICENSE IN ./LICENSE.md",
+  "author": {
+    "email": "chocholatom1997@gmail.com",
+    "name": "Tomáš Chochola",
+    "url": "https://github.com/tomchochola"
+  },
+  "contributors": [
+    {
+      "email": "chocholatom1997@gmail.com",
+      "name": "Tomáš Chochola",
+      "url": "https://github.com/tomchochola"
+    }
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/tomchochola"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomchochola/php-util.git"
+  },
+  "devDependencies": {
+    "@tomchochola/prettier-config": "github:tomchochola/prettier-config",
+    "@tomchochola/eslint-config": "github:tomchochola/eslint-config"
+  },
+  "private": true,
+  "type": "module"
+}

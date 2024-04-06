@@ -1,0 +1,9 @@
+includes:
+  - ./vendor/tomchochola/phpstan-config/src/configs/recommended.neon
+
+parameters:
+  checkTooWideReturnTypesInProtectedAndPublicMethods: false
+
+  paths:
+    - ./src
+    - ./tests
