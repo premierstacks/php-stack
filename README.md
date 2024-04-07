@@ -97,6 +97,8 @@ Leverage the extensive utilities provided by PHP Util in your PHP projects, enha
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Tomchochola\PhpUtil\IO\ResourceObject;
 use Tomchochola\PhpUtil\Mixed\Assert;
 use Tomchochola\PhpUtil\Mixed\Check;
