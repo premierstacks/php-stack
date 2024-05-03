@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Support;
+namespace Premierstacks\PhpUtil\Support;
 
 class Arrays
 {

@@ -23,8 +23,8 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase as VendorTestCase;
-use Tomchochola\PhpUtil\Testing\TestInterface;
-use Tomchochola\PhpUtil\Testing\TestTrait;
+use Premierstacks\PhpUtil\Testing\TestInterface;
+use Premierstacks\PhpUtil\Testing\TestTrait;
 
 /**
  * @internal

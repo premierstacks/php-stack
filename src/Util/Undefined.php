@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Util;
+namespace Premierstacks\PhpUtil\Util;
 
 enum Undefined
 {

@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Encoding;
+namespace Premierstacks\PhpUtil\Encoding;
 
-use Tomchochola\PhpUtil\IO\ResourceObject;
-use Tomchochola\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\IO\ResourceObject;
+use Premierstacks\PhpUtil\Support\Resources;
 
 class Csv
 {

@@ -1,4 +1,4 @@
-# [PHP Util](https://github.com/tomchochola/php-util) by [Tomáš Chochola](https://github.com/tomchochola)
+# [PHP Util](https://github.com/premierstacks/php-util) by [Tomáš Chochola](https://github.com/tomchochola)
 
 Elevate PHP development with PHP Util: a comprehensive suite offering innovative solutions for data handling, error management, and more. Designed for streamlined integration and enhanced efficiency.
 
@@ -76,8 +76,8 @@ Add the following to your `composer.json`:
 ```json
 "repositories": [
     {
-        "type": "vcs",
-        "url": "https://github.com/tomchochola/php-util.git"
+        "type": "git",
+        "url": "https://github.com/premierstacks/php-util.git"
     }
 ]
 ```
@@ -85,7 +85,7 @@ Add the following to your `composer.json`:
 Then, execute:
 
 ```shell
-composer require tomchochola/php-util:@dev
+composer require premierstacks/php-util:@dev
 ```
 
 ### 3️⃣ Utilize PHP Util
@@ -99,11 +99,11 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Tomchochola\PhpUtil\IO\ResourceObject;
-use Tomchochola\PhpUtil\Mixed\Assert;
-use Tomchochola\PhpUtil\Mixed\Check;
-use Tomchochola\PhpUtil\Mixed\Is;
-use Tomchochola\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\IO\ResourceObject;
+use Premierstacks\PhpUtil\Mixed\Assert;
+use Premierstacks\PhpUtil\Mixed\Check;
+use Premierstacks\PhpUtil\Mixed\Is;
+use Premierstacks\PhpUtil\Support\Resources;
 
 // Runtime check for mixed types
 $listOfInt = Check::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a)); // [1, 2, 3]

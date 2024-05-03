@@ -16,6 +16,6 @@
  * - Sponsor & License: https://github.com/sponsors/tomchochola
  */
 
-import { configs } from '@tomchochola/eslint-config';
+import { configs } from '@premierstacks/eslint-config';
 
 export default [...configs.ignores(), ...configs.node(), ...configs.configs()];

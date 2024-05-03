@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Mixed;
+namespace Premierstacks\PhpUtil\Mixed;
 
 use BackedEnum as B;
 

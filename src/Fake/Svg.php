@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Fake;
+namespace Premierstacks\PhpUtil\Fake;
 
 class Svg
 {

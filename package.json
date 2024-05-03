@@ -1,14 +1,14 @@
 {
-  "name": "@tomchochola/php-util",
+  "name": "@premierstacks/php-util",
   "description": "php util",
   "keywords": [
-    "tomchochola",
+    "premierstacks",
     "php-util"
   ],
-  "homepage": "https://github.com/tomchochola/php-util",
+  "homepage": "https://github.com/premierstacks/php-util",
   "bugs": {
     "email": "chocholatom1997@gmail.com",
-    "url": "https://github.com/tomchochola/php-util/issues"
+    "url": "https://github.com/premierstacks/php-util/issues"
   },
   "license": "SEE LICENSE IN ./LICENSE.md",
   "author": {
@@ -29,11 +29,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomchochola/php-util.git"
+    "url": "https://github.com/premierstacks/php-util.git"
   },
   "devDependencies": {
-    "@tomchochola/prettier-config": "github:tomchochola/prettier-config",
-    "@tomchochola/eslint-config": "github:tomchochola/eslint-config"
+    "@premierstacks/prettier-config": "github:premierstacks/prettier-config",
+    "@premierstacks/eslint-config": "github:premierstacks/eslint-config"
   },
   "private": true,
   "type": "module"

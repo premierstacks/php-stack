@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Support;
+namespace Premierstacks\PhpUtil\Support;
 
-use Tomchochola\PhpUtil\Errors\Errorf;
+use Premierstacks\PhpUtil\Errors\Errorf;
 
 class Strings
 {

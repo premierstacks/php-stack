@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Mixed;
+namespace Premierstacks\PhpUtil\Mixed;
 
-use Tomchochola\PhpUtil\Errors\Errorf;
-use Tomchochola\PhpUtil\Util\Undefined;
+use Premierstacks\PhpUtil\Errors\Errorf;
+use Premierstacks\PhpUtil\Util\Undefined;
 
 class Filter
 {

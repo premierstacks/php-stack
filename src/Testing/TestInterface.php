@@ -20,6 +20,6 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Testing;
+namespace Premierstacks\PhpUtil\Testing;
 
 interface TestInterface {}

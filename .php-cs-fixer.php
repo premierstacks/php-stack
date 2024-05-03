@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-use Tomchochola\PhpCsFixerConfig\Configs\Tomchochola;
-use Tomchochola\PhpCsFixerConfig\Preset;
+use Premierstacks\PhpCsFixerConfig\Configs\Tomchochola;
+use Premierstacks\PhpCsFixerConfig\Preset;
 
 return Preset::make(__DIR__, Tomchochola::config());

@@ -27,10 +27,10 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\Unit\TestCase;
-use Tomchochola\PhpUtil\Mixed\Assert;
-use Tomchochola\PhpUtil\Testing\PHPUnit;
-use Tomchochola\PhpUtil\Testing\TestIntEnum;
-use Tomchochola\PhpUtil\Testing\TestStringEnum;
+use Premierstacks\PhpUtil\Mixed\Assert;
+use Premierstacks\PhpUtil\Testing\PHPUnit;
+use Premierstacks\PhpUtil\Testing\TestIntEnum;
+use Premierstacks\PhpUtil\Testing\TestStringEnum;
 
 /**
  * @internal

@@ -20,11 +20,11 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\IO;
+namespace Premierstacks\PhpUtil\IO;
 
 use Psr\Http\Message\StreamInterface;
-use Tomchochola\PhpUtil\Errors\Errorf;
-use Tomchochola\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\Errors\Errorf;
+use Premierstacks\PhpUtil\Support\Resources;
 
 class ResourceObject implements \Stringable, StreamInterface
 {

@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Encoding;
+namespace Premierstacks\PhpUtil\Encoding;
 
 class Hash
 {

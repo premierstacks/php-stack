@@ -1,5 +1,5 @@
 includes:
-  - ./vendor/tomchochola/phpstan-config/src/configs/recommended.neon
+  - ./vendor/premierstacks/phpstan-config/src/configs/recommended.neon
 
 parameters:
   checkTooWideReturnTypesInProtectedAndPublicMethods: false

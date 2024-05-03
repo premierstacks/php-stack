@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Random;
+namespace Premierstacks\PhpUtil\Random;
 
 use Random\Randomizer;
 

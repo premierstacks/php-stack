@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Errors;
+namespace Premierstacks\PhpUtil\Errors;
 
 class Errorf
 {

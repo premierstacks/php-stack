@@ -20,10 +20,10 @@
 
 declare(strict_types=1);
 
-namespace Tomchochola\PhpUtil\Testing;
+namespace Premierstacks\PhpUtil\Testing;
 
 use PHPUnit\Framework\Assert;
-use Tomchochola\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\Support\Resources;
 
 class PHPUnit extends Assert
 {

@@ -16,6 +16,6 @@
  * - Sponsor & License: https://github.com/sponsors/tomchochola
  */
 
-import { configs } from '@tomchochola/prettier-config';
+import { configs } from '@premierstacks/prettier-config';
 
 export default configs.recommended();
