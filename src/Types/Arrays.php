@@ -20,39 +20,45 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Encoding;
+namespace Premierstacks\PhpUtil\Types;
 
-use Premierstacks\PhpUtil\Debug\Errorf;
-
-class Json
+class Arrays
 {
     /**
-     * @param positive-int $depth
+     * @template K of array-key
+     * @template V
+     *
+     * @param array<K, V> $array
+     *
+     * @return array<K, V|null>
      */
-    public static function decode(string $json, bool|null $associative = null, int $depth = 512, int $flags = 0): mixed
+    public static function nullableTrim(array $array): array
     {
-        $data = \json_decode($json, $associative, $depth, $flags);
+        \array_walk_recursive($array, static function (mixed &$value): void {
+            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
+                $value = null;
+            }
+        });
 
-        if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_decode', [$json, $associative, $depth, $flags], \json_last_error_msg()));
-        }
-
-        return $data;
+        return $array;
     }
 
     /**
-     * @param positive-int $depth
+     * @template K of array-key
+     * @template V
      *
-     * @return non-empty-string
+     * @param array<K, V> $array
+     *
+     * @return array<K, V>
      */
-    public static function encode(mixed $data, int $flags = 0, int $depth = 512): string
+    public static function trim(array $array): array
     {
-        $json = \json_encode($data, $flags, $depth);
+        \array_walk_recursive($array, static function (mixed &$value): void {
+            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
+                $value = '';
+            }
+        });
 
-        if ($json === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_encode', [$data, $flags, $depth], \json_last_error_msg()));
-        }
-
-        return $json;
+        return $array;
     }
 }

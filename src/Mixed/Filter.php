@@ -22,8 +22,9 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpUtil\Mixed;
 
-use Premierstacks\PhpUtil\Errors\Errorf;
-use Premierstacks\PhpUtil\Util\Undefined;
+use Premierstacks\PhpUtil\Debug\Debugf;
+use Premierstacks\PhpUtil\Debug\Errorf;
+use Premierstacks\PhpUtil\Enums\Undefined;
 
 class Filter
 {
@@ -51,7 +52,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "class-string<{$class}>", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "class-string<{$class}>", $value));
     }
 
     /**
@@ -70,7 +71,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>', $value));
     }
 
     public static function arrayKey(mixed $value, Undefined|int|string $default = Undefined::value, \Throwable|null $throwable = null): int|string
@@ -95,7 +96,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|string', $value));
     }
 
     /**
@@ -113,7 +114,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>', $value));
         }
 
         foreach ($value as $v) {
@@ -124,7 +125,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -148,7 +149,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'bool', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'bool', $value));
     }
 
     /**
@@ -172,7 +173,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable(): mixed', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable(): mixed', $value));
     }
 
     /**
@@ -196,7 +197,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable-string', $value));
     }
 
     /**
@@ -220,7 +221,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'class-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'class-string', $value));
     }
 
     /**
@@ -239,7 +240,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'closed-resource', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'closed-resource', $value));
     }
 
     /**
@@ -258,7 +259,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'countable', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'countable', $value));
     }
 
     /**
@@ -290,7 +291,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value));
     }
 
     public static function false(mixed $value, Undefined|false $default = Undefined::value, \Throwable|null $throwable = null): false
@@ -309,7 +310,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'false', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'false', $value));
     }
 
     public static function float(mixed $value, Undefined|float $default = Undefined::value, \Throwable|null $throwable = null): float
@@ -328,7 +329,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'float', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'float', $value));
     }
 
     /**
@@ -349,7 +350,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', Errorf::types($enum), $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', Debugf::types($enum), $value));
     }
 
     /**
@@ -370,7 +371,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $class, $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $class, $value));
     }
 
     public static function int(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
@@ -389,7 +390,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int', $value));
     }
 
     /**
@@ -404,7 +405,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -413,7 +414,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value));
             }
         }
 
@@ -436,7 +437,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -445,7 +446,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value));
             }
 
             $expected = $callback($v);
@@ -455,7 +456,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -488,7 +489,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value));
     }
 
     /**
@@ -503,7 +504,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -512,7 +513,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value));
             }
         }
 
@@ -535,7 +536,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -544,7 +545,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value));
             }
 
             $expected = $callback($v);
@@ -554,7 +555,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -583,7 +584,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'interface-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'interface-string', $value));
     }
 
     /**
@@ -602,7 +603,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>', $value));
     }
 
     /**
@@ -620,7 +621,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>', $value));
         }
 
         foreach ($value as $v) {
@@ -631,7 +632,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -654,7 +655,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>', $value));
     }
 
     /**
@@ -672,7 +673,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>', $value));
         }
 
         if (!\array_is_list($value)) {
@@ -680,7 +681,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>', $value));
         }
 
         foreach ($value as $v) {
@@ -691,7 +692,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -719,7 +720,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'negative-int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'negative-int', $value));
     }
 
     /**
@@ -738,7 +739,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>', $value));
     }
 
     /**
@@ -756,7 +757,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>', $value));
         }
 
         if ($value === []) {
@@ -764,7 +765,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>', $value));
         }
 
         foreach ($value as $v) {
@@ -775,7 +776,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -795,7 +796,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
         }
 
         if ($value === []) {
@@ -803,7 +804,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -812,7 +813,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
             }
         }
 
@@ -835,7 +836,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
         }
 
         if ($value === []) {
@@ -843,7 +844,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -852,7 +853,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value));
             }
 
             $expected = $callback($v);
@@ -862,7 +863,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -885,7 +886,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value));
     }
 
     /**
@@ -903,7 +904,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value));
         }
 
         if ($value === []) {
@@ -911,7 +912,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value));
         }
 
         if (!\array_is_list($value)) {
@@ -919,7 +920,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value));
         }
 
         foreach ($value as $v) {
@@ -930,7 +931,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -958,7 +959,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-string', $value));
     }
 
     /**
@@ -973,7 +974,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
         }
 
         if ($value === []) {
@@ -981,7 +982,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -990,7 +991,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
             }
         }
 
@@ -1013,7 +1014,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
         }
 
         if ($value === []) {
@@ -1021,7 +1022,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -1030,7 +1031,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value));
             }
 
             $expected = $callback($v);
@@ -1040,7 +1041,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1071,7 +1072,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-falsy-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-falsy-string', $value));
     }
 
     /**
@@ -1095,7 +1096,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-negative-int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-negative-int', $value));
     }
 
     /**
@@ -1119,7 +1120,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-positive-int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-positive-int', $value));
     }
 
     /**
@@ -1143,7 +1144,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-zero-int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-zero-int', $value));
     }
 
     public static function notFalse(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1158,7 +1159,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!false', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!false', $value));
     }
 
     public static function notNegativeOne(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1173,7 +1174,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!-1', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!-1', $value));
     }
 
     public static function notNull(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1186,7 +1187,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!null', $value));
     }
 
     public static function notPositiveOne(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1201,7 +1202,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!1', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!1', $value));
     }
 
     public static function notTrue(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1216,7 +1217,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!true', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!true', $value));
     }
 
     public static function notZero(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
@@ -1231,7 +1232,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!0', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!0', $value));
     }
 
     public static function null(mixed $value, Undefined|null $default = Undefined::value, \Throwable|null $throwable = null): null
@@ -1244,7 +1245,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'null', $value));
     }
 
     /**
@@ -1271,7 +1272,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "class-string<{$class}>|null", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "class-string<{$class}>|null", $value));
     }
 
     /**
@@ -1290,7 +1291,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>|null', $value));
     }
 
     public static function nullableArrayKey(mixed $value, Undefined|int|string|null $default = Undefined::value, \Throwable|null $throwable = null): int|string|null
@@ -1315,7 +1316,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|string|null', $value));
     }
 
     /**
@@ -1337,7 +1338,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>|null', $value));
         }
 
         foreach ($value as $v) {
@@ -1348,7 +1349,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1372,7 +1373,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'bool|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'bool|null', $value));
     }
 
     /**
@@ -1396,7 +1397,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable(): mixed|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable(): mixed|null', $value));
     }
 
     /**
@@ -1420,7 +1421,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable-string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable-string|null', $value));
     }
 
     /**
@@ -1444,7 +1445,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'class-string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'class-string|null', $value));
     }
 
     /**
@@ -1463,7 +1464,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'closed-resource|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'closed-resource|null', $value));
     }
 
     /**
@@ -1482,7 +1483,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'countable|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'countable|null', $value));
     }
 
     /**
@@ -1514,7 +1515,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value));
     }
 
     public static function nullableFalse(mixed $value, Undefined|false|null $default = Undefined::value, \Throwable|null $throwable = null): false|null
@@ -1533,7 +1534,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'false|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'false|null', $value));
     }
 
     public static function nullableFloat(mixed $value, Undefined|float|null $default = Undefined::value, \Throwable|null $throwable = null): float|null
@@ -1552,7 +1553,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'float|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'float|null', $value));
     }
 
     /**
@@ -1573,7 +1574,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', Errorf::types($enum) . '|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', Debugf::types($enum) . '|null', $value));
     }
 
     /**
@@ -1594,7 +1595,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$class}|null", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$class}|null", $value));
     }
 
     public static function nullableInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
@@ -1613,7 +1614,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|null', $value));
     }
 
     /**
@@ -1632,7 +1633,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -1641,7 +1642,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value));
             }
         }
 
@@ -1668,7 +1669,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -1677,7 +1678,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value));
             }
             $expected = $callback($v);
 
@@ -1686,7 +1687,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1719,7 +1720,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value));
     }
 
     /**
@@ -1738,7 +1739,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -1747,7 +1748,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value));
             }
         }
 
@@ -1774,7 +1775,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -1783,7 +1784,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value));
             }
 
             $expected = $callback($v);
@@ -1793,7 +1794,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1822,7 +1823,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'interface-string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'interface-string|null', $value));
     }
 
     /**
@@ -1841,7 +1842,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>|null', $value));
     }
 
     /**
@@ -1863,7 +1864,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>|null', $value));
         }
 
         foreach ($value as $v) {
@@ -1874,7 +1875,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1897,7 +1898,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>|null', $value));
     }
 
     /**
@@ -1919,7 +1920,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>|null', $value));
         }
 
         if (!\array_is_list($value)) {
@@ -1927,7 +1928,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>|null', $value));
         }
 
         foreach ($value as $v) {
@@ -1938,7 +1939,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -1966,7 +1967,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'negative-int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'negative-int|null', $value));
     }
 
     /**
@@ -1985,7 +1986,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>|null', $value));
     }
 
     /**
@@ -2007,7 +2008,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>|null', $value));
         }
 
         if ($value === []) {
@@ -2015,7 +2016,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>|null', $value));
         }
 
         foreach ($value as $v) {
@@ -2026,7 +2027,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2050,7 +2051,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>|null', $value));
         }
 
         if ($value === []) {
@@ -2058,7 +2059,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2067,7 +2068,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>|null', $value));
             }
         }
 
@@ -2094,7 +2095,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, templatevv>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, templatevv>|null', $value));
         }
 
         if ($value === []) {
@@ -2102,7 +2103,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, templatevv>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, templatevv>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2111,7 +2112,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, templatevv>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, templatevv>|null', $value));
             }
 
             $expected = $callback($v);
@@ -2121,7 +2122,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2144,7 +2145,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value));
     }
 
     /**
@@ -2166,7 +2167,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value));
         }
 
         if ($value === []) {
@@ -2174,7 +2175,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value));
         }
 
         if (!\array_is_list($value)) {
@@ -2182,7 +2183,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value));
         }
 
         foreach ($value as $v) {
@@ -2193,7 +2194,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2221,7 +2222,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-string', $value));
     }
 
     /**
@@ -2240,7 +2241,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
         }
 
         if ($value === []) {
@@ -2248,7 +2249,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2257,7 +2258,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
             }
         }
 
@@ -2284,7 +2285,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
         }
 
         if ($value === []) {
@@ -2292,7 +2293,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2301,7 +2302,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value));
             }
 
             $expected = $callback($v);
@@ -2311,7 +2312,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2342,7 +2343,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-falsy-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-falsy-string', $value));
     }
 
     /**
@@ -2366,7 +2367,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-negative-int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-negative-int|null', $value));
     }
 
     /**
@@ -2390,7 +2391,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-positive-int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-positive-int|null', $value));
     }
 
     /**
@@ -2414,7 +2415,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-zero-int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-zero-int|null', $value));
     }
 
     /**
@@ -2450,7 +2451,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric', $value));
     }
 
     /**
@@ -2474,7 +2475,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric-string', $value));
     }
 
     /**
@@ -2490,7 +2491,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'object|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'object|null', $value));
     }
 
     /**
@@ -2508,7 +2509,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'open-resource|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'open-resource|null', $value));
     }
 
     /**
@@ -2532,7 +2533,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'positive-int|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'positive-int|null', $value));
     }
 
     /**
@@ -2551,7 +2552,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'resource|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'resource|null', $value));
     }
 
     /**
@@ -2593,7 +2594,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'scalar|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'scalar|null', $value));
     }
 
     public static function nullableString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
@@ -2612,7 +2613,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'string|null', $value));
     }
 
     /**
@@ -2631,7 +2632,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2640,7 +2641,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value));
             }
         }
 
@@ -2667,7 +2668,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2676,7 +2677,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value));
             }
 
             $expected = $callback($v);
@@ -2686,7 +2687,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2719,7 +2720,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value));
     }
 
     /**
@@ -2738,7 +2739,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2747,7 +2748,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value));
             }
         }
 
@@ -2774,7 +2775,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -2783,7 +2784,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value));
             }
 
             $expected = $callback($v);
@@ -2793,7 +2794,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -2840,7 +2841,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'stringable|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'stringable|null', $value));
     }
 
     /**
@@ -2864,7 +2865,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'trait-string|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'trait-string|null', $value));
     }
 
     public static function nullableTrue(mixed $value, Undefined|true|null $default = Undefined::value, \Throwable|null $throwable = null): true|null
@@ -2883,7 +2884,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'true|null', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'true|null', $value));
     }
 
     /**
@@ -2919,7 +2920,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric', $value));
     }
 
     /**
@@ -2943,7 +2944,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric-string', $value));
     }
 
     /**
@@ -2959,7 +2960,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'object', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'object', $value));
     }
 
     /**
@@ -2977,7 +2978,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'open-resource', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'open-resource', $value));
     }
 
     /**
@@ -3001,7 +3002,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'positive-int', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'positive-int', $value));
     }
 
     /**
@@ -3020,7 +3021,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'resource', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'resource', $value));
     }
 
     /**
@@ -3058,7 +3059,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'scalar', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'scalar', $value));
     }
 
     public static function string(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
@@ -3077,7 +3078,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'string', $value));
     }
 
     /**
@@ -3092,7 +3093,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -3101,7 +3102,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value));
             }
         }
 
@@ -3124,7 +3125,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -3133,7 +3134,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value));
             }
 
             $expected = $callback($v);
@@ -3143,7 +3144,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -3176,7 +3177,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value));
     }
 
     /**
@@ -3191,7 +3192,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -3200,7 +3201,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value));
             }
         }
 
@@ -3223,7 +3224,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value));
+            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value));
         }
 
         foreach ($value as $k => $v) {
@@ -3232,7 +3233,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value));
+                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value));
             }
             $expected = $callback($v);
 
@@ -3241,7 +3242,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
             }
         }
 
@@ -3288,7 +3289,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'stringable', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'stringable', $value));
     }
 
     /**
@@ -3312,7 +3313,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'trait-string', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'trait-string', $value));
     }
 
     public static function true(mixed $value, Undefined|true $default = Undefined::value, \Throwable|null $throwable = null): true
@@ -3331,6 +3332,6 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'true', $value));
+        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'true', $value));
     }
 }

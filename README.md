@@ -103,7 +103,7 @@ use Premierstacks\PhpUtil\IO\ResourceObject;
 use Premierstacks\PhpUtil\Mixed\Assert;
 use Premierstacks\PhpUtil\Mixed\Check;
 use Premierstacks\PhpUtil\Mixed\Is;
-use Premierstacks\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\Types\Resources;
 
 // Runtime check for mixed types
 $listOfInt = Check::listOf($_GET['ints'], static fn (mixed $a): int => Check::int($a)); // [1, 2, 3]

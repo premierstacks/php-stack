@@ -22,32 +22,31 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpUtil\Encoding;
 
-use Premierstacks\PhpUtil\Errors\Errorf;
+use Premierstacks\PhpUtil\Debug\Errorf;
 use Premierstacks\PhpUtil\IO\ResourceObject;
-use Premierstacks\PhpUtil\Support\Resources;
 
 class Svg
 {
     public static function encode(string $data, string $format = 'webp'): string
     {
-        $resource = new ResourceObject(Resources::temp());
+        $resource = ResourceObject::newFromString();
 
         $imagick = new \Imagick();
 
         if ($imagick->readImageBlob($data) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturnValue($imagick::class . '->readImageBlob', [$data]));
+            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->readImageBlob', [$data]));
         }
 
         if ($imagick->setImageFormat($format) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturnValue($imagick::class . '->setImageFormat', [$format]));
+            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->setImageFormat', [$format]));
         }
 
         if ($imagick->writeImageFile($resource->resource) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturnValue($imagick::class . '->writeImageFile', [$resource->resource]));
+            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->writeImageFile', [$resource->resource]));
         }
 
         if ($imagick->clear() === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturnValue($imagick::class . '->clear', []));
+            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->clear', []));
         }
 
         return $resource->streamGetContents(null, 0);

@@ -22,7 +22,8 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpUtil\Mixed;
 
-use Premierstacks\PhpUtil\Errors\Errorf;
+use Premierstacks\PhpUtil\Debug\Debugf;
+use Premierstacks\PhpUtil\Debug\Errorf;
 
 class Assert
 {
@@ -41,7 +42,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \is_a($value, $class, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "class-string<{$class}>", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "class-string<{$class}>", $value)),
         );
 
         return $value;
@@ -60,7 +61,7 @@ class Assert
     {
         \assert(
             \is_array($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -80,7 +81,7 @@ class Assert
     {
         \assert(
             \is_int($value) || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|string', $value)),
         );
 
         return $value;
@@ -109,13 +110,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -135,7 +136,7 @@ class Assert
     {
         \assert(
             \is_bool($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'bool', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'bool', $value)),
         );
 
         return $value;
@@ -154,7 +155,7 @@ class Assert
     {
         \assert(
             \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable(): mixed', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable(): mixed', $value)),
         );
 
         return $value;
@@ -173,7 +174,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable-string', $value)),
         );
 
         return $value;
@@ -192,7 +193,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \class_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'class-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'class-string', $value)),
         );
 
         return $value;
@@ -211,7 +212,7 @@ class Assert
     {
         \assert(
             $value !== null && !\is_resource($value) && !\is_scalar($value) && !\is_array($value) && !\is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'closed-resource', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'closed-resource', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -231,7 +232,7 @@ class Assert
     {
         \assert(
             \is_countable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'countable', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'countable', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -253,7 +254,7 @@ class Assert
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value)),
         );
 
         return $value;
@@ -272,7 +273,7 @@ class Assert
     {
         \assert(
             $value === false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'false', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'false', $value)),
         );
 
         return $value;
@@ -291,7 +292,7 @@ class Assert
     {
         \assert(
             \is_float($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'float', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'float', $value)),
         );
 
         return $value;
@@ -312,7 +313,7 @@ class Assert
     {
         \assert(
             \in_array($value, $enum, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', Errorf::types($enum), $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', Debugf::types($enum), $value)),
         );
 
         return $value;
@@ -333,7 +334,7 @@ class Assert
     {
         \assert(
             $value instanceof $class,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $class, $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $class, $value)),
         );
 
         return $value;
@@ -352,7 +353,7 @@ class Assert
     {
         \assert(
             \is_int($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int', $value)),
         );
 
         return $value;
@@ -383,7 +384,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -417,13 +418,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -445,7 +446,7 @@ class Assert
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value)),
         );
 
         return $value;
@@ -476,7 +477,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -510,13 +511,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -536,7 +537,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \interface_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'interface-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'interface-string', $value)),
         );
 
         return $value;
@@ -555,7 +556,7 @@ class Assert
     {
         \assert(
             \is_iterable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -585,13 +586,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -611,7 +612,7 @@ class Assert
     {
         \assert(
             \is_array($value) && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>', $value)),
         );
 
         return $value;
@@ -644,13 +645,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -670,7 +671,7 @@ class Assert
     {
         \assert(
             \is_int($value) && $value < 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'negative-int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'negative-int', $value)),
         );
 
         return $value;
@@ -689,7 +690,7 @@ class Assert
     {
         \assert(
             \is_array($value) && $value !== [],
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -723,13 +724,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -765,7 +766,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -803,13 +804,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -829,7 +830,7 @@ class Assert
     {
         \assert(
             \is_array($value) && $value !== [] && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value)),
         );
 
         return $value;
@@ -866,13 +867,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -892,7 +893,7 @@ class Assert
     {
         \assert(
             \is_string($value) && $value !== '',
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-string', $value)),
         );
 
         return $value;
@@ -927,7 +928,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -965,13 +966,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -991,7 +992,7 @@ class Assert
     {
         \assert(
             \is_string($value) && (bool) $value,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-falsy-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-falsy-string', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1011,7 +1012,7 @@ class Assert
     {
         \assert(
             \is_int($value) && $value >= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-negative-int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-negative-int', $value)),
         );
 
         return $value;
@@ -1030,7 +1031,7 @@ class Assert
     {
         \assert(
             \is_int($value) && $value <= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-positive-int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-positive-int', $value)),
         );
 
         return $value;
@@ -1049,7 +1050,7 @@ class Assert
     {
         \assert(
             \is_int($value) && $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-zero-int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-zero-int', $value)),
         );
 
         return $value;
@@ -1068,7 +1069,7 @@ class Assert
     {
         \assert(
             $value !== false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!false', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!false', $value)),
         );
 
         return $value;
@@ -1087,7 +1088,7 @@ class Assert
     {
         \assert(
             $value !== -1,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!-1', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!-1', $value)),
         );
 
         return $value;
@@ -1106,7 +1107,7 @@ class Assert
     {
         \assert(
             $value !== null,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!null', $value)),
         );
 
         return $value;
@@ -1125,7 +1126,7 @@ class Assert
     {
         \assert(
             $value !== 1,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!1', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!1', $value)),
         );
 
         return $value;
@@ -1144,7 +1145,7 @@ class Assert
     {
         \assert(
             $value !== true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!true', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!true', $value)),
         );
 
         return $value;
@@ -1163,7 +1164,7 @@ class Assert
     {
         \assert(
             $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', '!0', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', '!0', $value)),
         );
 
         return $value;
@@ -1182,7 +1183,7 @@ class Assert
     {
         \assert(
             $value === null,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'null', $value)),
         );
 
         return $value;
@@ -1203,7 +1204,7 @@ class Assert
     {
         \assert(
             $value === null || (\is_string($value) && \is_a($value, $class, true)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "class-string<{$class}>|null", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "class-string<{$class}>|null", $value)),
         );
 
         return $value;
@@ -1222,7 +1223,7 @@ class Assert
     {
         \assert(
             $value === null || \is_array($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1242,7 +1243,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|string|null', $value)),
         );
 
         return $value;
@@ -1275,13 +1276,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1301,7 +1302,7 @@ class Assert
     {
         \assert(
             $value === null || \is_bool($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'bool|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'bool|null', $value)),
         );
 
         return $value;
@@ -1320,7 +1321,7 @@ class Assert
     {
         \assert(
             $value === null || \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable(): mixed|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable(): mixed|null', $value)),
         );
 
         return $value;
@@ -1339,7 +1340,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'callable-string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'callable-string|null', $value)),
         );
 
         return $value;
@@ -1358,7 +1359,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && \class_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'class-string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'class-string|null', $value)),
         );
 
         return $value;
@@ -1377,7 +1378,7 @@ class Assert
     {
         \assert(
             $value === null || (!\is_scalar($value) && !\is_resource($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'closed-resource|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'closed-resource|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1397,7 +1398,7 @@ class Assert
     {
         \assert(
             $value === null || \is_countable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'countable|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'countable|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1419,7 +1420,7 @@ class Assert
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value)),
         );
 
         return $value;
@@ -1438,7 +1439,7 @@ class Assert
     {
         \assert(
             $value === null || $value === false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'false|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'false|null', $value)),
         );
 
         return $value;
@@ -1457,7 +1458,7 @@ class Assert
     {
         \assert(
             $value === null || \is_float($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'float|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'float|null', $value)),
         );
 
         return $value;
@@ -1478,7 +1479,7 @@ class Assert
     {
         \assert(
             $value === null || \in_array($value, $enum, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', Errorf::types($enum) . '|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', Debugf::types($enum) . '|null', $value)),
         );
 
         return $value;
@@ -1499,7 +1500,7 @@ class Assert
     {
         \assert(
             $value === null || $value instanceof $class,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$class}|null", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$class}|null", $value)),
         );
 
         return $value;
@@ -1518,7 +1519,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'int|null', $value)),
         );
 
         return $value;
@@ -1553,7 +1554,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1590,13 +1591,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<int, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<int, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1618,7 +1619,7 @@ class Assert
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value)),
         );
 
         return $value;
@@ -1653,7 +1654,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1691,13 +1692,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1717,7 +1718,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && \interface_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'interface-string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'interface-string|null', $value)),
         );
 
         return $value;
@@ -1736,7 +1737,7 @@ class Assert
     {
         \assert(
             $value === null || \is_iterable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1770,13 +1771,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1796,7 +1797,7 @@ class Assert
     {
         \assert(
             $value === null || \is_array($value) && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>|null', $value)),
         );
 
         return $value;
@@ -1833,13 +1834,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'list<mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'list<mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1859,7 +1860,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) && $value < 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'negative-int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'negative-int|null', $value)),
         );
 
         return $value;
@@ -1878,7 +1879,7 @@ class Assert
     {
         \assert(
             $value === null || \is_array($value) && $value !== [],
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1916,13 +1917,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int|string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int|string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1962,7 +1963,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2004,13 +2005,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<int, templatevv>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<int, templatevv>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2030,7 +2031,7 @@ class Assert
     {
         \assert(
             $value === null || \is_array($value) && $value !== [] && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value)),
         );
 
         return $value;
@@ -2071,13 +2072,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-list<mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-list<mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2097,7 +2098,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && $value !== '',
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-string', $value)),
         );
 
         return $value;
@@ -2136,7 +2137,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2178,13 +2179,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-empty-array<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-empty-array<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2204,7 +2205,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && (bool) $value,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-falsy-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-falsy-string', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2224,7 +2225,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) && $value >= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-negative-int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-negative-int|null', $value)),
         );
 
         return $value;
@@ -2243,7 +2244,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) && $value <= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-positive-int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-positive-int|null', $value)),
         );
 
         return $value;
@@ -2262,7 +2263,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) && $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'non-zero-int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'non-zero-int|null', $value)),
         );
 
         return $value;
@@ -2281,7 +2282,7 @@ class Assert
     {
         \assert(
             $value === null || \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric', $value)),
         );
 
         return $value;
@@ -2300,7 +2301,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric-string', $value)),
         );
 
         return $value;
@@ -2319,7 +2320,7 @@ class Assert
     {
         \assert(
             $value === null || \is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'object|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'object|null', $value)),
         );
 
         return $value;
@@ -2338,7 +2339,7 @@ class Assert
     {
         \assert(
             $value === null || \is_resource($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'open-resource|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'open-resource|null', $value)),
         );
 
         return $value;
@@ -2357,7 +2358,7 @@ class Assert
     {
         \assert(
             $value === null || \is_int($value) && $value > 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'positive-int|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'positive-int|null', $value)),
         );
 
         return $value;
@@ -2376,7 +2377,7 @@ class Assert
     {
         \assert(
             $value === null || \is_resource($value) || (!\is_scalar($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'resource|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'resource|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2396,7 +2397,7 @@ class Assert
     {
         \assert(
             $value === null || \is_scalar($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'scalar|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'scalar|null', $value)),
         );
 
         return $value;
@@ -2415,7 +2416,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'string|null', $value)),
         );
 
         return $value;
@@ -2450,7 +2451,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2491,13 +2492,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2519,7 +2520,7 @@ class Assert
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', "{$enum}|null", $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', "{$enum}|null", $value)),
         );
 
         return $value;
@@ -2554,7 +2555,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2592,13 +2593,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>|null', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2618,7 +2619,7 @@ class Assert
     {
         \assert(
             $value === null || \is_scalar($value) || $value instanceof \Stringable,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'stringable|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'stringable|null', $value)),
         );
 
         return $value;
@@ -2637,7 +2638,7 @@ class Assert
     {
         \assert(
             $value === null || \is_string($value) && \trait_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'trait-string|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'trait-string|null', $value)),
         );
 
         return $value;
@@ -2656,7 +2657,7 @@ class Assert
     {
         \assert(
             $value === null || $value === true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'true|null', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'true|null', $value)),
         );
 
         return $value;
@@ -2675,7 +2676,7 @@ class Assert
     {
         \assert(
             \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric', $value)),
         );
 
         return $value;
@@ -2694,7 +2695,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'numeric-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'numeric-string', $value)),
         );
 
         return $value;
@@ -2713,7 +2714,7 @@ class Assert
     {
         \assert(
             \is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'object', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'object', $value)),
         );
 
         return $value;
@@ -2732,7 +2733,7 @@ class Assert
     {
         \assert(
             \is_resource($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'open-resource', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'open-resource', $value)),
         );
 
         return $value;
@@ -2751,7 +2752,7 @@ class Assert
     {
         \assert(
             \is_int($value) && $value > 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'positive-int', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'positive-int', $value)),
         );
 
         return $value;
@@ -2770,7 +2771,7 @@ class Assert
     {
         \assert(
             \is_resource($value) || ($value !== null && !\is_scalar($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'resource', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'resource', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2790,7 +2791,7 @@ class Assert
     {
         \assert(
             \is_scalar($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'scalar', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'scalar', $value)),
         );
 
         return $value;
@@ -2809,7 +2810,7 @@ class Assert
     {
         \assert(
             \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'string', $value)),
         );
 
         return $value;
@@ -2840,7 +2841,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2874,13 +2875,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'array<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'array<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2902,7 +2903,7 @@ class Assert
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', $enum, $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $enum, $value)),
         );
 
         return $value;
@@ -2933,7 +2934,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2966,13 +2967,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValueType('iterable value', Errorf::type($expected), $v));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue('iterable value', Debugf::type($expected), $v));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'iterable<string, mixed>', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'iterable<string, mixed>', $value)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2992,7 +2993,7 @@ class Assert
     {
         \assert(
             \is_scalar($value) || $value instanceof \Stringable,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'stringable', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'stringable', $value)),
         );
 
         return $value;
@@ -3011,7 +3012,7 @@ class Assert
     {
         \assert(
             \is_string($value) && \trait_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'trait-string', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'trait-string', $value)),
         );
 
         return $value;
@@ -3030,7 +3031,7 @@ class Assert
     {
         \assert(
             $value === true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgumentType('value', 'true', $value)),
+            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', 'true', $value)),
         );
 
         return $value;

@@ -20,39 +20,30 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Encoding;
+namespace Premierstacks\PhpUtil\Structures;
 
-use Premierstacks\PhpUtil\Debug\Errorf;
+use Premierstacks\PhpUtil\Enums\Undefined;
 
-class Json
+class Struct
 {
     /**
-     * @param positive-int $depth
+     * @param iterable<array-key, mixed>|object $data
      */
-    public static function decode(string $json, bool|null $associative = null, int $depth = 512, int $flags = 0): mixed
+    public function __construct(public iterable|object $data = []) {}
+
+    /**
+     * @param array<array-key, array-key> $keys
+     */
+    public function get(array $keys = [], mixed $default = Undefined::value): mixed
     {
-        $data = \json_decode($json, $associative, $depth, $flags);
-
-        if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_decode', [$json, $associative, $depth, $flags], \json_last_error_msg()));
-        }
-
-        return $data;
+        return Structs::get($this->data, $keys, $default);
     }
 
     /**
-     * @param positive-int $depth
-     *
-     * @return non-empty-string
+     * @param array<array-key, array-key> $keys
      */
-    public static function encode(mixed $data, int $flags = 0, int $depth = 512): string
+    public function set(array $keys, mixed $value, bool $overwrite = true, bool $reformat = true): void
     {
-        $json = \json_encode($data, $flags, $depth);
-
-        if ($json === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_encode', [$data, $flags, $depth], \json_last_error_msg()));
-        }
-
-        return $json;
+        Structs::set($this->data, $keys, $value, $overwrite, $reformat);
     }
 }

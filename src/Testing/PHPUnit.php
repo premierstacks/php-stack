@@ -23,7 +23,7 @@ declare(strict_types=1);
 namespace Premierstacks\PhpUtil\Testing;
 
 use PHPUnit\Framework\Assert;
-use Premierstacks\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\Types\Resources;
 
 class PHPUnit extends Assert
 {

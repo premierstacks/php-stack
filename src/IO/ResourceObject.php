@@ -22,8 +22,8 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpUtil\IO;
 
-use Premierstacks\PhpUtil\Errors\Errorf;
-use Premierstacks\PhpUtil\Support\Resources;
+use Premierstacks\PhpUtil\Debug\Errorf;
+use Premierstacks\PhpUtil\Types\Resources;
 use Psr\Http\Message\StreamInterface;
 
 class ResourceObject implements \Stringable, StreamInterface
@@ -260,7 +260,7 @@ class ResourceObject implements \Stringable, StreamInterface
     public function read(int $length): string
     {
         if ($length < 0) {
-            throw new \InvalidArgumentException(Errorf::invalidArgumentType('length', 'int<0, max>', $length));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('length', 'int<0, max>', $length));
         }
 
         return $this->fread($length);
@@ -309,5 +309,32 @@ class ResourceObject implements \Stringable, StreamInterface
     public function write(string $string): int
     {
         return $this->fwrite($string);
+    }
+
+    /**
+     * @param resource|null $context
+     */
+    public static function newFromFile(string $filename = 'php://temp/maxmemory:10485760', string $mode = 'r+', bool $useIncludePath = false, mixed $context = null): self
+    {
+        return new self(Resources::fopen($filename, $mode, $useIncludePath, $context));
+    }
+
+    /**
+     * @param resource $resource
+     */
+    public static function newFromResource(mixed $resource): self
+    {
+        return new self($resource);
+    }
+
+    public static function newFromString(string $content = ''): self
+    {
+        $self = new self(Resources::temp());
+
+        if ($content !== '') {
+            $self->write($content);
+        }
+
+        return $self;
     }
 }

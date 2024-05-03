@@ -20,9 +20,15 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Util;
+namespace Premierstacks\PhpUtil\Encoding;
 
-enum Undefined
+class Signature
 {
-    case value;
+    /**
+     * @return non-empty-string
+     */
+    public static function encode(mixed $serialized, mixed $hashed = null): string
+    {
+        return \serialize($serialized) . ':' . Hash::encode($hashed);
+    }
 }

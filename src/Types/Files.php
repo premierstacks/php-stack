@@ -20,45 +20,20 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Support;
+namespace Premierstacks\PhpUtil\Types;
 
-class Arrays
+use Premierstacks\PhpUtil\Debug\Errorf;
+
+class Files
 {
-    /**
-     * @template K of array-key
-     * @template V
-     *
-     * @param array<K, V> $array
-     *
-     * @return array<K, V|null>
-     */
-    public static function nullableTrim(array $array): array
+    public static function tempnamp(string|null $directory, string $prefix = 'php'): string
     {
-        \array_walk_recursive($array, static function (mixed &$value): void {
-            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
-                $value = null;
-            }
-        });
+        $filename = \tempnam($directory ?? \sys_get_temp_dir(), $prefix);
 
-        return $array;
-    }
+        if ($filename === false) {
+            throw new \UnexpectedValueException(Errorf::errorReturn('tempnam', [$directory ?? \sys_get_temp_dir(), $prefix]));
+        }
 
-    /**
-     * @template K of array-key
-     * @template V
-     *
-     * @param array<K, V> $array
-     *
-     * @return array<K, V>
-     */
-    public static function trim(array $array): array
-    {
-        \array_walk_recursive($array, static function (mixed &$value): void {
-            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
-                $value = '';
-            }
-        });
-
-        return $array;
+        return $filename;
     }
 }

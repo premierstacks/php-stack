@@ -23,7 +23,6 @@ declare(strict_types=1);
 namespace Premierstacks\PhpUtil\Encoding;
 
 use Premierstacks\PhpUtil\IO\ResourceObject;
-use Premierstacks\PhpUtil\Support\Resources;
 
 class Csv
 {
@@ -32,7 +31,7 @@ class Csv
      */
     public static function encode(iterable $data, string $separator = ',', string $enclosure = '"', string $escape = '\\', string $eol = \PHP_EOL): string
     {
-        $resource = new ResourceObject(Resources::temp());
+        $resource = ResourceObject::newFromString();
 
         foreach ($data as $v) {
             $resource->fputcsv($v, $separator, $enclosure, $escape, $eol);
