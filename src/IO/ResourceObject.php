@@ -22,9 +22,9 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpUtil\IO;
 
-use Psr\Http\Message\StreamInterface;
 use Premierstacks\PhpUtil\Errors\Errorf;
 use Premierstacks\PhpUtil\Support\Resources;
+use Psr\Http\Message\StreamInterface;
 
 class ResourceObject implements \Stringable, StreamInterface
 {

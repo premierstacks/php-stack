@@ -26,11 +26,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
-use Tests\Unit\TestCase;
 use Premierstacks\PhpUtil\Mixed\Assert;
 use Premierstacks\PhpUtil\Testing\PHPUnit;
 use Premierstacks\PhpUtil\Testing\TestIntEnum;
 use Premierstacks\PhpUtil\Testing\TestStringEnum;
+use Tests\Unit\TestCase;
 
 /**
  * @internal
