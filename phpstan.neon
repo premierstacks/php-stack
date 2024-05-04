@@ -1,9 +1,7 @@
 includes:
-  - ./vendor/premierstacks/phpstan-config/src/configs/recommended.neon
+  - ./vendor/premierstacks/phpstan-config/src/configs/premierstacks.neon
 
 parameters:
-  checkTooWideReturnTypesInProtectedAndPublicMethods: false
-
   paths:
     - ./src
     - ./tests
