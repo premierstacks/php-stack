@@ -262,7 +262,7 @@ class ResourceObject implements \Stringable, StreamInterface
     public function read(int $length): string
     {
         if ($length < 0) {
-            throw new \InvalidArgumentException(Errorf::invalidArgument('length', 'int<0, max>', $length));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('length', $length, 'int<0, max>'));
         }
 
         return $this->fread($length);

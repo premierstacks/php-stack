@@ -46,7 +46,7 @@ class Strings
         $result = \preg_match($pattern, $subject, $matches, $flags, $offset);
 
         if ($result === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('preg_match', [$pattern, $subject, $matches, $flags, $offset]));
+            throw new \UnexpectedValueException(Errorf::callableError('preg_match', [$pattern, $subject, $matches, $flags, $offset]));
         }
 
         return $result === 1;
@@ -60,7 +60,7 @@ class Strings
         $splited = \preg_split($pattern, $string, $limit, $flags);
 
         if ($splited === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('preg_split', [$pattern, $string, $limit, $flags]));
+            throw new \UnexpectedValueException(Errorf::callableError('preg_split', [$pattern, $string, $limit, $flags]));
         }
 
         return $splited;

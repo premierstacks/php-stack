@@ -34,29 +34,29 @@ class Structs
      */
     public static function get(mixed $target, array $keys = [], mixed $default = Undefined::value): mixed
     {
-        foreach ($keys as $key) {
-            if (\is_array($target) && \array_key_exists($key, $target)) {
-                $target = $target[$key];
+        foreach ($keys as $key => $value) {
+            if (\is_array($target) && \array_key_exists($value, $target)) {
+                $target = $target[$value];
 
                 continue;
             }
 
-            if ($target instanceof \ArrayAccess && $target->offsetExists($key)) {
-                $target = $target[$key];
+            if ($target instanceof \ArrayAccess && $target->offsetExists($value)) {
+                $target = $target[$value];
 
                 continue;
             }
 
-            if (\is_object($target) && \property_exists($target, (string) $key)) {
+            if (\is_object($target) && \property_exists($target, (string) $value)) {
                 /** @phpstan-ignore-next-line */
-                $target = $target->{$key};
+                $target = $target->{$value};
 
                 continue;
             }
 
             if (\is_iterable($target)) {
                 foreach ($target as $k => $v) {
-                    if ($k === $key) {
+                    if ($k === $value) {
                         $target = $v;
 
                         continue 2;
@@ -68,7 +68,7 @@ class Structs
                 return $default;
             }
 
-            throw new \UnexpectedValueException(Errorf::unexpectedValue('key', 'array-key', $key));
+            throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $key, $value, 'array-key'));
         }
 
         return $target;
@@ -123,7 +123,7 @@ class Structs
                 $target->{$key} = $value;
             }
         } else {
-            throw new \InvalidArgumentException(Errorf::invalidArgument('target', 'iterable|object', $target));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('target', $target, 'iterable|object'));
         }
     }
 }

@@ -22,20 +22,9 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Types;
+namespace Premierstacks\PhpUtil\Enums;
 
-use Premierstacks\PhpUtil\Debug\Errorf;
-
-class Files
+enum Unknown
 {
-    public static function tempnamp(string|null $directory, string $prefix = 'php'): string
-    {
-        $filename = \tempnam($directory ?? \sys_get_temp_dir(), $prefix);
-
-        if ($filename === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('tempnam', [$directory ?? \sys_get_temp_dir(), $prefix]));
-        }
-
-        return $filename;
-    }
+    case value;
 }

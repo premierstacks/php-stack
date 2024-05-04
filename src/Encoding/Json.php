@@ -36,7 +36,7 @@ class Json
         $data = \json_decode($json, $associative, $depth, $flags);
 
         if (\json_last_error() !== \JSON_ERROR_NONE) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_decode', [$json, $associative, $depth, $flags], \json_last_error_msg()));
+            throw new \UnexpectedValueException(Errorf::callableError('\json_decode', [$json, $associative, $depth, $flags], [], \json_last_error_msg()));
         }
 
         return $data;
@@ -52,7 +52,7 @@ class Json
         $json = \json_encode($data, $flags, $depth);
 
         if ($json === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn('json_encode', [$data, $flags, $depth], \json_last_error_msg()));
+            throw new \UnexpectedValueException(Errorf::callableError('\json_encode', [$data, $flags, $depth], [], \json_last_error_msg()));
         }
 
         return $json;

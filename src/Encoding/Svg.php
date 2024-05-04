@@ -36,19 +36,19 @@ class Svg
         $imagick = new \Imagick();
 
         if ($imagick->readImageBlob($data) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->readImageBlob', [$data]));
+            throw new \UnexpectedValueException(Errorf::callableError($imagick::class . '->readImageBlob', [$data]));
         }
 
         if ($imagick->setImageFormat($format) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->setImageFormat', [$format]));
+            throw new \UnexpectedValueException(Errorf::callableError($imagick::class . '->setImageFormat', [$format]));
         }
 
         if ($imagick->writeImageFile($resource->resource) === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->writeImageFile', [$resource->resource]));
+            throw new \UnexpectedValueException(Errorf::callableError($imagick::class . '->writeImageFile', [$resource->resource]));
         }
 
         if ($imagick->clear() === false) {
-            throw new \UnexpectedValueException(Errorf::errorReturn($imagick::class . '->clear', []));
+            throw new \UnexpectedValueException(Errorf::callableError($imagick::class . '->clear', []));
         }
 
         return $resource->streamGetContents(null, 0);

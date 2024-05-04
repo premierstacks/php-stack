@@ -27,73 +27,79 @@ namespace Premierstacks\PhpUtil\Debug;
 class Debugf
 {
     /**
-     * @param iterable<int|string, mixed> $args
+     * @param iterable<int|string, mixed> $values
      */
-    public static function args(iterable $args): string
+    public static function args(iterable $values): string
     {
-        $encoded = [];
+        return '(' . \implode(', ', static::types($values)) . ')';
+    }
 
-        foreach ($args as $k => $v) {
-            if (\is_int($k)) {
-                $encoded[] = static::type($v);
-            } else {
-                $encoded[] = \sprintf('%s: %s', $k, static::type($v));
-            }
+    /**
+     * @param iterable<int|string, mixed> $values
+     */
+    public static function context(iterable $values): string
+    {
+        return '{' . \implode('; ', static::types($values)) . '}';
+    }
+
+    /**
+     * @param iterable<int|string, mixed> $context
+     */
+    public static function message(string $message, iterable $context = [], \Throwable|string|null $previous = null): string
+    {
+        if ($context !== []) {
+            $message .= ' ' . static::context($context);
         }
 
-        return \implode(', ', $encoded);
+        if ($previous !== null) {
+            $message .= ': ' . ($previous instanceof \Throwable ? $previous->getMessage() : $previous);
+        }
+
+        return $message;
     }
 
     public static function type(mixed $value): string
     {
-        $type = \get_debug_type($value);
-        $size = null;
+        if (\is_string($value)) {
+            return '#' . \mb_strlen($value, '8bit') . \get_debug_type($value);
+        }
 
         if (\is_countable($value)) {
-            $size = \count($value);
-        } elseif (\is_string($value)) {
-            $size = \mb_strlen($value, '8bit');
+            return '#' . \count($value) . \get_debug_type($value);
         }
 
-        if (\is_iterable($value)) {
-            $arrayKey = null;
-            $valueTypes = [];
-
-            foreach ($value as $k => $v) {
-                if (\is_int($k) && \in_array($arrayKey, ['int', null], true)) {
-                    $arrayKey = 'int';
-                } elseif (\is_string($k) && \in_array($arrayKey, ['string', null], true)) {
-                    $arrayKey = 'string';
-                } else {
-                    $arrayKey = 'mixed';
-                }
-
-                $valueType = static::type($v);
-
-                if (!\in_array($valueType, $valueTypes, true)) {
-                    $valueTypes[] = $valueType;
-                }
-            }
-
-            $type = \sprintf('%s<%s, %s>', $type, $arrayKey ?? 'mixed', \count($valueTypes) > 0 ? \implode('|', $valueTypes) : 'mixed');
-        }
-
-        if ($size !== null) {
-            $type .= "[{$size}]";
-        }
-
-        return $type;
+        return \get_debug_type($value);
     }
 
     /**
-     * @param iterable<int|string, mixed> $args
+     * @param iterable<int|string, mixed> $values
+     *
+     * @return list<string>
      */
-    public static function types(iterable $args): string
+    public static function types(iterable $values): array
     {
+        $encoded = [];
+
+        foreach ($values as $key => $value) {
+            $encoded[] = static::type($value) . ' $' . $key;
+        }
+
+        return $encoded;
+    }
+
+    /**
+     * @param iterable<int|string, mixed>|string $values
+     */
+    public static function union(iterable|string $values): string
+    {
+        if (\is_string($values)) {
+            return $values;
+        }
+
         $types = [];
 
-        foreach ($args as $v) {
-            $type = static::type($v);
+        foreach ($values as $value) {
+            $type = static::type($value);
 
             if (!\in_array($type, $types, true)) {
                 $types[] = $type;
@@ -101,5 +107,42 @@ class Debugf
         }
 
         return \implode('|', $types);
+    }
+
+    public static function value(mixed $value): string
+    {
+        if (\is_scalar($value) || $value === null) {
+            return \var_export($value, true);
+        }
+
+        if (\is_array($value)) {
+            return 'array<?, ?>';
+        }
+
+        if (\is_object($value)) {
+            return (string) \spl_object_id($value);
+        }
+
+        if (\is_resource($value)) {
+            return (string) \get_resource_id($value);
+        }
+
+        return '?';
+    }
+
+    /**
+     * @param iterable<int|string, mixed> $values
+     *
+     * @return list<string>
+     */
+    public static function values(iterable $values): array
+    {
+        $encoded = [];
+
+        foreach ($values as $key => $value) {
+            $encoded[] = static::type($value) . ' $' . $key . '= ' . static::value($value);
+        }
+
+        return $encoded;
     }
 }
