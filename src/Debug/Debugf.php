@@ -61,11 +61,11 @@ class Debugf
     public static function type(mixed $value): string
     {
         if (\is_string($value)) {
-            return '#' . \mb_strlen($value, '8bit') . \get_debug_type($value);
+            return \get_debug_type($value) . '#' . \mb_strlen($value, '8bit');
         }
 
         if (\is_countable($value)) {
-            return '#' . \count($value) . \get_debug_type($value);
+            return \get_debug_type($value) . '#' . \count($value);
         }
 
         return \get_debug_type($value);

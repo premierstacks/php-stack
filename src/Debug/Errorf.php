@@ -32,7 +32,7 @@ class Errorf
      */
     public static function callableError(string $callable, iterable $args, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Error returned from "%s%s".', $callable, Debugf::args($args)), $context, $previous);
+        return Debugf::message(\sprintf('Error returned from [%s%s].', $callable, Debugf::args($args)), $context, $previous);
     }
 
     /**
@@ -42,7 +42,7 @@ class Errorf
      */
     public static function callableReturn(string $callable, iterable $args, mixed $got, iterable|string $wanted, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Unexpected value returned from "%s%s", got "%s", wanted "%s".', $callable, Debugf::args($args), Debugf::type($got), Debugf::union($wanted)), $context, $previous);
+        return Debugf::message(\sprintf('Unexpected value returned from [%s%s], got [%s], wanted [%s].', $callable, Debugf::args($args), Debugf::type($got), Debugf::union($wanted)), $context, $previous);
     }
 
     /**
@@ -51,15 +51,15 @@ class Errorf
      */
     public static function invalidArgument(string $param, mixed $got, iterable|string $wanted, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Invalid argument "%s" provided, got "%s", wanted "%s".', $param, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
+        return Debugf::message(\sprintf('Invalid argument [%s] provided, got [%s], wanted [%s].', $param, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
     }
 
     /**
      * @param iterable<int|string, mixed> $context
      */
-    public static function invalidKey(string $source, mixed $got, iterable $context = [], \Throwable|string|null $previous = null): string
+    public static function invalidKey(string $key, string $source, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Invalid or missing "%s" key provided, got "%s".', $source, Debugf::type($got)), $context, $previous);
+        return Debugf::message(\sprintf('Key [%s] is invalid or is missing from [%s].', $key, $source), $context, $previous);
     }
 
     /**
@@ -68,7 +68,7 @@ class Errorf
      */
     public static function notImplemented(string $where, mixed $got, iterable|string $wanted, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Feature not implemented on "%s", got "%s", wanted "%s"', $where, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
+        return Debugf::message(\sprintf('Feature not implemented on [%s], got [%s], wanted [%s]', $where, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
     }
 
     /**
@@ -77,6 +77,6 @@ class Errorf
      */
     public static function unexpectedValue(string $where, mixed $got, iterable|string $wanted, iterable $context = [], \Throwable|string|null $previous = null): string
     {
-        return Debugf::message(\sprintf('Unexpected value "%s", got "%s", wanted "%s".', $where, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
+        return Debugf::message(\sprintf('Unexpected value [%s], got [%s], wanted [%s].', $where, Debugf::type($got), Debugf::union($wanted)), $context, $previous);
     }
 }
