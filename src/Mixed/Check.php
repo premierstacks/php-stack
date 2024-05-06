@@ -92,7 +92,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<int|string, B>
      *
@@ -105,7 +105,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -370,7 +370,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<int, B>
      *
@@ -387,7 +387,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -448,7 +448,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<int, B>
      *
@@ -465,7 +465,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -518,7 +518,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<int|string, B>
      *
@@ -531,7 +531,8 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 // @phpstan-ignore-next-line
@@ -566,7 +567,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&list<B>
      *
@@ -583,7 +584,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -635,7 +636,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<int|string, B>
      *
@@ -652,7 +653,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -697,7 +698,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<int, B>
      *
@@ -718,7 +719,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -752,7 +753,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-list<B>
      *
@@ -773,7 +774,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -835,7 +836,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<string, B>
      *
@@ -856,7 +857,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
@@ -1128,7 +1129,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<int|string, B>|null)
      *
@@ -1145,7 +1146,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1414,7 +1415,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<int, B>|null)
      *
@@ -1435,7 +1436,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1500,7 +1501,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<int, B>|null)
      *
@@ -1521,7 +1522,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1574,7 +1575,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<int|string, B>|null)
      *
@@ -1591,7 +1592,8 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 // @phpstan-ignore-next-line
@@ -1626,7 +1628,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(list<B>|null)
      *
@@ -1647,7 +1649,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1699,7 +1701,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<int|string, B>|null)
      *
@@ -1720,7 +1722,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1769,7 +1771,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<int, B>|null)
      *
@@ -1794,7 +1796,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1828,7 +1830,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-list<B>|null)
      *
@@ -1853,7 +1855,7 @@ class Check
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
@@ -1919,7 +1921,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<string, B>|null)
      *
@@ -1944,7 +1946,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
@@ -2207,7 +2209,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<string, B>|null)
      *
@@ -2228,7 +2230,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
@@ -2293,7 +2295,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<string, B>|null)
      *
@@ -2314,7 +2316,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
@@ -2554,7 +2556,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<string, B>
      *
@@ -2571,7 +2573,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
@@ -2632,7 +2634,7 @@ class Check
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<string, B>
      *
@@ -2649,7 +2651,7 @@ class Check
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));

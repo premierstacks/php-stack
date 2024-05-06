@@ -71,7 +71,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<int|string, B> $value
      */
@@ -81,8 +81,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -269,7 +269,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<int, B> $value
      */
@@ -284,7 +284,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -335,7 +335,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<int, B> $value
      */
@@ -350,7 +350,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -389,7 +389,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<int|string, B> $value
      */
@@ -399,8 +399,9 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -427,7 +428,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true list<B> $value
      */
@@ -441,8 +442,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -481,7 +482,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<int|string, B> $value
      */
@@ -495,8 +496,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -537,7 +538,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<int, B> $value
      */
@@ -556,7 +557,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -583,7 +584,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-list<B> $value
      */
@@ -601,8 +602,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -655,7 +656,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<string, B> $value
      */
@@ -674,7 +675,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -859,7 +860,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<int|string, B>|null $value
      */
@@ -873,8 +874,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1065,7 +1066,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<int, B>|null $value
      */
@@ -1083,7 +1084,7 @@ class Is
             if (!\is_int($k)) {
                 return false;
             }
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1138,7 +1139,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<int, B>|null $value
      */
@@ -1157,7 +1158,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1196,7 +1197,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<int|string, B>|null $value
      */
@@ -1210,8 +1211,9 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1238,7 +1240,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true list<B>|null $value
      */
@@ -1256,8 +1258,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1296,7 +1298,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<int|string, B>|null $value
      */
@@ -1314,8 +1316,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1360,7 +1362,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<int, B>|null $value
      */
@@ -1383,7 +1385,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1410,7 +1412,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-list<B>|null $value
      */
@@ -1432,8 +1434,8 @@ class Is
             return false;
         }
 
-        foreach ($value as $v) {
-            $expected = $callback($v);
+        foreach ($value as $k => $v) {
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1490,7 +1492,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true non-empty-array<string, B>|null $value
      */
@@ -1513,7 +1515,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1698,7 +1700,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<string, B>|null $value
      */
@@ -1717,7 +1719,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1772,7 +1774,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<string, B>|null $value
      */
@@ -1791,7 +1793,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -1960,7 +1962,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true array<string, B> $value
      */
@@ -1975,7 +1977,7 @@ class Is
                 return false;
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;
@@ -2026,7 +2028,7 @@ class Is
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @phpstan-assert-if-true iterable<string, B> $value
      */
@@ -2040,7 +2042,7 @@ class Is
             if (!\is_string($k)) {
                 return false;
             }
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 return false;

@@ -94,7 +94,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::arrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::arrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -290,7 +290,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::intArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::intArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -332,7 +332,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::intIterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::intIterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -374,7 +374,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::iterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::iterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -402,7 +402,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::listOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::listOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -444,7 +444,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nonEmptyArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nonEmptyArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -472,7 +472,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nonEmptyIntArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nonEmptyIntArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -500,7 +500,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nonEmptyListOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nonEmptyListOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -542,7 +542,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nonEmptyStringArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nonEmptyStringArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -752,7 +752,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -948,7 +948,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableIntArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableIntArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -990,7 +990,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableIntIterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableIntIterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1032,7 +1032,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableIterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableIterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1060,7 +1060,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableListOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableListOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1102,7 +1102,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableNonEmptyArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableNonEmptyArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1130,7 +1130,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableNonEmptyIntArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableNonEmptyIntArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1158,7 +1158,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableNonEmptyListOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableNonEmptyListOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1200,7 +1200,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableNonEmptyStringArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableNonEmptyStringArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1396,7 +1396,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableStringArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableStringArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1438,7 +1438,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::nullableStringIterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::nullableStringIterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1620,7 +1620,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::stringArrayOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::stringArrayOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**
@@ -1662,7 +1662,7 @@ class CheckTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        static::assertSame($value, Check::stringIterableOf($value, static fn(mixed $value): mixed => $value));
+        static::assertSame($value, Check::stringIterableOf($value, static fn(int|string $key, mixed $value): mixed => $value));
     }
 
     /**

@@ -94,7 +94,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<int|string, B>
      *
@@ -109,7 +109,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -398,7 +398,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<int, B>
      *
@@ -417,7 +417,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -491,7 +491,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<int, B>
      *
@@ -510,7 +510,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -570,7 +570,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<int|string, B>
      *
@@ -585,7 +585,8 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    /** @phpstan-ignore-next-line */
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
@@ -626,7 +627,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&list<B>
      *
@@ -645,7 +646,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -705,7 +706,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<int|string, B>
      *
@@ -724,7 +725,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -781,7 +782,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<int, B>
      *
@@ -804,7 +805,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -844,7 +845,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-list<B>
      *
@@ -867,7 +868,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -943,7 +944,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&non-empty-array<string, B>
      *
@@ -966,7 +967,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
@@ -1257,7 +1258,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<int|string, B>|null)
      *
@@ -1276,7 +1277,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -1569,7 +1570,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<int, B>|null)
      *
@@ -1591,7 +1592,7 @@ class Assert
                     if (!\is_int($k)) {
                         return false;
                     }
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -1669,7 +1670,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<int, B>|null)
      *
@@ -1692,7 +1693,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -1752,7 +1753,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<int|string, B>|null)
      *
@@ -1771,7 +1772,8 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    /** @phpstan-ignore-next-line */
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
@@ -1812,7 +1814,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(list<B>|null)
      *
@@ -1835,7 +1837,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -1895,7 +1897,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<int|string, B>|null)
      *
@@ -1918,7 +1920,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -1979,7 +1981,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<int, B>|null)
      *
@@ -2006,7 +2008,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -2046,7 +2048,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-list<B>|null)
      *
@@ -2073,7 +2075,7 @@ class Assert
                 }
 
                 foreach ($value as $k => $v) {
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
@@ -2153,7 +2155,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(non-empty-array<string, B>|null)
      *
@@ -2180,7 +2182,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
@@ -2467,7 +2469,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(array<string, B>|null)
      *
@@ -2493,7 +2495,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
@@ -2571,7 +2573,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&(iterable<string, B>|null)
      *
@@ -2594,7 +2596,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
@@ -2857,7 +2859,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&array<string, B>
      *
@@ -2876,7 +2878,7 @@ class Assert
                         return false;
                     }
 
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
@@ -2950,7 +2952,7 @@ class Assert
      * @template B
      *
      * @param A $value
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      *
      * @return A&iterable<string, B>
      *
@@ -2968,7 +2970,7 @@ class Assert
                     if (!\is_string($k)) {
                         return false;
                     }
-                    $expected = $callback($v);
+                    $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
                         throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));

@@ -28,37 +28,45 @@ use Random\Randomizer;
 
 class Random
 {
-    /**
-     * @return non-falsy-string|numeric-string
-     */
-    public static function numeric(int $length = 6, bool $startWithZero = true): string
+    public static function alnum(int $length = 64): string
     {
         $random = new Randomizer();
 
-        $code = (string) $random->getInt($startWithZero ? 0 : 1, 9);
-
-        for ($i = 1; $i < $length; ++$i) {
-            $code .= $random->getInt(0, 9);
-        }
-
-        return $code;
+        return $random->getBytesFromString('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', $length);
     }
 
-    public static function source(int $length = 6, string $source = ''): string
+    public static function alpha(int $length = 64): string
     {
-        if ($source === '') {
-            $source = \implode('', \range('a', 'z'));
-        }
-
         $random = new Randomizer();
 
-        return $random->getBytesFromString($source, $length);
+        return $random->getBytesFromString('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $length);
     }
 
-    public static function token(int $length = 64): string
+    public static function code(int $length = 6, bool $startWithZero = false): string
     {
         $random = new Randomizer();
 
-        return $random->getBytes($length);
+        return $random->getInt($startWithZero ? 0 : 1, 9) . $random->getBytesFromString('0123456789', $length - 1);
+    }
+
+    public static function lower(int $length = 64): string
+    {
+        $random = new Randomizer();
+
+        return $random->getBytesFromString('abcdefghijklmnopqrstuvwxyz', $length);
+    }
+
+    public static function numeric(int $length = 64): string
+    {
+        $random = new Randomizer();
+
+        return $random->getBytesFromString('0123456789', $length);
+    }
+
+    public static function upper(int $length = 64): string
+    {
+        $random = new Randomizer();
+
+        return $random->getBytesFromString('ABCDEFGHIJKLMNOPQRSTUVWXYZ', $length);
     }
 }

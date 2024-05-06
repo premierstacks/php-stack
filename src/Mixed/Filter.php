@@ -104,7 +104,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<int|string, B> $default
      *
      * @return array<int|string, B>
@@ -120,7 +120,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -427,7 +427,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<int, B> $default
      *
      * @return array<int, B>
@@ -451,7 +451,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -526,7 +526,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<int, B> $default
      *
      * @return iterable<int, B>
@@ -550,7 +550,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -611,7 +611,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<int|string, B> $default
      *
      * @return iterable<int|string, B>
@@ -627,7 +627,8 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -664,7 +665,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|list<B> $default
      *
      * @return list<B>
@@ -688,7 +689,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -748,7 +749,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<int|string, B> $default
      *
      * @return non-empty-array<int|string, B>
@@ -772,7 +773,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -827,7 +828,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<int, B> $default
      *
      * @return non-empty-array<int, B>
@@ -859,7 +860,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -895,7 +896,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-list<B> $default
      *
      * @return non-empty-list<B>
@@ -927,7 +928,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1005,7 +1006,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<string, B> $default
      *
      * @return non-empty-array<string, B>
@@ -1037,7 +1038,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1325,7 +1326,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<int|string, B>|null $default
      *
      * @return array<int|string, B>|null
@@ -1345,7 +1346,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1656,7 +1657,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<int, B>|null $default
      *
      * @return array<int, B>|null
@@ -1683,7 +1684,7 @@ class Filter
 
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
             }
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1762,7 +1763,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<int, B>|null $default
      *
      * @return iterable<int, B>|null
@@ -1790,7 +1791,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1851,7 +1852,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<int|string, B>|null $default
      *
      * @return iterable<int|string, B>|null
@@ -1871,7 +1872,8 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            /** @phpstan-ignore-next-line */
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1908,7 +1910,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|list<B>|null $default
      *
      * @return list<B>|null
@@ -1936,7 +1938,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -1996,7 +1998,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<int|string, B>|null $default
      *
      * @return non-empty-array<int|string, B>|null
@@ -2024,7 +2026,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -2083,7 +2085,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<int, B>|null $default
      *
      * @return non-empty-array<int, B>|null
@@ -2119,7 +2121,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -2155,7 +2157,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-list<B>|null $default
      *
      * @return non-empty-list<B>|null
@@ -2191,7 +2193,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -2273,7 +2275,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|non-empty-array<string, B>|null $default
      *
      * @return non-empty-array<string, B>|null
@@ -2309,7 +2311,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -2656,7 +2658,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<string, B>|null $default
      *
      * @return array<string, B>|null
@@ -2684,7 +2686,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -2763,7 +2765,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<string, B>|null $default
      *
      * @return iterable<string, B>|null
@@ -2791,7 +2793,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -3117,7 +3119,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|array<string, B> $default
      *
      * @return array<string, B>
@@ -3141,7 +3143,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
@@ -3216,7 +3218,7 @@ class Filter
     /**
      * @template B
      *
-     * @param callable(mixed): B $callback
+     * @param callable(array-key, mixed): B $callback
      * @param Undefined|iterable<string, B> $default
      *
      * @return iterable<string, B>
@@ -3239,7 +3241,7 @@ class Filter
 
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
             }
-            $expected = $callback($v);
+            $expected = $callback($k, $v);
 
             if ($v !== $expected) {
                 if ($default !== Undefined::value) {
