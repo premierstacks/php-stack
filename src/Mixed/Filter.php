@@ -38,7 +38,7 @@ class Filter
      *
      * @return class-string<B>
      */
-    public static function a(mixed $value, string $class, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function a(mixed $value, string $class, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \is_a($value, $class, true)) {
             return $value;
@@ -54,7 +54,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>", [], $previous));
     }
 
     /**
@@ -62,7 +62,7 @@ class Filter
      *
      * @return array<int|string, mixed>
      */
-    public static function array(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function array(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value)) {
             /** @phpstan-ignore-next-line */
@@ -73,10 +73,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>', [], $previous));
     }
 
-    public static function arrayKey(mixed $value, Undefined|int|string $default = Undefined::value, \Throwable|null $throwable = null): int|string
+    public static function arrayKey(mixed $value, Undefined|int|string $default = Undefined::value, \Throwable|string|null $previous = null): int|string
     {
         if (\is_int($value)) {
             return $value;
@@ -98,7 +98,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string', [], $previous));
     }
 
     /**
@@ -109,14 +109,14 @@ class Filter
      *
      * @return array<int|string, B>
      */
-    public static function arrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function arrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -127,7 +127,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -135,7 +135,7 @@ class Filter
         return $value;
     }
 
-    public static function bool(mixed $value, Undefined|bool $default = Undefined::value, \Throwable|null $throwable = null): bool
+    public static function bool(mixed $value, Undefined|bool $default = Undefined::value, \Throwable|string|null $previous = null): bool
     {
         if (\is_bool($value)) {
             return $value;
@@ -151,7 +151,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool', [], $previous));
     }
 
     /**
@@ -159,7 +159,7 @@ class Filter
      *
      * @return callable(): mixed
      */
-    public static function callable(mixed $value, Undefined|callable $default = Undefined::value, \Throwable|null $throwable = null): callable
+    public static function callable(mixed $value, Undefined|callable $default = Undefined::value, \Throwable|string|null $previous = null): callable
     {
         if (\is_callable($value)) {
             return $value;
@@ -175,7 +175,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed', [], $previous));
     }
 
     /**
@@ -183,7 +183,7 @@ class Filter
      *
      * @return callable(): mixed&string
      */
-    public static function callableString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function callableString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \is_callable($value)) {
             return $value;
@@ -199,7 +199,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string', [], $previous));
     }
 
     /**
@@ -207,7 +207,7 @@ class Filter
      *
      * @return class-string
      */
-    public static function classString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function classString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \class_exists($value)) {
             return $value;
@@ -223,7 +223,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string', [], $previous));
     }
 
     /**
@@ -231,7 +231,7 @@ class Filter
      *
      * @return closed-resource
      */
-    public static function closedResource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function closedResource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value !== null && !\is_resource($value) && !\is_scalar($value) && !\is_array($value) && !\is_object($value)) {
             /** @phpstan-ignore-next-line */
@@ -242,7 +242,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource', [], $previous));
     }
 
     /**
@@ -250,7 +250,7 @@ class Filter
      *
      * @return \Countable|array<int|string, mixed>
      */
-    public static function countable(mixed $value, \Countable|Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): \Countable|array
+    public static function countable(mixed $value, \Countable|Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): \Countable|array
     {
         if (\is_countable($value)) {
             /** @phpstan-ignore-next-line */
@@ -261,7 +261,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable', [], $previous));
     }
 
     /**
@@ -269,7 +269,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function enum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum
+    public static function enum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum
     {
         if ($value instanceof $enum) {
             return $value;
@@ -293,10 +293,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous));
     }
 
-    public static function false(mixed $value, Undefined|false $default = Undefined::value, \Throwable|null $throwable = null): false
+    public static function false(mixed $value, Undefined|false $default = Undefined::value, \Throwable|string|null $previous = null): false
     {
         if ($value === false) {
             return $value;
@@ -312,10 +312,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false', [], $previous));
     }
 
-    public static function float(mixed $value, Undefined|float $default = Undefined::value, \Throwable|null $throwable = null): float
+    public static function float(mixed $value, Undefined|float $default = Undefined::value, \Throwable|string|null $previous = null): float
     {
         if (\is_float($value)) {
             return $value;
@@ -331,7 +331,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float', [], $previous));
     }
 
     /**
@@ -342,7 +342,7 @@ class Filter
      *
      * @return B
      */
-    public static function in(mixed $value, array $enum, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function in(mixed $value, array $enum, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if (\in_array($value, $enum, true)) {
             return $value;
@@ -352,7 +352,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous));
     }
 
     /**
@@ -363,7 +363,7 @@ class Filter
      *
      * @return B
      */
-    public static function instance(mixed $value, string $class, object $default = Undefined::value, \Throwable|null $throwable = null): object
+    public static function instance(mixed $value, string $class, object $default = Undefined::value, \Throwable|string|null $previous = null): object
     {
         if ($value instanceof $class) {
             return $value;
@@ -373,10 +373,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $class));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $class, [], $previous));
     }
 
-    public static function int(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function int(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value)) {
             return $value;
@@ -392,7 +392,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int', [], $previous));
     }
 
     /**
@@ -400,14 +400,14 @@ class Filter
      *
      * @return array<int, mixed>
      */
-    public static function intArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function intArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -416,7 +416,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
             }
         }
 
@@ -432,14 +432,14 @@ class Filter
      *
      * @return array<int, B>
      */
-    public static function intArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function intArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -448,7 +448,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
             }
 
             $expected = $callback($v);
@@ -458,7 +458,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -471,7 +471,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function intEnum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum
+    public static function intEnum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum
     {
         if ($value instanceof $enum) {
             return $value;
@@ -491,7 +491,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous));
     }
 
     /**
@@ -499,14 +499,14 @@ class Filter
      *
      * @return iterable<int, mixed>
      */
-    public static function intIterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function intIterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (!\is_iterable($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -515,7 +515,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
             }
         }
 
@@ -531,14 +531,14 @@ class Filter
      *
      * @return iterable<int, B>
      */
-    public static function intIterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function intIterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (!\is_iterable($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -547,7 +547,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
             }
 
             $expected = $callback($v);
@@ -557,7 +557,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -570,7 +570,7 @@ class Filter
      *
      * @return interface-string
      */
-    public static function interfaceString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function interfaceString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \interface_exists($value)) {
             return $value;
@@ -586,7 +586,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string', [], $previous));
     }
 
     /**
@@ -594,7 +594,7 @@ class Filter
      *
      * @return iterable<int|string, mixed>
      */
-    public static function iterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function iterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (\is_iterable($value)) {
             /** @phpstan-ignore-next-line */
@@ -605,7 +605,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>', [], $previous));
     }
 
     /**
@@ -616,14 +616,14 @@ class Filter
      *
      * @return iterable<int|string, B>
      */
-    public static function iterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function iterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (!\is_iterable($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -635,7 +635,7 @@ class Filter
                 }
 
                 // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -648,7 +648,7 @@ class Filter
      *
      * @return list<mixed>
      */
-    public static function list(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function list(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value) && \array_is_list($value)) {
             return $value;
@@ -658,7 +658,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>', [], $previous));
     }
 
     /**
@@ -669,14 +669,14 @@ class Filter
      *
      * @return list<B>
      */
-    public static function listOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function listOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>', [], $previous));
         }
 
         if (!\array_is_list($value)) {
@@ -684,7 +684,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -695,7 +695,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -707,7 +707,7 @@ class Filter
      *
      * @return negative-int
      */
-    public static function negativeInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function negativeInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value) && $value < 0) {
             return $value;
@@ -723,7 +723,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int', [], $previous));
     }
 
     /**
@@ -731,7 +731,7 @@ class Filter
      *
      * @return non-empty-array<int|string, mixed>
      */
-    public static function nonEmptyArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value) && $value !== []) {
             /** @phpstan-ignore-next-line */
@@ -742,7 +742,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous));
     }
 
     /**
@@ -753,14 +753,14 @@ class Filter
      *
      * @return non-empty-array<int|string, B>
      */
-    public static function nonEmptyArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -768,7 +768,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -779,7 +779,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -792,14 +792,14 @@ class Filter
      *
      * @return non-empty-array<int, mixed>
      */
-    public static function nonEmptyIntArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyIntArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -807,7 +807,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -816,7 +816,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
             }
         }
 
@@ -832,14 +832,14 @@ class Filter
      *
      * @return non-empty-array<int, B>
      */
-    public static function nonEmptyIntArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyIntArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -847,7 +847,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -856,7 +856,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
             }
 
             $expected = $callback($v);
@@ -866,7 +866,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -879,7 +879,7 @@ class Filter
      *
      * @return non-empty-list<mixed>
      */
-    public static function nonEmptyList(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyList(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value) && $value !== [] && \array_is_list($value)) {
             return $value;
@@ -889,7 +889,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous));
     }
 
     /**
@@ -900,14 +900,14 @@ class Filter
      *
      * @return non-empty-list<B>
      */
-    public static function nonEmptyListOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyListOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -915,7 +915,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous));
         }
 
         if (!\array_is_list($value)) {
@@ -923,7 +923,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -934,7 +934,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -946,7 +946,7 @@ class Filter
      *
      * @return non-empty-string
      */
-    public static function nonEmptyString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function nonEmptyString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && $value !== '') {
             return $value;
@@ -962,7 +962,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string', [], $previous));
     }
 
     /**
@@ -970,14 +970,14 @@ class Filter
      *
      * @return non-empty-array<string, mixed>
      */
-    public static function nonEmptyStringArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyStringArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -985,7 +985,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -994,7 +994,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
             }
         }
 
@@ -1010,14 +1010,14 @@ class Filter
      *
      * @return non-empty-array<string, B>
      */
-    public static function nonEmptyStringArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function nonEmptyStringArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
         }
 
         if ($value === []) {
@@ -1025,7 +1025,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1034,7 +1034,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
             }
 
             $expected = $callback($v);
@@ -1044,7 +1044,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1057,7 +1057,7 @@ class Filter
      *
      * @return non-falsy-string
      */
-    public static function nonFalsyString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function nonFalsyString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && (bool) $value) {
             /** @phpstan-ignore-next-line */
@@ -1075,7 +1075,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous));
     }
 
     /**
@@ -1083,7 +1083,7 @@ class Filter
      *
      * @return non-negative-int
      */
-    public static function nonNegativeInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function nonNegativeInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value) && $value >= 0) {
             return $value;
@@ -1099,7 +1099,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int', [], $previous));
     }
 
     /**
@@ -1107,7 +1107,7 @@ class Filter
      *
      * @return non-positive-int
      */
-    public static function nonPositiveInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function nonPositiveInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value) && $value <= 0) {
             return $value;
@@ -1123,7 +1123,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int', [], $previous));
     }
 
     /**
@@ -1131,7 +1131,7 @@ class Filter
      *
      * @return non-zero-int
      */
-    public static function nonZeroInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function nonZeroInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value) && $value !== 0) {
             return $value;
@@ -1147,10 +1147,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int', [], $previous));
     }
 
-    public static function notFalse(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notFalse(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE);
 
@@ -1162,10 +1162,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!false'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!false', [], $previous));
     }
 
-    public static function notNegativeOne(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notNegativeOne(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_INT);
 
@@ -1177,10 +1177,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!-1'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!-1', [], $previous));
     }
 
-    public static function notNull(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notNull(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value !== null) {
             return $value;
@@ -1190,10 +1190,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!null', [], $previous));
     }
 
-    public static function notPositiveOne(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notPositiveOne(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_INT);
 
@@ -1205,10 +1205,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!1'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!1', [], $previous));
     }
 
-    public static function notTrue(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notTrue(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_BOOLEAN, \FILTER_NULL_ON_FAILURE);
 
@@ -1220,10 +1220,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!true'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!true', [], $previous));
     }
 
-    public static function notZero(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function notZero(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_INT);
 
@@ -1235,10 +1235,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!0'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!0', [], $previous));
     }
 
-    public static function null(mixed $value, Undefined|null $default = Undefined::value, \Throwable|null $throwable = null): null
+    public static function null(mixed $value, Undefined|null $default = Undefined::value, \Throwable|string|null $previous = null): null
     {
         if ($value === null) {
             return $value;
@@ -1248,7 +1248,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'null', [], $previous));
     }
 
     /**
@@ -1259,7 +1259,7 @@ class Filter
      *
      * @return class-string<B>|null
      */
-    public static function nullableA(mixed $value, string $class, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableA(mixed $value, string $class, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || (\is_string($value) && \is_a($value, $class, true))) {
             return $value;
@@ -1275,7 +1275,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>|null"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>|null", [], $previous));
     }
 
     /**
@@ -1283,7 +1283,7 @@ class Filter
      *
      * @return array<int|string, mixed>|null
      */
-    public static function nullableArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value)) {
             /** @phpstan-ignore-next-line */
@@ -1294,10 +1294,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null', [], $previous));
     }
 
-    public static function nullableArrayKey(mixed $value, Undefined|int|string|null $default = Undefined::value, \Throwable|null $throwable = null): int|string|null
+    public static function nullableArrayKey(mixed $value, Undefined|int|string|null $default = Undefined::value, \Throwable|string|null $previous = null): int|string|null
     {
         if ($value === null || \is_int($value)) {
             return $value;
@@ -1319,7 +1319,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string|null', [], $previous));
     }
 
     /**
@@ -1330,7 +1330,7 @@ class Filter
      *
      * @return array<int|string, B>|null
      */
-    public static function nullableArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -1341,7 +1341,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1352,7 +1352,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1360,7 +1360,7 @@ class Filter
         return $value;
     }
 
-    public static function nullableBool(mixed $value, Undefined|bool|null $default = Undefined::value, \Throwable|null $throwable = null): bool|null
+    public static function nullableBool(mixed $value, Undefined|bool|null $default = Undefined::value, \Throwable|string|null $previous = null): bool|null
     {
         if ($value === null || \is_bool($value)) {
             return $value;
@@ -1376,7 +1376,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool|null', [], $previous));
     }
 
     /**
@@ -1384,7 +1384,7 @@ class Filter
      *
      * @return callable(): mixed|null
      */
-    public static function nullableCallable(mixed $value, Undefined|callable|null $default = Undefined::value, \Throwable|null $throwable = null): callable|null
+    public static function nullableCallable(mixed $value, Undefined|callable|null $default = Undefined::value, \Throwable|string|null $previous = null): callable|null
     {
         if ($value === null || \is_callable($value)) {
             return $value;
@@ -1400,7 +1400,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed|null', [], $previous));
     }
 
     /**
@@ -1408,7 +1408,7 @@ class Filter
      *
      * @return (callable(): mixed&string)|null
      */
-    public static function nullableCallableString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableCallableString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && \is_callable($value)) {
             return $value;
@@ -1424,7 +1424,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string|null', [], $previous));
     }
 
     /**
@@ -1432,7 +1432,7 @@ class Filter
      *
      * @return class-string|null
      */
-    public static function nullableClassString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableClassString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && \class_exists($value)) {
             return $value;
@@ -1448,7 +1448,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string|null', [], $previous));
     }
 
     /**
@@ -1456,7 +1456,7 @@ class Filter
      *
      * @return closed-resource|null
      */
-    public static function nullableClosedResource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function nullableClosedResource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value === null || (!\is_scalar($value) && !\is_resource($value) && !\is_array($value) && !\is_object($value))) {
             /** @phpstan-ignore-next-line */
@@ -1467,7 +1467,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource|null', [], $previous));
     }
 
     /**
@@ -1475,7 +1475,7 @@ class Filter
      *
      * @return \Countable|array<int|string, mixed>|null
      */
-    public static function nullableCountable(mixed $value, \Countable|Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): \Countable|array|null
+    public static function nullableCountable(mixed $value, \Countable|Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): \Countable|array|null
     {
         if ($value === null || \is_countable($value)) {
             /** @phpstan-ignore-next-line */
@@ -1486,7 +1486,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable|null', [], $previous));
     }
 
     /**
@@ -1494,7 +1494,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function nullableEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         if ($value === null || $value instanceof $enum) {
             return $value;
@@ -1518,10 +1518,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous));
     }
 
-    public static function nullableFalse(mixed $value, Undefined|false|null $default = Undefined::value, \Throwable|null $throwable = null): false|null
+    public static function nullableFalse(mixed $value, Undefined|false|null $default = Undefined::value, \Throwable|string|null $previous = null): false|null
     {
         if ($value === null || $value === false) {
             return $value;
@@ -1537,10 +1537,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false|null', [], $previous));
     }
 
-    public static function nullableFloat(mixed $value, Undefined|float|null $default = Undefined::value, \Throwable|null $throwable = null): float|null
+    public static function nullableFloat(mixed $value, Undefined|float|null $default = Undefined::value, \Throwable|string|null $previous = null): float|null
     {
         if ($value === null || \is_float($value)) {
             return $value;
@@ -1556,7 +1556,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float|null', [], $previous));
     }
 
     /**
@@ -1567,7 +1567,7 @@ class Filter
      *
      * @return B|null
      */
-    public static function nullableIn(mixed $value, array $enum, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function nullableIn(mixed $value, array $enum, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value === null || \in_array($value, $enum, true)) {
             return $value;
@@ -1577,7 +1577,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum + [null]));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum + [null], [], $previous));
     }
 
     /**
@@ -1588,7 +1588,7 @@ class Filter
      *
      * @return B|null
      */
-    public static function nullableInstance(mixed $value, string $class, object|null $default = Undefined::value, \Throwable|null $throwable = null): object|null
+    public static function nullableInstance(mixed $value, string $class, object|null $default = Undefined::value, \Throwable|string|null $previous = null): object|null
     {
         if ($value === null || $value instanceof $class) {
             return $value;
@@ -1598,10 +1598,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$class}|null"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$class}|null", [], $previous));
     }
 
-    public static function nullableInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullableInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value)) {
             return $value;
@@ -1617,7 +1617,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|null', [], $previous));
     }
 
     /**
@@ -1625,7 +1625,7 @@ class Filter
      *
      * @return array<int, mixed>|null
      */
-    public static function nullableIntArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableIntArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -1636,7 +1636,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1645,7 +1645,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
             }
         }
 
@@ -1661,7 +1661,7 @@ class Filter
      *
      * @return array<int, B>|null
      */
-    public static function nullableIntArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableIntArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -1672,7 +1672,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1681,7 +1681,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
             }
             $expected = $callback($v);
 
@@ -1690,7 +1690,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1703,7 +1703,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function nullableIntEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableIntEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         if ($value === null || $value instanceof $enum) {
             return $value;
@@ -1723,7 +1723,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous));
     }
 
     /**
@@ -1731,7 +1731,7 @@ class Filter
      *
      * @return iterable<int, mixed>|null
      */
-    public static function nullableIntIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIntIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null) {
             return $value;
@@ -1742,7 +1742,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1751,7 +1751,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
         }
 
@@ -1767,7 +1767,7 @@ class Filter
      *
      * @return iterable<int, B>|null
      */
-    public static function nullableIntIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIntIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null) {
             return $value;
@@ -1778,7 +1778,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1787,7 +1787,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
 
             $expected = $callback($v);
@@ -1797,7 +1797,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1810,7 +1810,7 @@ class Filter
      *
      * @return interface-string|null
      */
-    public static function nullableInterfaceString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableInterfaceString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && \interface_exists($value)) {
             return $value;
@@ -1826,7 +1826,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string|null', [], $previous));
     }
 
     /**
@@ -1834,7 +1834,7 @@ class Filter
      *
      * @return iterable<int|string, mixed>|null
      */
-    public static function nullableIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null || \is_iterable($value)) {
             /** @phpstan-ignore-next-line */
@@ -1845,7 +1845,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null', [], $previous));
     }
 
     /**
@@ -1856,7 +1856,7 @@ class Filter
      *
      * @return iterable<int|string, B>|null
      */
-    public static function nullableIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null) {
             return $value;
@@ -1867,7 +1867,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1879,7 +1879,7 @@ class Filter
                 }
 
                 // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1892,7 +1892,7 @@ class Filter
      *
      * @return list<mixed>|null
      */
-    public static function nullableList(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableList(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value) && \array_is_list($value)) {
             return $value;
@@ -1902,7 +1902,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null', [], $previous));
     }
 
     /**
@@ -1913,7 +1913,7 @@ class Filter
      *
      * @return list<B>|null
      */
-    public static function nullableListOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableListOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -1924,7 +1924,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null', [], $previous));
         }
 
         if (!\array_is_list($value)) {
@@ -1932,7 +1932,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -1943,7 +1943,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -1955,7 +1955,7 @@ class Filter
      *
      * @return negative-int|null
      */
-    public static function nullableNegativeInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullableNegativeInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value) && $value < 0) {
             return $value;
@@ -1971,7 +1971,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int|null', [], $previous));
     }
 
     /**
@@ -1979,7 +1979,7 @@ class Filter
      *
      * @return non-empty-array<int|string, mixed>|null
      */
-    public static function nullableNonEmptyArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value) && $value !== []) {
             /** @phpstan-ignore-next-line */
@@ -1990,7 +1990,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous));
     }
 
     /**
@@ -2001,7 +2001,7 @@ class Filter
      *
      * @return non-empty-array<int|string, B>|null
      */
-    public static function nullableNonEmptyArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2012,7 +2012,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2020,7 +2020,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2031,7 +2031,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2044,7 +2044,7 @@ class Filter
      *
      * @return non-empty-array<int, mixed>|null
      */
-    public static function nullableNonEmptyIntArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyIntArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2055,7 +2055,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2063,7 +2063,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2072,7 +2072,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null', [], $previous));
             }
         }
 
@@ -2088,7 +2088,7 @@ class Filter
      *
      * @return non-empty-array<int, B>|null
      */
-    public static function nullableNonEmptyIntArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyIntArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2099,7 +2099,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2107,7 +2107,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2116,7 +2116,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
             }
 
             $expected = $callback($v);
@@ -2126,7 +2126,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2139,7 +2139,7 @@ class Filter
      *
      * @return non-empty-list<mixed>|null
      */
-    public static function nullableNonEmptyList(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyList(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value) && $value !== [] && \array_is_list($value)) {
             return $value;
@@ -2149,7 +2149,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous));
     }
 
     /**
@@ -2160,7 +2160,7 @@ class Filter
      *
      * @return non-empty-list<B>|null
      */
-    public static function nullableNonEmptyListOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyListOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2171,7 +2171,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2179,7 +2179,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous));
         }
 
         if (!\array_is_list($value)) {
@@ -2187,7 +2187,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2198,7 +2198,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2210,7 +2210,7 @@ class Filter
      *
      * @return non-empty-string|null
      */
-    public static function nullableNonEmptyString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableNonEmptyString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && $value !== '') {
             return $value;
@@ -2226,7 +2226,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string', [], $previous));
     }
 
     /**
@@ -2234,7 +2234,7 @@ class Filter
      *
      * @return non-empty-array<string, mixed>|null
      */
-    public static function nullableNonEmptyStringArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyStringArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2245,7 +2245,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2253,7 +2253,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2262,7 +2262,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
             }
         }
 
@@ -2278,7 +2278,7 @@ class Filter
      *
      * @return non-empty-array<string, B>|null
      */
-    public static function nullableNonEmptyStringArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyStringArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2289,7 +2289,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
         }
 
         if ($value === []) {
@@ -2297,7 +2297,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2306,7 +2306,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
             }
 
             $expected = $callback($v);
@@ -2316,7 +2316,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2329,7 +2329,7 @@ class Filter
      *
      * @return non-falsy-string|null
      */
-    public static function nullableNonFalsyString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableNonFalsyString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && (bool) $value) {
             /** @phpstan-ignore-next-line */
@@ -2347,7 +2347,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous));
     }
 
     /**
@@ -2355,7 +2355,7 @@ class Filter
      *
      * @return non-negative-int|null
      */
-    public static function nullableNonNegativeInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonNegativeInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value) && $value >= 0) {
             return $value;
@@ -2371,7 +2371,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int|null', [], $previous));
     }
 
     /**
@@ -2379,7 +2379,7 @@ class Filter
      *
      * @return non-positive-int|null
      */
-    public static function nullableNonPositiveInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonPositiveInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value) && $value <= 0) {
             return $value;
@@ -2395,7 +2395,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int|null', [], $previous));
     }
 
     /**
@@ -2403,7 +2403,7 @@ class Filter
      *
      * @return non-zero-int|null
      */
-    public static function nullableNonZeroInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonZeroInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value) && $value !== 0) {
             return $value;
@@ -2419,7 +2419,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int|null', [], $previous));
     }
 
     /**
@@ -2427,7 +2427,7 @@ class Filter
      *
      * @return numeric|null
      */
-    public static function nullableNumeric(mixed $value, Undefined|float|int|string|null $default = Undefined::value, \Throwable|null $throwable = null): float|int|string|null
+    public static function nullableNumeric(mixed $value, Undefined|float|int|string|null $default = Undefined::value, \Throwable|string|null $previous = null): float|int|string|null
     {
         if ($value === null) {
             return $value;
@@ -2455,7 +2455,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric', [], $previous));
     }
 
     /**
@@ -2463,7 +2463,7 @@ class Filter
      *
      * @return numeric-string|null
      */
-    public static function nullableNumericString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableNumericString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && \is_numeric($value)) {
             return $value;
@@ -2479,13 +2479,13 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string', [], $previous));
     }
 
     /**
      * @param Undefined|object|null $default
      */
-    public static function nullableObject(mixed $value, object|null $default = Undefined::value, \Throwable|null $throwable = null): object|null
+    public static function nullableObject(mixed $value, object|null $default = Undefined::value, \Throwable|string|null $previous = null): object|null
     {
         if ($value === null || \is_object($value)) {
             return $value;
@@ -2495,7 +2495,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object|null', [], $previous));
     }
 
     /**
@@ -2503,7 +2503,7 @@ class Filter
      *
      * @return open-resource|null
      */
-    public static function nullableOpenResource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function nullableOpenResource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value === null || \is_resource($value)) {
             return $value;
@@ -2513,7 +2513,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource|null', [], $previous));
     }
 
     /**
@@ -2521,7 +2521,7 @@ class Filter
      *
      * @return positive-int|null
      */
-    public static function nullablePositiveInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|null $throwable = null): int|null
+    public static function nullablePositiveInt(mixed $value, Undefined|int|null $default = Undefined::value, \Throwable|string|null $previous = null): int|null
     {
         if ($value === null || \is_int($value) && $value > 0) {
             return $value;
@@ -2537,7 +2537,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int|null', [], $previous));
     }
 
     /**
@@ -2545,7 +2545,7 @@ class Filter
      *
      * @return resource|null
      */
-    public static function nullableResource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function nullableResource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if ($value === null || \is_resource($value) || (!\is_scalar($value) && !\is_array($value) && !\is_object($value))) {
             /** @phpstan-ignore-next-line */
@@ -2556,7 +2556,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource|null', [], $previous));
     }
 
     /**
@@ -2564,7 +2564,7 @@ class Filter
      *
      * @return scalar|null
      */
-    public static function nullableScalar(mixed $value, Undefined|bool|float|int|string|null $default = Undefined::value, \Throwable|null $throwable = null): bool|float|int|string|null
+    public static function nullableScalar(mixed $value, Undefined|bool|float|int|string|null $default = Undefined::value, \Throwable|string|null $previous = null): bool|float|int|string|null
     {
         if ($value === null) {
             return $value;
@@ -2598,10 +2598,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar|null', [], $previous));
     }
 
-    public static function nullableString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value)) {
             return $value;
@@ -2617,7 +2617,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string|null', [], $previous));
     }
 
     /**
@@ -2625,7 +2625,7 @@ class Filter
      *
      * @return array<string, mixed>|null
      */
-    public static function nullableStringArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableStringArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2636,7 +2636,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2645,7 +2645,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
             }
         }
 
@@ -2661,7 +2661,7 @@ class Filter
      *
      * @return array<string, B>|null
      */
-    public static function nullableStringArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|null $throwable = null): array|null
+    public static function nullableStringArrayOf(mixed $value, callable $callback, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null) {
             return $value;
@@ -2672,7 +2672,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2681,7 +2681,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
             }
 
             $expected = $callback($v);
@@ -2691,7 +2691,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2704,7 +2704,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function nullableStringEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableStringEnum(mixed $value, string $enum, \BackedEnum|Undefined|null $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         if ($value === null || $value instanceof $enum) {
             return $value;
@@ -2724,7 +2724,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null"));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous));
     }
 
     /**
@@ -2732,7 +2732,7 @@ class Filter
      *
      * @return iterable<string, mixed>|null
      */
-    public static function nullableStringIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableStringIterable(mixed $value, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null) {
             return $value;
@@ -2743,7 +2743,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2752,7 +2752,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
             }
         }
 
@@ -2768,7 +2768,7 @@ class Filter
      *
      * @return iterable<string, B>|null
      */
-    public static function nullableStringIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableStringIterableOf(mixed $value, callable $callback, Undefined|iterable|null $default = Undefined::value, \Throwable|string|null $previous = null): iterable|null
     {
         if ($value === null) {
             return $value;
@@ -2779,7 +2779,7 @@ class Filter
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -2788,7 +2788,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
             }
 
             $expected = $callback($v);
@@ -2798,7 +2798,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -2811,7 +2811,7 @@ class Filter
      *
      * @return \Stringable|scalar|null
      */
-    public static function nullableStringable(mixed $value, \Stringable|Undefined|bool|float|int|string|null $default = Undefined::value, \Throwable|null $throwable = null): \Stringable|bool|float|int|string|null
+    public static function nullableStringable(mixed $value, \Stringable|Undefined|bool|float|int|string|null $default = Undefined::value, \Throwable|string|null $previous = null): \Stringable|bool|float|int|string|null
     {
         if ($value === null || $value instanceof \Stringable) {
             return $value;
@@ -2845,7 +2845,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable|null', [], $previous));
     }
 
     /**
@@ -2853,7 +2853,7 @@ class Filter
      *
      * @return trait-string|null
      */
-    public static function nullableTraitString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|null $throwable = null): string|null
+    public static function nullableTraitString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && \trait_exists($value)) {
             return $value;
@@ -2869,10 +2869,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string|null', [], $previous));
     }
 
-    public static function nullableTrue(mixed $value, Undefined|true|null $default = Undefined::value, \Throwable|null $throwable = null): true|null
+    public static function nullableTrue(mixed $value, Undefined|true|null $default = Undefined::value, \Throwable|string|null $previous = null): true|null
     {
         if ($value === null || $value === true) {
             return $value;
@@ -2888,7 +2888,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true|null'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true|null', [], $previous));
     }
 
     /**
@@ -2896,7 +2896,7 @@ class Filter
      *
      * @return numeric
      */
-    public static function numeric(mixed $value, Undefined|float|int|string $default = Undefined::value, \Throwable|null $throwable = null): float|int|string
+    public static function numeric(mixed $value, Undefined|float|int|string $default = Undefined::value, \Throwable|string|null $previous = null): float|int|string
     {
         if (\is_numeric($value)) {
             return $value;
@@ -2924,7 +2924,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric', [], $previous));
     }
 
     /**
@@ -2932,7 +2932,7 @@ class Filter
      *
      * @return numeric-string
      */
-    public static function numericString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function numericString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \is_numeric($value)) {
             return $value;
@@ -2948,13 +2948,13 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string', [], $previous));
     }
 
     /**
      * @param Undefined|object $default
      */
-    public static function object(mixed $value, object $default = Undefined::value, \Throwable|null $throwable = null): object
+    public static function object(mixed $value, object $default = Undefined::value, \Throwable|string|null $previous = null): object
     {
         if (\is_object($value)) {
             return $value;
@@ -2964,7 +2964,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object', [], $previous));
     }
 
     /**
@@ -2972,7 +2972,7 @@ class Filter
      *
      * @return open-resource
      */
-    public static function openResource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function openResource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if (\is_resource($value)) {
             return $value;
@@ -2982,7 +2982,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource', [], $previous));
     }
 
     /**
@@ -2990,7 +2990,7 @@ class Filter
      *
      * @return positive-int
      */
-    public static function positiveInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|null $throwable = null): int
+    public static function positiveInt(mixed $value, Undefined|int $default = Undefined::value, \Throwable|string|null $previous = null): int
     {
         if (\is_int($value) && $value > 0) {
             return $value;
@@ -3006,7 +3006,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int', [], $previous));
     }
 
     /**
@@ -3014,7 +3014,7 @@ class Filter
      *
      * @return resource
      */
-    public static function resource(mixed $value, mixed $default = Undefined::value, \Throwable|null $throwable = null): mixed
+    public static function resource(mixed $value, mixed $default = Undefined::value, \Throwable|string|null $previous = null): mixed
     {
         if (\is_resource($value) || ($value !== null && !\is_scalar($value) && !\is_array($value) && !\is_object($value))) {
             /** @phpstan-ignore-next-line */
@@ -3025,7 +3025,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource', [], $previous));
     }
 
     /**
@@ -3033,7 +3033,7 @@ class Filter
      *
      * @return scalar
      */
-    public static function scalar(mixed $value, Undefined|bool|float|int|string $default = Undefined::value, \Throwable|null $throwable = null): bool|float|int|string
+    public static function scalar(mixed $value, Undefined|bool|float|int|string $default = Undefined::value, \Throwable|string|null $previous = null): bool|float|int|string
     {
         $parsed = \filter_var($value, \FILTER_VALIDATE_INT);
 
@@ -3063,10 +3063,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar', [], $previous));
     }
 
-    public static function string(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function string(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value)) {
             return $value;
@@ -3082,7 +3082,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string', [], $previous));
     }
 
     /**
@@ -3090,14 +3090,14 @@ class Filter
      *
      * @return array<string, mixed>
      */
-    public static function stringArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function stringArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -3106,7 +3106,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
             }
         }
 
@@ -3122,14 +3122,14 @@ class Filter
      *
      * @return array<string, B>
      */
-    public static function stringArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|null $throwable = null): array
+    public static function stringArrayOf(mixed $value, callable $callback, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (!\is_array($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -3138,7 +3138,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
             }
 
             $expected = $callback($v);
@@ -3148,7 +3148,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -3161,7 +3161,7 @@ class Filter
      *
      * @param class-string<B> $enum
      */
-    public static function stringEnum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|null $throwable = null): \BackedEnum
+    public static function stringEnum(mixed $value, string $enum, \BackedEnum|Undefined $default = Undefined::value, \Throwable|string|null $previous = null): \BackedEnum
     {
         if ($value instanceof $enum) {
             return $value;
@@ -3181,7 +3181,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous));
     }
 
     /**
@@ -3189,14 +3189,14 @@ class Filter
      *
      * @return iterable<string, mixed>
      */
-    public static function stringIterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function stringIterable(mixed $value, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (!\is_iterable($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -3205,7 +3205,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
             }
         }
 
@@ -3221,14 +3221,14 @@ class Filter
      *
      * @return iterable<string, B>
      */
-    public static function stringIterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|null $throwable = null): iterable
+    public static function stringIterableOf(mixed $value, callable $callback, Undefined|iterable $default = Undefined::value, \Throwable|string|null $previous = null): iterable
     {
         if (!\is_iterable($value)) {
             if ($default !== Undefined::value) {
                 return $default;
             }
 
-            throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>'));
+            throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
         }
 
         foreach ($value as $k => $v) {
@@ -3237,7 +3237,7 @@ class Filter
                     return $default;
                 }
 
-                throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>'));
+                throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
             }
             $expected = $callback($v);
 
@@ -3246,7 +3246,7 @@ class Filter
                     return $default;
                 }
 
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
             }
         }
 
@@ -3259,7 +3259,7 @@ class Filter
      *
      * @return \Stringable|scalar
      */
-    public static function stringable(mixed $value, \Stringable|Undefined|bool|float|int|string $default = Undefined::value, \Throwable|null $throwable = null): \Stringable|bool|float|int|string
+    public static function stringable(mixed $value, \Stringable|Undefined|bool|float|int|string $default = Undefined::value, \Throwable|string|null $previous = null): \Stringable|bool|float|int|string
     {
         if ($value instanceof \Stringable) {
             return $value;
@@ -3293,7 +3293,7 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable', [], $previous));
     }
 
     /**
@@ -3301,7 +3301,7 @@ class Filter
      *
      * @return trait-string
      */
-    public static function traitString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|null $throwable = null): string
+    public static function traitString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && \trait_exists($value)) {
             return $value;
@@ -3317,10 +3317,10 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string', [], $previous));
     }
 
-    public static function true(mixed $value, Undefined|true $default = Undefined::value, \Throwable|null $throwable = null): true
+    public static function true(mixed $value, Undefined|true $default = Undefined::value, \Throwable|string|null $previous = null): true
     {
         if ($value === true) {
             return $value;
@@ -3336,6 +3336,6 @@ class Filter
             return $default;
         }
 
-        throw $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true'));
+        throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true', [], $previous));
     }
 }

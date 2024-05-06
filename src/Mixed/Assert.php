@@ -40,11 +40,11 @@ class Assert
      *
      * @phpstan-assert class-string<B> $value
      */
-    public static function a(mixed $value, string $class, \Throwable|null $throwable = null): string
+    public static function a(mixed $value, string $class, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \is_a($value, $class, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>", [], $previous)),
         );
 
         return $value;
@@ -59,11 +59,11 @@ class Assert
      *
      * @phpstan-assert array<int|string, mixed> $value
      */
-    public static function array(mixed $value, \Throwable|null $throwable = null): array
+    public static function array(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             \is_array($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -79,11 +79,11 @@ class Assert
      *
      * @phpstan-assert int|string $value
      */
-    public static function arrayKey(mixed $value, \Throwable|null $throwable = null): int|string
+    public static function arrayKey(mixed $value, \Throwable|string|null $previous = null): int|string
     {
         \assert(
             \is_int($value) || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string', [], $previous)),
         );
 
         return $value;
@@ -100,10 +100,10 @@ class Assert
      *
      * @phpstan-assert array<int|string, B> $value
      */
-    public static function arrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function arrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -112,13 +112,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -134,11 +134,11 @@ class Assert
      *
      * @phpstan-assert bool $value
      */
-    public static function bool(mixed $value, \Throwable|null $throwable = null): bool
+    public static function bool(mixed $value, \Throwable|string|null $previous = null): bool
     {
         \assert(
             \is_bool($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool', [], $previous)),
         );
 
         return $value;
@@ -153,11 +153,11 @@ class Assert
      *
      * @phpstan-assert callable(): mixed $value
      */
-    public static function callable(mixed $value, \Throwable|null $throwable = null): callable
+    public static function callable(mixed $value, \Throwable|string|null $previous = null): callable
     {
         \assert(
             \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed', [], $previous)),
         );
 
         return $value;
@@ -172,11 +172,11 @@ class Assert
      *
      * @phpstan-assert string&callable(): mixed $value
      */
-    public static function callableString(mixed $value, \Throwable|null $throwable = null): string
+    public static function callableString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string', [], $previous)),
         );
 
         return $value;
@@ -191,11 +191,11 @@ class Assert
      *
      * @phpstan-assert class-string $value
      */
-    public static function classString(mixed $value, \Throwable|null $throwable = null): string
+    public static function classString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \class_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string', [], $previous)),
         );
 
         return $value;
@@ -210,11 +210,11 @@ class Assert
      *
      * @phpstan-assert closed-resource $value
      */
-    public static function closedResource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function closedResource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== null && !\is_resource($value) && !\is_scalar($value) && !\is_array($value) && !\is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -230,11 +230,11 @@ class Assert
      *
      * @phpstan-assert array<int|string, mixed>|\Countable $value
      */
-    public static function countable(mixed $value, \Throwable|null $throwable = null): \Countable|array
+    public static function countable(mixed $value, \Throwable|string|null $previous = null): \Countable|array
     {
         \assert(
             \is_countable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -252,11 +252,11 @@ class Assert
      *
      * @phpstan-assert B $value
      */
-    public static function enum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum
+    public static function enum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum)),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous)),
         );
 
         return $value;
@@ -271,11 +271,11 @@ class Assert
      *
      * @phpstan-assert false $value
      */
-    public static function false(mixed $value, \Throwable|null $throwable = null): false
+    public static function false(mixed $value, \Throwable|string|null $previous = null): false
     {
         \assert(
             $value === false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false', [], $previous)),
         );
 
         return $value;
@@ -290,11 +290,11 @@ class Assert
      *
      * @phpstan-assert float $value
      */
-    public static function float(mixed $value, \Throwable|null $throwable = null): float
+    public static function float(mixed $value, \Throwable|string|null $previous = null): float
     {
         \assert(
             \is_float($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float', [], $previous)),
         );
 
         return $value;
@@ -311,11 +311,11 @@ class Assert
      *
      * @phpstan-assert B $value
      */
-    public static function in(mixed $value, array $enum, \Throwable|null $throwable = null): mixed
+    public static function in(mixed $value, array $enum, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             \in_array($value, $enum, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum)),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous)),
         );
 
         return $value;
@@ -332,11 +332,11 @@ class Assert
      *
      * @phpstan-assert B $value
      */
-    public static function instance(mixed $value, string $class, \Throwable|null $throwable = null): object
+    public static function instance(mixed $value, string $class, \Throwable|string|null $previous = null): object
     {
         \assert(
             $value instanceof $class,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $class)),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $class, [], $previous)),
         );
 
         return $value;
@@ -351,11 +351,11 @@ class Assert
      *
      * @phpstan-assert int $value
      */
-    public static function int(mixed $value, \Throwable|null $throwable = null): int
+    public static function int(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int', [], $previous)),
         );
 
         return $value;
@@ -370,7 +370,7 @@ class Assert
      *
      * @phpstan-assert array<int, mixed> $value
      */
-    public static function intArray(mixed $value, \Throwable|null $throwable = null): array
+    public static function intArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             (static function (mixed $value): bool {
@@ -386,7 +386,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -404,10 +404,10 @@ class Assert
      *
      * @phpstan-assert array<int, B> $value
      */
-    public static function intArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function intArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -420,13 +420,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -444,11 +444,11 @@ class Assert
      *
      * @phpstan-assert B $value
      */
-    public static function intEnum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum
+    public static function intEnum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum)),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous)),
         );
 
         return $value;
@@ -463,7 +463,7 @@ class Assert
      *
      * @phpstan-assert iterable<int, mixed> $value
      */
-    public static function intIterable(mixed $value, \Throwable|null $throwable = null): iterable
+    public static function intIterable(mixed $value, \Throwable|string|null $previous = null): iterable
     {
         \assert(
             (static function (mixed $value): bool {
@@ -479,7 +479,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -497,10 +497,10 @@ class Assert
      *
      * @phpstan-assert iterable<int, B> $value
      */
-    public static function intIterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable
+    public static function intIterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_iterable($value)) {
                     return false;
                 }
@@ -513,13 +513,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -535,11 +535,11 @@ class Assert
      *
      * @phpstan-assert interface-string $value
      */
-    public static function interfaceString(mixed $value, \Throwable|null $throwable = null): string
+    public static function interfaceString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \interface_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string', [], $previous)),
         );
 
         return $value;
@@ -554,11 +554,11 @@ class Assert
      *
      * @phpstan-assert iterable<int|string, mixed> $value
      */
-    public static function iterable(mixed $value, \Throwable|null $throwable = null): iterable
+    public static function iterable(mixed $value, \Throwable|string|null $previous = null): iterable
     {
         \assert(
             \is_iterable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -576,10 +576,10 @@ class Assert
      *
      * @phpstan-assert iterable<int|string, B> $value
      */
-    public static function iterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable
+    public static function iterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_iterable($value)) {
                     return false;
                 }
@@ -589,13 +589,13 @@ class Assert
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -611,11 +611,11 @@ class Assert
      *
      * @phpstan-assert list<mixed> $value
      */
-    public static function list(mixed $value, \Throwable|null $throwable = null): array
+    public static function list(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             \is_array($value) && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>', [], $previous)),
         );
 
         return $value;
@@ -632,10 +632,10 @@ class Assert
      *
      * @phpstan-assert list<B> $value
      */
-    public static function listOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function listOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -648,13 +648,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -670,11 +670,11 @@ class Assert
      *
      * @phpstan-assert negative-int $value
      */
-    public static function negativeInt(mixed $value, \Throwable|null $throwable = null): int
+    public static function negativeInt(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value) && $value < 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int', [], $previous)),
         );
 
         return $value;
@@ -689,11 +689,11 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int|string, mixed> $value
      */
-    public static function nonEmptyArray(mixed $value, \Throwable|null $throwable = null): array
+    public static function nonEmptyArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             \is_array($value) && $value !== [],
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -711,10 +711,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int|string, B> $value
      */
-    public static function nonEmptyArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function nonEmptyArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -727,13 +727,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -749,7 +749,7 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int, mixed> $value
      */
-    public static function nonEmptyIntArray(mixed $value, \Throwable|null $throwable = null): array
+    public static function nonEmptyIntArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             (static function (mixed $value): bool {
@@ -769,7 +769,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -787,10 +787,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int, B> $value
      */
-    public static function nonEmptyIntArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function nonEmptyIntArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -807,13 +807,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -829,11 +829,11 @@ class Assert
      *
      * @phpstan-assert non-empty-list<mixed> $value
      */
-    public static function nonEmptyList(mixed $value, \Throwable|null $throwable = null): array
+    public static function nonEmptyList(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             \is_array($value) && $value !== [] && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous)),
         );
 
         return $value;
@@ -850,10 +850,10 @@ class Assert
      *
      * @phpstan-assert non-empty-list<B> $value
      */
-    public static function nonEmptyListOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function nonEmptyListOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -870,13 +870,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -892,11 +892,11 @@ class Assert
      *
      * @phpstan-assert non-empty-string $value
      */
-    public static function nonEmptyString(mixed $value, \Throwable|null $throwable = null): string
+    public static function nonEmptyString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && $value !== '',
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string', [], $previous)),
         );
 
         return $value;
@@ -911,7 +911,7 @@ class Assert
      *
      * @phpstan-assert non-empty-array<string, mixed> $value
      */
-    public static function nonEmptyStringArray(mixed $value, \Throwable|null $throwable = null): array
+    public static function nonEmptyStringArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             (static function (mixed $value): bool {
@@ -931,7 +931,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -949,10 +949,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<string, B> $value
      */
-    public static function nonEmptyStringArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function nonEmptyStringArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -969,13 +969,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -991,11 +991,11 @@ class Assert
      *
      * @phpstan-assert non-falsy-string $value
      */
-    public static function nonFalsyString(mixed $value, \Throwable|null $throwable = null): string
+    public static function nonFalsyString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && (bool) $value,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1011,11 +1011,11 @@ class Assert
      *
      * @phpstan-assert non-negative-int $value
      */
-    public static function nonNegativeInt(mixed $value, \Throwable|null $throwable = null): int
+    public static function nonNegativeInt(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value) && $value >= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int', [], $previous)),
         );
 
         return $value;
@@ -1030,11 +1030,11 @@ class Assert
      *
      * @phpstan-assert non-positive-int $value
      */
-    public static function nonPositiveInt(mixed $value, \Throwable|null $throwable = null): int
+    public static function nonPositiveInt(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value) && $value <= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int', [], $previous)),
         );
 
         return $value;
@@ -1049,11 +1049,11 @@ class Assert
      *
      * @phpstan-assert non-zero-int $value
      */
-    public static function nonZeroInt(mixed $value, \Throwable|null $throwable = null): int
+    public static function nonZeroInt(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value) && $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int', [], $previous)),
         );
 
         return $value;
@@ -1068,11 +1068,11 @@ class Assert
      *
      * @phpstan-assert !false $value
      */
-    public static function notFalse(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notFalse(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!false')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!false', [], $previous)),
         );
 
         return $value;
@@ -1087,11 +1087,11 @@ class Assert
      *
      * @phpstan-assert !-1 $value
      */
-    public static function notNegativeOne(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notNegativeOne(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== -1,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!-1')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!-1', [], $previous)),
         );
 
         return $value;
@@ -1106,11 +1106,11 @@ class Assert
      *
      * @phpstan-assert !null $value
      */
-    public static function notNull(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notNull(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== null,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!null', [], $previous)),
         );
 
         return $value;
@@ -1125,11 +1125,11 @@ class Assert
      *
      * @phpstan-assert !1 $value
      */
-    public static function notPositiveOne(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notPositiveOne(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== 1,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!1')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!1', [], $previous)),
         );
 
         return $value;
@@ -1144,11 +1144,11 @@ class Assert
      *
      * @phpstan-assert !true $value
      */
-    public static function notTrue(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notTrue(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!true')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!true', [], $previous)),
         );
 
         return $value;
@@ -1163,11 +1163,11 @@ class Assert
      *
      * @phpstan-assert !0 $value
      */
-    public static function notZero(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function notZero(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!0')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, '!0', [], $previous)),
         );
 
         return $value;
@@ -1182,11 +1182,11 @@ class Assert
      *
      * @phpstan-assert null $value
      */
-    public static function null(mixed $value, \Throwable|null $throwable = null): null
+    public static function null(mixed $value, \Throwable|string|null $previous = null): null
     {
         \assert(
             $value === null,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'null', [], $previous)),
         );
 
         return $value;
@@ -1203,11 +1203,11 @@ class Assert
      *
      * @phpstan-assert class-string<B>|null $value
      */
-    public static function nullableA(mixed $value, string $class, \Throwable|null $throwable = null): string|null
+    public static function nullableA(mixed $value, string $class, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || (\is_string($value) && \is_a($value, $class, true)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>|null")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "class-string<{$class}>|null", [], $previous)),
         );
 
         return $value;
@@ -1222,11 +1222,11 @@ class Assert
      *
      * @phpstan-assert array<int|string, mixed>|null $value
      */
-    public static function nullableArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             $value === null || \is_array($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1242,11 +1242,11 @@ class Assert
      *
      * @phpstan-assert int|string|null $value
      */
-    public static function nullableArrayKey(mixed $value, \Throwable|null $throwable = null): int|string|null
+    public static function nullableArrayKey(mixed $value, \Throwable|string|null $previous = null): int|string|null
     {
         \assert(
             $value === null || \is_int($value) || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|string|null', [], $previous)),
         );
 
         return $value;
@@ -1263,10 +1263,10 @@ class Assert
      *
      * @phpstan-assert array<int|string, B>|null $value
      */
-    public static function nullableArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1279,13 +1279,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1301,11 +1301,11 @@ class Assert
      *
      * @phpstan-assert bool|null $value
      */
-    public static function nullableBool(mixed $value, \Throwable|null $throwable = null): bool|null
+    public static function nullableBool(mixed $value, \Throwable|string|null $previous = null): bool|null
     {
         \assert(
             $value === null || \is_bool($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'bool|null', [], $previous)),
         );
 
         return $value;
@@ -1320,11 +1320,11 @@ class Assert
      *
      * @phpstan-assert callable(): mixed|null $value
      */
-    public static function nullableCallable(mixed $value, \Throwable|null $throwable = null): callable|null
+    public static function nullableCallable(mixed $value, \Throwable|string|null $previous = null): callable|null
     {
         \assert(
             $value === null || \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable(): mixed|null', [], $previous)),
         );
 
         return $value;
@@ -1339,11 +1339,11 @@ class Assert
      *
      * @phpstan-assert (string&callable(): mixed)|null $value
      */
-    public static function nullableCallableString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableCallableString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && \is_callable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'callable-string|null', [], $previous)),
         );
 
         return $value;
@@ -1358,11 +1358,11 @@ class Assert
      *
      * @phpstan-assert class-string|null $value
      */
-    public static function nullableClassString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableClassString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && \class_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'class-string|null', [], $previous)),
         );
 
         return $value;
@@ -1377,11 +1377,11 @@ class Assert
      *
      * @phpstan-assert closed-resource|null $value
      */
-    public static function nullableClosedResource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function nullableClosedResource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value === null || (!\is_scalar($value) && !\is_resource($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'closed-resource|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1397,11 +1397,11 @@ class Assert
      *
      * @phpstan-assert array<int|string, mixed>|\Countable|null $value
      */
-    public static function nullableCountable(mixed $value, \Throwable|null $throwable = null): \Countable|array|null
+    public static function nullableCountable(mixed $value, \Throwable|string|null $previous = null): \Countable|array|null
     {
         \assert(
             $value === null || \is_countable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1419,11 +1419,11 @@ class Assert
      *
      * @phpstan-assert B|null $value
      */
-    public static function nullableEnum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableEnum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous)),
         );
 
         return $value;
@@ -1438,11 +1438,11 @@ class Assert
      *
      * @phpstan-assert false|null $value
      */
-    public static function nullableFalse(mixed $value, \Throwable|null $throwable = null): false|null
+    public static function nullableFalse(mixed $value, \Throwable|string|null $previous = null): false|null
     {
         \assert(
             $value === null || $value === false,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'false|null', [], $previous)),
         );
 
         return $value;
@@ -1457,11 +1457,11 @@ class Assert
      *
      * @phpstan-assert float|null $value
      */
-    public static function nullableFloat(mixed $value, \Throwable|null $throwable = null): float|null
+    public static function nullableFloat(mixed $value, \Throwable|string|null $previous = null): float|null
     {
         \assert(
             $value === null || \is_float($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'float|null', [], $previous)),
         );
 
         return $value;
@@ -1478,11 +1478,11 @@ class Assert
      *
      * @phpstan-assert B|null $value
      */
-    public static function nullableIn(mixed $value, array $enum, \Throwable|null $throwable = null): mixed
+    public static function nullableIn(mixed $value, array $enum, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value === null || \in_array($value, $enum, true),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum + [null])),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum + [null], [], $previous)),
         );
 
         return $value;
@@ -1499,11 +1499,11 @@ class Assert
      *
      * @phpstan-assert B|null $value
      */
-    public static function nullableInstance(mixed $value, string $class, \Throwable|null $throwable = null): object|null
+    public static function nullableInstance(mixed $value, string $class, \Throwable|string|null $previous = null): object|null
     {
         \assert(
             $value === null || $value instanceof $class,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$class}|null")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$class}|null", [], $previous)),
         );
 
         return $value;
@@ -1518,11 +1518,11 @@ class Assert
      *
      * @phpstan-assert int|null $value
      */
-    public static function nullableInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullableInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'int|null', [], $previous)),
         );
 
         return $value;
@@ -1537,7 +1537,7 @@ class Assert
      *
      * @phpstan-assert array<int, mixed>|null $value
      */
-    public static function nullableIntArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableIntArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -1557,7 +1557,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1575,10 +1575,10 @@ class Assert
      *
      * @phpstan-assert array<int, B>|null $value
      */
-    public static function nullableIntArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableIntArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1594,13 +1594,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1618,11 +1618,11 @@ class Assert
      *
      * @phpstan-assert B|null $value
      */
-    public static function nullableIntEnum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableIntEnum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous)),
         );
 
         return $value;
@@ -1637,7 +1637,7 @@ class Assert
      *
      * @phpstan-assert iterable<int, mixed>|null $value
      */
-    public static function nullableIntIterable(mixed $value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIntIterable(mixed $value, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -1657,7 +1657,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1675,10 +1675,10 @@ class Assert
      *
      * @phpstan-assert iterable<int, B>|null $value
      */
-    public static function nullableIntIterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIntIterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1695,13 +1695,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1717,11 +1717,11 @@ class Assert
      *
      * @phpstan-assert interface-string|null $value
      */
-    public static function nullableInterfaceString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableInterfaceString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && \interface_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'interface-string|null', [], $previous)),
         );
 
         return $value;
@@ -1736,11 +1736,11 @@ class Assert
      *
      * @phpstan-assert iterable<int|string, mixed>|null $value
      */
-    public static function nullableIterable(mixed $value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIterable(mixed $value, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
             $value === null || \is_iterable($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1758,10 +1758,10 @@ class Assert
      *
      * @phpstan-assert iterable<int|string, B>|null $value
      */
-    public static function nullableIterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable|null
+    public static function nullableIterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1775,13 +1775,13 @@ class Assert
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1797,11 +1797,11 @@ class Assert
      *
      * @phpstan-assert list<mixed>|null $value
      */
-    public static function nullableList(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableList(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             $value === null || \is_array($value) && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null', [], $previous)),
         );
 
         return $value;
@@ -1818,10 +1818,10 @@ class Assert
      *
      * @phpstan-assert list<B>|null $value
      */
-    public static function nullableListOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableListOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1838,13 +1838,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'list<mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1860,11 +1860,11 @@ class Assert
      *
      * @phpstan-assert negative-int|null $value
      */
-    public static function nullableNegativeInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullableNegativeInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value) && $value < 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'negative-int|null', [], $previous)),
         );
 
         return $value;
@@ -1879,11 +1879,11 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int|string, mixed>|null $value
      */
-    public static function nullableNonEmptyArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             $value === null || \is_array($value) && $value !== [],
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1901,10 +1901,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int|string, B>|null $value
      */
-    public static function nullableNonEmptyArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -1921,13 +1921,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1943,7 +1943,7 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int, mixed>|null $value
      */
-    public static function nullableNonEmptyIntArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyIntArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -1967,7 +1967,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -1985,10 +1985,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<int, B>|null $value
      */
-    public static function nullableNonEmptyIntArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyIntArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -2009,13 +2009,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2031,11 +2031,11 @@ class Assert
      *
      * @phpstan-assert non-empty-list<mixed>|null $value
      */
-    public static function nullableNonEmptyList(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyList(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             $value === null || \is_array($value) && $value !== [] && \array_is_list($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous)),
         );
 
         return $value;
@@ -2052,10 +2052,10 @@ class Assert
      *
      * @phpstan-assert non-empty-list<B>|null $value
      */
-    public static function nullableNonEmptyListOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyListOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -2076,13 +2076,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-list<mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2098,11 +2098,11 @@ class Assert
      *
      * @phpstan-assert non-empty-string|null $value
      */
-    public static function nullableNonEmptyString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableNonEmptyString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && $value !== '',
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-string', [], $previous)),
         );
 
         return $value;
@@ -2117,7 +2117,7 @@ class Assert
      *
      * @phpstan-assert non-empty-array<string, mixed>|null $value
      */
-    public static function nullableNonEmptyStringArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyStringArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -2141,7 +2141,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2159,10 +2159,10 @@ class Assert
      *
      * @phpstan-assert non-empty-array<string, B>|null $value
      */
-    public static function nullableNonEmptyStringArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableNonEmptyStringArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -2183,13 +2183,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2205,11 +2205,11 @@ class Assert
      *
      * @phpstan-assert non-falsy-string|null $value
      */
-    public static function nullableNonFalsyString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableNonFalsyString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && (bool) $value,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2225,11 +2225,11 @@ class Assert
      *
      * @phpstan-assert non-negative-int|null $value
      */
-    public static function nullableNonNegativeInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonNegativeInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value) && $value >= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-negative-int|null', [], $previous)),
         );
 
         return $value;
@@ -2244,11 +2244,11 @@ class Assert
      *
      * @phpstan-assert non-positive-int|null $value
      */
-    public static function nullableNonPositiveInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonPositiveInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value) && $value <= 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-positive-int|null', [], $previous)),
         );
 
         return $value;
@@ -2263,11 +2263,11 @@ class Assert
      *
      * @phpstan-assert non-zero-int|null $value
      */
-    public static function nullableNonZeroInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullableNonZeroInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value) && $value !== 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-zero-int|null', [], $previous)),
         );
 
         return $value;
@@ -2282,11 +2282,11 @@ class Assert
      *
      * @phpstan-assert numeric|null $value
      */
-    public static function nullableNumeric(mixed $value, \Throwable|null $throwable = null): float|int|string|null
+    public static function nullableNumeric(mixed $value, \Throwable|string|null $previous = null): float|int|string|null
     {
         \assert(
             $value === null || \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric', [], $previous)),
         );
 
         return $value;
@@ -2301,11 +2301,11 @@ class Assert
      *
      * @phpstan-assert numeric-string|null $value
      */
-    public static function nullableNumericString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableNumericString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string', [], $previous)),
         );
 
         return $value;
@@ -2320,11 +2320,11 @@ class Assert
      *
      * @phpstan-assert object|null $value
      */
-    public static function nullableObject(mixed $value, \Throwable|null $throwable = null): object|null
+    public static function nullableObject(mixed $value, \Throwable|string|null $previous = null): object|null
     {
         \assert(
             $value === null || \is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object|null', [], $previous)),
         );
 
         return $value;
@@ -2339,11 +2339,11 @@ class Assert
      *
      * @phpstan-assert open-resource|null $value
      */
-    public static function nullableOpenResource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function nullableOpenResource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value === null || \is_resource($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource|null', [], $previous)),
         );
 
         return $value;
@@ -2358,11 +2358,11 @@ class Assert
      *
      * @phpstan-assert positive-int|null $value
      */
-    public static function nullablePositiveInt(mixed $value, \Throwable|null $throwable = null): int|null
+    public static function nullablePositiveInt(mixed $value, \Throwable|string|null $previous = null): int|null
     {
         \assert(
             $value === null || \is_int($value) && $value > 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int|null', [], $previous)),
         );
 
         return $value;
@@ -2377,11 +2377,11 @@ class Assert
      *
      * @phpstan-assert resource|null $value
      */
-    public static function nullableResource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function nullableResource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             $value === null || \is_resource($value) || (!\is_scalar($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2397,11 +2397,11 @@ class Assert
      *
      * @phpstan-assert scalar|null $value
      */
-    public static function nullableScalar(mixed $value, \Throwable|null $throwable = null): bool|float|int|string|null
+    public static function nullableScalar(mixed $value, \Throwable|string|null $previous = null): bool|float|int|string|null
     {
         \assert(
             $value === null || \is_scalar($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar|null', [], $previous)),
         );
 
         return $value;
@@ -2416,11 +2416,11 @@ class Assert
      *
      * @phpstan-assert string|null $value
      */
-    public static function nullableString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string|null', [], $previous)),
         );
 
         return $value;
@@ -2435,7 +2435,7 @@ class Assert
      *
      * @phpstan-assert array<string, mixed>|null $value
      */
-    public static function nullableStringArray(mixed $value, \Throwable|null $throwable = null): array|null
+    public static function nullableStringArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -2455,7 +2455,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2473,13 +2473,13 @@ class Assert
      *
      * @phpstan-assert array<string, B>|null $value
      */
-    public static function nullableStringArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array|null
+    public static function nullableStringArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array|null
     {
         \assert(
             (static function (
                 mixed $value,
                 callable $callback,
-            ): bool {
+            ) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -2496,13 +2496,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2520,11 +2520,11 @@ class Assert
      *
      * @phpstan-assert B|null $value
      */
-    public static function nullableStringEnum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum|null
+    public static function nullableStringEnum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum|null
     {
         \assert(
             $value === null || $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null")),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, "{$enum}|null", [], $previous)),
         );
 
         return $value;
@@ -2539,7 +2539,7 @@ class Assert
      *
      * @phpstan-assert iterable<string, mixed>|null $value
      */
-    public static function nullableStringIterable(mixed $value, \Throwable|null $throwable = null): iterable|null
+    public static function nullableStringIterable(mixed $value, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
             (static function (mixed $value): bool {
@@ -2559,7 +2559,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2577,10 +2577,10 @@ class Assert
      *
      * @phpstan-assert iterable<string, B>|null $value
      */
-    public static function nullableStringIterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable|null
+    public static function nullableStringIterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable|null
     {
         \assert(
-            (static function (mixed $value, $callback): bool {
+            (static function (mixed $value, $callback) use ($previous): bool {
                 if ($value === null) {
                     return true;
                 }
@@ -2597,13 +2597,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2619,11 +2619,11 @@ class Assert
      *
      * @phpstan-assert scalar|\Stringable|null $value
      */
-    public static function nullableStringable(mixed $value, \Throwable|null $throwable = null): \Stringable|bool|float|int|string|null
+    public static function nullableStringable(mixed $value, \Throwable|string|null $previous = null): \Stringable|bool|float|int|string|null
     {
         \assert(
             $value === null || \is_scalar($value) || $value instanceof \Stringable,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable|null', [], $previous)),
         );
 
         return $value;
@@ -2638,11 +2638,11 @@ class Assert
      *
      * @phpstan-assert trait-string|null $value
      */
-    public static function nullableTraitString(mixed $value, \Throwable|null $throwable = null): string|null
+    public static function nullableTraitString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         \assert(
             $value === null || \is_string($value) && \trait_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string|null', [], $previous)),
         );
 
         return $value;
@@ -2657,11 +2657,11 @@ class Assert
      *
      * @phpstan-assert true|null $value
      */
-    public static function nullableTrue(mixed $value, \Throwable|null $throwable = null): true|null
+    public static function nullableTrue(mixed $value, \Throwable|string|null $previous = null): true|null
     {
         \assert(
             $value === null || $value === true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true|null')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true|null', [], $previous)),
         );
 
         return $value;
@@ -2676,11 +2676,11 @@ class Assert
      *
      * @phpstan-assert numeric $value
      */
-    public static function numeric(mixed $value, \Throwable|null $throwable = null): float|int|string
+    public static function numeric(mixed $value, \Throwable|string|null $previous = null): float|int|string
     {
         \assert(
             \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric', [], $previous)),
         );
 
         return $value;
@@ -2695,11 +2695,11 @@ class Assert
      *
      * @phpstan-assert numeric-string $value
      */
-    public static function numericString(mixed $value, \Throwable|null $throwable = null): string
+    public static function numericString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \is_numeric($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'numeric-string', [], $previous)),
         );
 
         return $value;
@@ -2714,11 +2714,11 @@ class Assert
      *
      * @phpstan-assert object $value
      */
-    public static function object(mixed $value, \Throwable|null $throwable = null): object
+    public static function object(mixed $value, \Throwable|string|null $previous = null): object
     {
         \assert(
             \is_object($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'object', [], $previous)),
         );
 
         return $value;
@@ -2733,11 +2733,11 @@ class Assert
      *
      * @phpstan-assert open-resource $value
      */
-    public static function openResource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function openResource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             \is_resource($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'open-resource', [], $previous)),
         );
 
         return $value;
@@ -2752,11 +2752,11 @@ class Assert
      *
      * @phpstan-assert positive-int $value
      */
-    public static function positiveInt(mixed $value, \Throwable|null $throwable = null): int
+    public static function positiveInt(mixed $value, \Throwable|string|null $previous = null): int
     {
         \assert(
             \is_int($value) && $value > 0,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'positive-int', [], $previous)),
         );
 
         return $value;
@@ -2771,11 +2771,11 @@ class Assert
      *
      * @phpstan-assert resource $value
      */
-    public static function resource(mixed $value, \Throwable|null $throwable = null): mixed
+    public static function resource(mixed $value, \Throwable|string|null $previous = null): mixed
     {
         \assert(
             \is_resource($value) || ($value !== null && !\is_scalar($value) && !\is_array($value) && !\is_object($value)),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'resource', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2791,11 +2791,11 @@ class Assert
      *
      * @phpstan-assert scalar $value
      */
-    public static function scalar(mixed $value, \Throwable|null $throwable = null): bool|float|int|string
+    public static function scalar(mixed $value, \Throwable|string|null $previous = null): bool|float|int|string
     {
         \assert(
             \is_scalar($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'scalar', [], $previous)),
         );
 
         return $value;
@@ -2810,11 +2810,11 @@ class Assert
      *
      * @phpstan-assert string $value
      */
-    public static function string(mixed $value, \Throwable|null $throwable = null): string
+    public static function string(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'string', [], $previous)),
         );
 
         return $value;
@@ -2829,7 +2829,7 @@ class Assert
      *
      * @phpstan-assert array<string, mixed> $value
      */
-    public static function stringArray(mixed $value, \Throwable|null $throwable = null): array
+    public static function stringArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         \assert(
             (static function (mixed $value): bool {
@@ -2845,7 +2845,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2863,10 +2863,10 @@ class Assert
      *
      * @phpstan-assert array<string, B> $value
      */
-    public static function stringArrayOf(mixed $value, callable $callback, \Throwable|null $throwable = null): array
+    public static function stringArrayOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): array
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_array($value)) {
                     return false;
                 }
@@ -2879,13 +2879,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2903,11 +2903,11 @@ class Assert
      *
      * @phpstan-assert B $value
      */
-    public static function stringEnum(mixed $value, string $enum, \Throwable|null $throwable = null): \BackedEnum
+    public static function stringEnum(mixed $value, string $enum, \Throwable|string|null $previous = null): \BackedEnum
     {
         \assert(
             $value instanceof $enum,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum)),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, $enum, [], $previous)),
         );
 
         return $value;
@@ -2922,7 +2922,7 @@ class Assert
      *
      * @phpstan-assert iterable<string, mixed> $value
      */
-    public static function stringIterable(mixed $value, \Throwable|null $throwable = null): iterable
+    public static function stringIterable(mixed $value, \Throwable|string|null $previous = null): iterable
     {
         \assert(
             (static function (mixed $value): bool {
@@ -2938,7 +2938,7 @@ class Assert
 
                 return true;
             })($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2956,10 +2956,10 @@ class Assert
      *
      * @phpstan-assert iterable<string, B> $value
      */
-    public static function stringIterableOf(mixed $value, callable $callback, \Throwable|null $throwable = null): iterable
+    public static function stringIterableOf(mixed $value, callable $callback, \Throwable|string|null $previous = null): iterable
     {
         \assert(
-            (static function (mixed $value, callable $callback): bool {
+            (static function (mixed $value, callable $callback) use ($previous): bool {
                 if (!\is_iterable($value)) {
                     return false;
                 }
@@ -2971,13 +2971,13 @@ class Assert
                     $expected = $callback($v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
                 return true;
             })($value, $callback),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous)),
         );
 
         /** @phpstan-ignore-next-line */
@@ -2993,11 +2993,11 @@ class Assert
      *
      * @phpstan-assert scalar|\Stringable $value
      */
-    public static function stringable(mixed $value, \Throwable|null $throwable = null): \Stringable|bool|float|int|string
+    public static function stringable(mixed $value, \Throwable|string|null $previous = null): \Stringable|bool|float|int|string
     {
         \assert(
             \is_scalar($value) || $value instanceof \Stringable,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'stringable', [], $previous)),
         );
 
         return $value;
@@ -3012,11 +3012,11 @@ class Assert
      *
      * @phpstan-assert trait-string $value
      */
-    public static function traitString(mixed $value, \Throwable|null $throwable = null): string
+    public static function traitString(mixed $value, \Throwable|string|null $previous = null): string
     {
         \assert(
             \is_string($value) && \trait_exists($value),
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'trait-string', [], $previous)),
         );
 
         return $value;
@@ -3031,11 +3031,11 @@ class Assert
      *
      * @phpstan-assert true $value
      */
-    public static function true(mixed $value, \Throwable|null $throwable = null): true
+    public static function true(mixed $value, \Throwable|string|null $previous = null): true
     {
         \assert(
             $value === true,
-            $throwable ?? new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true')),
+            new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'true', [], $previous)),
         );
 
         return $value;
