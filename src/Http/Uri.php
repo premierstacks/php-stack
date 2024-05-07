@@ -150,6 +150,21 @@ class Uri implements UriInterface
         return $this->user . ($this->password !== '' ? ':' . $this->password : '');
     }
 
+    /**
+     * @param array<array-key, mixed>|object $query
+     */
+    public function mergeQuery(array|object $query): UriInterface
+    {
+        $old = $this->getQuery();
+        $additional = \http_build_query($query);
+
+        if ($additional === '') {
+            return $this;
+        }
+
+        return $this->withQuery($old === '' ? $additional : $old . '&' . $additional);
+    }
+
     #[\Override]
     public function withFragment(string $fragment): UriInterface
     {
