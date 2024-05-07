@@ -30,13 +30,35 @@ namespace Premierstacks\PhpUtil\JsonApi;
 class JsonApiMeta implements \IteratorAggregate
 {
     /**
+     * @var array<array-key, iterable<array-key, mixed>>
+     */
+    public array $metaCollection = [];
+
+    /**
      * @param iterable<array-key, mixed> $meta
      */
-    public function __construct(public iterable $meta = []) {}
+    public function __construct(iterable $meta = [])
+    {
+        $this->metaCollection[] = $meta;
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->meta;
+        foreach ($this->metaCollection as $meta) {
+            yield from $meta;
+        }
+    }
+
+    /**
+     * @param iterable<array-key, mixed> $meta
+     *
+     * @return $this
+     */
+    public function push(iterable $meta): static
+    {
+        $this->metaCollection[] = $meta;
+
+        return $this;
     }
 }

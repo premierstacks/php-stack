@@ -30,13 +30,35 @@ namespace Premierstacks\PhpUtil\JsonApi;
 class JsonApiAttributes implements \IteratorAggregate
 {
     /**
+     * @var array<array-key, iterable<array-key, mixed>>
+     */
+    public array $attributesCollection = [];
+
+    /**
      * @param iterable<array-key, mixed> $attributes
      */
-    public function __construct(public iterable $attributes = []) {}
+    public function __construct(iterable $attributes = [])
+    {
+        $this->attributesCollection[] = $attributes;
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->attributes;
+        foreach ($this->attributesCollection as $attributes) {
+            yield from $attributes;
+        }
+    }
+
+    /**
+     * @param iterable<array-key, mixed> $attributes
+     *
+     * @return $this
+     */
+    public function push(iterable $attributes): static
+    {
+        $this->attributesCollection[] = $attributes;
+
+        return $this;
     }
 }

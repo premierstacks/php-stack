@@ -30,13 +30,35 @@ namespace Premierstacks\PhpUtil\JsonApi;
 class JsonApiErrors implements \IteratorAggregate
 {
     /**
+     * @var array<array-key, iterable<array-key, JsonApiErrorInterface>>
+     */
+    public array $errorsCollection = [];
+
+    /**
      * @param iterable<array-key, JsonApiErrorInterface> $errors
      */
-    public function __construct(public iterable $errors = []) {}
+    public function __construct(iterable $errors = [])
+    {
+        $this->errorsCollection[] = $errors;
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->errors;
+        foreach ($this->errorsCollection as $errors) {
+            yield from $errors;
+        }
+    }
+
+    /**
+     * @param iterable<array-key, JsonApiErrorInterface> $errors
+     *
+     * @return $this
+     */
+    public function push(iterable $errors): static
+    {
+        $this->errorsCollection[] = $errors;
+
+        return $this;
     }
 }

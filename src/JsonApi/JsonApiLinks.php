@@ -30,13 +30,35 @@ namespace Premierstacks\PhpUtil\JsonApi;
 class JsonApiLinks implements \IteratorAggregate
 {
     /**
+     * @var array<array-key, iterable<array-key, JsonApiLinkInterface|string>>
+     */
+    public array $linksCollection = [];
+
+    /**
      * @param iterable<array-key, JsonApiLinkInterface|string> $links
      */
-    public function __construct(public iterable $links = []) {}
+    public function __construct(iterable $links = [])
+    {
+        $this->linksCollection[] = $links;
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->links;
+        foreach ($this->linksCollection as $links) {
+            yield from $links;
+        }
+    }
+
+    /**
+     * @param iterable<array-key, JsonApiLinkInterface|string> $links
+     *
+     * @return $this
+     */
+    public function push(iterable $links): static
+    {
+        $this->linksCollection[] = $links;
+
+        return $this;
     }
 }

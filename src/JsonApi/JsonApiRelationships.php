@@ -30,13 +30,35 @@ namespace Premierstacks\PhpUtil\JsonApi;
 class JsonApiRelationships implements \IteratorAggregate
 {
     /**
+     * @var array<array-key, iterable<array-key, JsonApiRelationshipInterface>>
+     */
+    public array $relationshipsCollection = [];
+
+    /**
      * @param iterable<array-key, JsonApiRelationshipInterface> $relationships
      */
-    public function __construct(public iterable $relationships = []) {}
+    public function __construct(iterable $relationships = [])
+    {
+        $this->relationshipsCollection[] = $relationships;
+    }
 
     #[\Override]
     public function getIterator(): \Traversable
     {
-        yield from $this->relationships;
+        foreach ($this->relationshipsCollection as $relationships) {
+            yield from $relationships;
+        }
+    }
+
+    /**
+     * @param iterable<array-key, JsonApiRelationshipInterface> $relationships
+     *
+     * @return $this
+     */
+    public function push(iterable $relationships): static
+    {
+        $this->relationshipsCollection[] = $relationships;
+
+        return $this;
     }
 }
