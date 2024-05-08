@@ -4,7 +4,8 @@
   "type": "library",
   "keywords": [
     "premierstacks",
-    "php-util"
+    "php-util",
+    "tomchochola"
   ],
   "homepage": "https://github.com/premierstacks/php-util",
   "readme": "./README.md",
