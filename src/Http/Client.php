@@ -127,7 +127,7 @@ class Client implements ClientInterface, RequestFactoryInterface, ResponseFactor
         $response = \fopen($request->getUri()->__toString(), 'r', false, $context);
 
         if ($response === false) {
-            throw new NetworkException($request, Errorf::callableError('\fopen', [$request->getUri()->__toString(), 'r', false, $context]));
+            throw new NetworkException($request, Errorf::unexpectedCallableError('\fopen', [$request->getUri()->__toString(), 'r', false, $context]));
         }
 
         $resource = $this->createStreamFromResource($response);
@@ -143,7 +143,7 @@ class Client implements ClientInterface, RequestFactoryInterface, ResponseFactor
         $reason = $parsed[2] ?? SymfonyResponse::$statusTexts[$status] ?? '';
 
         if (!\is_string($reason)) {
-            throw new \UnexpectedValueException(Errorf::unexpectedValue('reason', $reason, 'string'));
+            throw new \UnexpectedValueException(Errorf::unexpectedValue($reason, 'string'));
         }
 
         $headers = new HeaderBag();

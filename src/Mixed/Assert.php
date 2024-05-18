@@ -112,7 +112,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -420,7 +420,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -513,7 +513,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -590,7 +590,7 @@ class Assert
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -649,7 +649,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -728,7 +728,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -808,7 +808,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -871,7 +871,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -970,7 +970,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1280,7 +1280,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1595,7 +1595,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1696,7 +1696,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1777,7 +1777,7 @@ class Assert
 
                     if ($v !== $expected) {
                         // @phpstan-ignore-next-line
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1840,7 +1840,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -1923,7 +1923,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2011,7 +2011,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2078,7 +2078,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2185,7 +2185,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2498,7 +2498,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2599,7 +2599,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2881,7 +2881,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 
@@ -2973,7 +2973,7 @@ class Assert
                     $expected = $callback($k, $v);
 
                     if ($v !== $expected) {
-                        throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected), [], $previous));
+                        throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
                     }
                 }
 

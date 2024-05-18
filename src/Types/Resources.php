@@ -46,7 +46,7 @@ class Resources
     public static function fclose(mixed $resource): void
     {
         if (\fclose($resource) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fclose', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fclose', [$resource]));
         }
     }
 
@@ -56,7 +56,7 @@ class Resources
     public static function fdatasync(mixed $resource): void
     {
         if (\fdatasync($resource) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fdatasync', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fdatasync', [$resource]));
         }
     }
 
@@ -74,7 +74,7 @@ class Resources
     public static function fflush(mixed $resource): void
     {
         if (\fflush($resource) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fflush', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fflush', [$resource]));
         }
     }
 
@@ -86,7 +86,7 @@ class Resources
         $char = \fgetc($resource);
 
         if ($char === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fgetc', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fgetc', [$resource]));
         }
 
         return $char;
@@ -103,7 +103,7 @@ class Resources
         $fields = \fgetcsv($resource, $length, $separator, $enclosure, $escape);
 
         if ($fields === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fgetcsv', [$resource, $length, $separator, $enclosure, $escape]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fgetcsv', [$resource, $length, $separator, $enclosure, $escape]));
         }
 
         if ($fields === [null]) {
@@ -123,7 +123,7 @@ class Resources
         $line = \fgets($resource, $length);
 
         if ($line === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fgets', [$resource, $length]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fgets', [$resource, $length]));
         }
 
         return $line;
@@ -152,7 +152,7 @@ class Resources
         $locked = \flock($resource, $operation);
 
         if ($locked === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('flock', [$resource, $operation]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('flock', [$resource, $operation]));
         }
 
         return $locked;
@@ -168,7 +168,7 @@ class Resources
         $resource = \fopen($filename, $mode, $useIncludePath, $context);
 
         if ($resource === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fopen', [$filename, $mode, $useIncludePath, $context]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fopen', [$filename, $mode, $useIncludePath, $context]));
         }
 
         return $resource;
@@ -199,7 +199,7 @@ class Resources
         $written = \fputcsv($resource, $fields, $separator, $enclosure, $escape, $eol);
 
         if ($written === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fputcsv', [$resource, $fields, $separator, $enclosure, $escape, $eol]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fputcsv', [$resource, $fields, $separator, $enclosure, $escape, $eol]));
         }
 
         return $written;
@@ -214,7 +214,7 @@ class Resources
         $data = \fread($resource, $length);
 
         if ($data === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fread', [$resource, $length]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fread', [$resource, $length]));
         }
 
         return $data;
@@ -228,7 +228,7 @@ class Resources
         $result = \fscanf($resource, $format, ...$vars);
 
         if ($result === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fscanf', [$resource, $format, $vars]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fscanf', [$resource, $format, $vars]));
         }
 
         if ($result === null) {
@@ -248,7 +248,7 @@ class Resources
     public static function fseek(mixed $resource, int $offset, int $whence = \SEEK_SET): void
     {
         if (\fseek($resource, $offset, $whence) === -1) {
-            throw new \UnexpectedValueException(Errorf::callableError('fseek', [$resource, $offset, $whence]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fseek', [$resource, $offset, $whence]));
         }
     }
 
@@ -262,7 +262,7 @@ class Resources
         $stat = \fstat($resource);
 
         if ($stat === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fstat', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fstat', [$resource]));
         }
 
         return $stat;
@@ -274,7 +274,7 @@ class Resources
     public static function fsync(mixed $resource): void
     {
         if (\fsync($resource) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fsync', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fsync', [$resource]));
         }
     }
 
@@ -286,7 +286,7 @@ class Resources
         $position = \ftell($resource);
 
         if ($position === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('ftell', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('ftell', [$resource]));
         }
 
         return $position;
@@ -299,7 +299,7 @@ class Resources
     public static function ftruncate(mixed $resource, int $size): void
     {
         if (\ftruncate($resource, $size) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('ftruncate', [$resource, $size]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('ftruncate', [$resource, $size]));
         }
     }
 
@@ -312,7 +312,7 @@ class Resources
         $written = \fwrite($resource, $string, $length);
 
         if ($written === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('fwrite', [$resource, $string, $length]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('fwrite', [$resource, $string, $length]));
         }
 
         return $written;
@@ -356,7 +356,7 @@ class Resources
     public static function rewind(mixed $resource): void
     {
         if (\rewind($resource) === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('rewind', [$resource]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('rewind', [$resource]));
         }
     }
 
@@ -368,7 +368,7 @@ class Resources
         $contents = \stream_get_contents($resource, $length, $offset);
 
         if ($contents === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('stream_get_contents', [$resource, $length, $offset]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('stream_get_contents', [$resource, $length, $offset]));
         }
 
         return $contents;
@@ -400,7 +400,7 @@ class Resources
         $resource = \tmpfile();
 
         if ($resource === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('tmpfile', []));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('tmpfile', []));
         }
 
         return $resource;

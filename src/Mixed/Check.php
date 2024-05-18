@@ -108,7 +108,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -390,7 +390,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -468,7 +468,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -536,7 +536,7 @@ class Check
 
             if ($v !== $expected) {
                 // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -587,10 +587,11 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -656,7 +657,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -722,7 +723,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -777,7 +778,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -860,7 +861,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1149,7 +1150,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1439,7 +1440,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1525,7 +1526,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1597,7 +1598,7 @@ class Check
 
             if ($v !== $expected) {
                 // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1652,10 +1653,11 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1725,7 +1727,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1799,7 +1801,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1858,7 +1860,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected)));
             }
         }
 
@@ -1949,7 +1951,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 
@@ -2233,7 +2235,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 
@@ -2319,7 +2321,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 
@@ -2576,7 +2578,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 
@@ -2654,7 +2656,7 @@ class Check
             $expected = $callback($k, $v);
 
             if ($v !== $expected) {
-                throw new \UnexpectedValueException(Errorf::unexpectedValue($k, $v, Debugf::type($expected)));
+                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected)));
             }
         }
 

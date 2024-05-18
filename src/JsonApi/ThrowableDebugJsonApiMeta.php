@@ -46,7 +46,7 @@ class ThrowableDebugJsonApiMeta extends JsonApiMeta
     {
         yield 'throwable' => [
             'message' => $this->throwable->getMessage(),
-            'type' => \get_class($this->throwable),
+            'type' => $this->throwable::class,
             'file' => $this->throwable->getFile(),
             'line' => $this->throwable->getLine(),
             'trace' => $this->throwable->getTrace(),

@@ -28,9 +28,13 @@ use Premierstacks\PhpUtil\Debug\Errorf;
 
 class Strings
 {
-    public static function nullableTrim(string|null $value): string|null
+    public static function nullify(string|null $value, bool $trim = true): string|null
     {
-        if ($value === null || $value === '' || \trim($value) === '') {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        if ($trim && \trim($value) === '') {
             return null;
         }
 
@@ -46,7 +50,7 @@ class Strings
         $result = \preg_match($pattern, $subject, $matches, $flags, $offset);
 
         if ($result === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('preg_match', [$pattern, $subject, $matches, $flags, $offset]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('preg_match', [$pattern, $subject, $matches, $flags, $offset]));
         }
 
         return $result === 1;
@@ -60,7 +64,7 @@ class Strings
         $splited = \preg_split($pattern, $string, $limit, $flags);
 
         if ($splited === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('preg_split', [$pattern, $string, $limit, $flags]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('preg_split', [$pattern, $string, $limit, $flags]));
         }
 
         return $splited;

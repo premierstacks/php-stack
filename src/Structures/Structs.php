@@ -68,7 +68,7 @@ class Structs
                 return $default;
             }
 
-            throw new \UnexpectedValueException(Errorf::unexpectedValue((string) $key, $value, 'array-key'));
+            throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $key, $value, 'array-key'));
         }
 
         return $target;

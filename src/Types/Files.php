@@ -33,7 +33,7 @@ class Files
         $filename = \tempnam($directory ?? \sys_get_temp_dir(), $prefix);
 
         if ($filename === false) {
-            throw new \UnexpectedValueException(Errorf::callableError('tempnam', [$directory ?? \sys_get_temp_dir(), $prefix]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('tempnam', [$directory ?? \sys_get_temp_dir(), $prefix]));
         }
 
         return $filename;
