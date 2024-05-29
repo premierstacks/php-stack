@@ -11,18 +11,17 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
 declare(strict_types=1);
 
-use Premierstacks\PhpCsFixerConfig\Configs\Premierstacks;
-use Premierstacks\PhpCsFixerConfig\Preset;
+use Premierstacks\PhpCsFixerStack\Configs\Premierstacks;
+use Premierstacks\PhpCsFixerStack\Preset;
 
 return Preset::make(__DIR__, Premierstacks::config());

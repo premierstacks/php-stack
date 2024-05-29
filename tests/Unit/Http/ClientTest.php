@@ -11,13 +11,12 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
 declare(strict_types=1);
@@ -27,11 +26,11 @@ namespace Tests\Unit\Http;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Medium;
 use PHPUnit\Framework\Attributes\Test;
-use Premierstacks\PhpUtil\Http\Client;
-use Premierstacks\PhpUtil\Http\Request;
-use Premierstacks\PhpUtil\Http\Response;
-use Premierstacks\PhpUtil\Http\Stream;
-use Premierstacks\PhpUtil\Http\Uri;
+use Premierstacks\PhpStack\Http\Client;
+use Premierstacks\PhpStack\Http\Request;
+use Premierstacks\PhpStack\Http\Response;
+use Premierstacks\PhpStack\Http\Stream;
+use Premierstacks\PhpStack\Http\Uri;
 use Symfony\Component\Mime\Header\HeaderInterface;
 use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\Mime\Part\Multipart\FormDataPart;

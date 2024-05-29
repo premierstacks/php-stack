@@ -11,13 +11,12 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
 declare(strict_types=1);
@@ -25,16 +24,16 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase as VendorTestCase;
-use Premierstacks\PhpUtil\Http\Client;
-use Premierstacks\PhpUtil\Http\Message;
-use Premierstacks\PhpUtil\Http\Request;
-use Premierstacks\PhpUtil\Http\Response;
-use Premierstacks\PhpUtil\Http\Stream;
-use Premierstacks\PhpUtil\Http\Uri;
-use Premierstacks\PhpUtil\IO\ResourceObject;
-use Premierstacks\PhpUtil\Testing\TestInterface;
-use Premierstacks\PhpUtil\Testing\TestTrait;
-use Premierstacks\PhpUtil\Types\Resources;
+use Premierstacks\PhpStack\Http\Client;
+use Premierstacks\PhpStack\Http\Message;
+use Premierstacks\PhpStack\Http\Request;
+use Premierstacks\PhpStack\Http\Response;
+use Premierstacks\PhpStack\Http\Stream;
+use Premierstacks\PhpStack\Http\Uri;
+use Premierstacks\PhpStack\IO\ResourceObject;
+use Premierstacks\PhpStack\Testing\TestInterface;
+use Premierstacks\PhpStack\Testing\TestTrait;
+use Premierstacks\PhpStack\Types\Resources;
 use Symfony\Component\HttpFoundation\HeaderBag;
 
 /**

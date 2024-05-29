@@ -1,15 +1,15 @@
 {
-  "name": "@premierstacks/php-util",
-  "description": "php util",
+  "name": "@premierstacks/php-stack",
+  "description": "php stack",
   "keywords": [
     "premierstacks",
-    "php-util",
+    "php-stack",
     "tomchochola"
   ],
-  "homepage": "https://github.com/premierstacks/php-util",
+  "homepage": "https://github.com/premierstacks/php-stack",
   "bugs": {
     "email": "chocholatom1997@gmail.com",
-    "url": "https://github.com/premierstacks/php-util/issues"
+    "url": "https://github.com/premierstacks/php-stack/issues"
   },
   "license": "SEE LICENSE IN ./LICENSE.md",
   "author": {
@@ -30,11 +30,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/premierstacks/php-util.git"
+    "url": "https://github.com/premierstacks/php-stack.git"
   },
   "devDependencies": {
-    "@premierstacks/prettier-config": "github:premierstacks/prettier-config",
-    "@premierstacks/eslint-config": "github:premierstacks/eslint-config"
+    "@premierstacks/prettier-stack": "github:premierstacks/prettier-stack",
+    "@premierstacks/eslint-stack": "github:premierstacks/eslint-stack"
   },
   "private": true,
   "type": "module"

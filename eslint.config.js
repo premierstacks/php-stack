@@ -9,15 +9,14 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
-import { configs } from '@premierstacks/eslint-config';
+import { configs } from '@premierstacks/eslint-stack';
 
 export default [...configs.ignores(), ...configs.node(), ...configs.configs()];

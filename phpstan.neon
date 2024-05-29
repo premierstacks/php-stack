@@ -1,5 +1,5 @@
 includes:
-  - ./vendor/premierstacks/phpstan-config/src/configs/premierstacks.neon
+  - ./vendor/premierstacks/phpstan-stack/src/configs/premierstacks.neon
 
 parameters:
   paths:

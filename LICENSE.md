@@ -12,6 +12,7 @@ For licensing or inquiries, please contact Tomáš Chochola or refer to the GitH
 - Commercial use: ✔️
 - Non-commercial use: ✔️
 - Private use: ✔️
+- Public use: ✔️
 
 **Limitations:**
 
@@ -38,6 +39,7 @@ Elite developer crafting exclusive, enterprise-grade software, professional pack
 - **Email:** <chocholatom1997@gmail.com>
 - **GitHub:** [https://github.com/tomchochola](https://github.com/tomchochola)
 - **Sponsor & License:** [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
+- **Web**: [https://premierstacks.com](https://premierstacks.com)
 
 ## License Agreement
 
@@ -62,9 +64,15 @@ This platform has been chosen for its reliability and ease of use, offering an a
 Please visit the provided link to select the appropriate subscription plan for your project.<br />
 The GitHub Sponsors platform ensures a secure and straightforward subscription process.
 
+## Binding to GitHub Account
+
+The license is bound to the Licensee's GitHub account that has the active subscription.<br />
+The software can only be used while the associated GitHub account maintains an active subscription to Tomáš Chochola through GitHub Sponsors.<br />
+Any use of the software without an active subscription linked to a valid GitHub account is strictly prohibited.
+
 ## Grant of License
 
-Subject to the terms of this agreement, the Licensor grants the Licensee a non-exclusive, non-transferable, individual license to:
+Subject to the terms of this agreement, the Licensor grants the Licensee a non-exclusive, non-transferable, non-shareable, individual license to:
 
 - Use the software's libraries and packages as dependencies in their projects solely via package managers such as npm or Composer.
 - Utilize template repositories provided by the Licensor to create new repositories, subject to the terms of this license.

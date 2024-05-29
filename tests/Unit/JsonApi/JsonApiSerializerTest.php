@@ -11,13 +11,12 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
 declare(strict_types=1);
@@ -27,20 +26,20 @@ namespace Tests\Unit\JsonApi;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
-use Premierstacks\PhpUtil\JsonApi\JsonApi;
-use Premierstacks\PhpUtil\JsonApi\JsonApiAttributes;
-use Premierstacks\PhpUtil\JsonApi\JsonApiDocument;
-use Premierstacks\PhpUtil\JsonApi\JsonApiError;
-use Premierstacks\PhpUtil\JsonApi\JsonApiErrors;
-use Premierstacks\PhpUtil\JsonApi\JsonApiLink;
-use Premierstacks\PhpUtil\JsonApi\JsonApiLinks;
-use Premierstacks\PhpUtil\JsonApi\JsonApiMeta;
-use Premierstacks\PhpUtil\JsonApi\JsonApiRelationship;
-use Premierstacks\PhpUtil\JsonApi\JsonApiRelationships;
-use Premierstacks\PhpUtil\JsonApi\JsonApiResource;
-use Premierstacks\PhpUtil\JsonApi\JsonApiResourceIdentifier;
-use Premierstacks\PhpUtil\JsonApi\JsonApiSerializer;
-use Premierstacks\PhpUtil\JsonApi\JsonApiSource;
+use Premierstacks\PhpStack\JsonApi\JsonApi;
+use Premierstacks\PhpStack\JsonApi\JsonApiAttributes;
+use Premierstacks\PhpStack\JsonApi\JsonApiDocument;
+use Premierstacks\PhpStack\JsonApi\JsonApiError;
+use Premierstacks\PhpStack\JsonApi\JsonApiErrors;
+use Premierstacks\PhpStack\JsonApi\JsonApiLink;
+use Premierstacks\PhpStack\JsonApi\JsonApiLinks;
+use Premierstacks\PhpStack\JsonApi\JsonApiMeta;
+use Premierstacks\PhpStack\JsonApi\JsonApiRelationship;
+use Premierstacks\PhpStack\JsonApi\JsonApiRelationships;
+use Premierstacks\PhpStack\JsonApi\JsonApiResource;
+use Premierstacks\PhpStack\JsonApi\JsonApiResourceIdentifier;
+use Premierstacks\PhpStack\JsonApi\JsonApiSerializer;
+use Premierstacks\PhpStack\JsonApi\JsonApiSource;
 use Tests\Unit\TestCase;
 
 /**

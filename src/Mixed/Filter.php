@@ -11,22 +11,21 @@
  * The full license terms are detailed in the LICENSE.md file within the source code repository.
  * The terms are subject to changes. Users are encouraged to review them periodically.
  *
- * Tomáš Chochola: The Creator, Proprietor & Project Visionary
+ * 🤵 The Proprietor: Tomáš Chochola
+ * - Role: The Creator, Proprietor & Project Visionary
  * - Email: chocholatom1997@gmail.com
  * - GitHub: https://github.com/tomchochola
  * - Sponsor & License: https://github.com/sponsors/tomchochola
- *
- * Premierstacks: The Organization
- * - GitHub: https://github.com/premierstacks
+ * - Web: https://premierstacks.com
  */
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpUtil\Mixed;
+namespace Premierstacks\PhpStack\Mixed;
 
-use Premierstacks\PhpUtil\Debug\Debugf;
-use Premierstacks\PhpUtil\Debug\Errorf;
-use Premierstacks\PhpUtil\Enums\Undefined;
+use Premierstacks\PhpStack\Debug\Debugf;
+use Premierstacks\PhpStack\Debug\Errorf;
+use Premierstacks\PhpStack\Enums\Undefined;
 
 class Filter
 {
@@ -120,15 +119,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -451,15 +442,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -550,19 +533,8 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            yield $k => $callback($k, $v);
         }
-
-        /** @phpstan-ignore-next-line */
-        return $value;
     }
 
     /**
@@ -628,20 +600,8 @@ class Filter
 
         foreach ($value as $k => $v) {
             /** @phpstan-ignore-next-line */
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            yield $k => $callback($k, $v);
         }
-
-        /** @phpstan-ignore-next-line */
-        return $value;
     }
 
     /**
@@ -689,15 +649,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         return $value;
@@ -773,15 +725,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -860,15 +804,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, mixed>', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -928,15 +864,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         return $value;
@@ -1038,15 +966,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -1346,15 +1266,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -1684,15 +1596,8 @@ class Filter
 
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int, mixed>|null', [], $previous));
             }
-            $expected = $callback($k, $v);
 
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -1791,19 +1696,8 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            yield $k => $callback($k, $v);
         }
-
-        /** @phpstan-ignore-next-line */
-        return $value;
     }
 
     /**
@@ -1873,20 +1767,8 @@ class Filter
 
         foreach ($value as $k => $v) {
             /** @phpstan-ignore-next-line */
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                // @phpstan-ignore-next-line
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            yield $k => $callback($k, $v);
         }
-
-        /** @phpstan-ignore-next-line */
-        return $value;
     }
 
     /**
