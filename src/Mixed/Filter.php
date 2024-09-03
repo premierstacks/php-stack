@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace Premierstacks\PhpStack\Mixed;
 
-use Premierstacks\PhpStack\Debug\Debugf;
 use Premierstacks\PhpStack\Debug\Errorf;
 use Premierstacks\PhpStack\Enums\Undefined;
 
@@ -599,7 +598,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            /** @phpstan-ignore-next-line */
+            // @phpstan-ignore-next-line
             yield $k => $callback($k, $v);
         }
     }
@@ -652,6 +651,7 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -867,6 +867,7 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1687,6 +1688,8 @@ class Filter
             throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
         }
 
+        $filtered = [];
+
         foreach ($value as $k => $v) {
             if (!\is_int($k)) {
                 if ($default !== Undefined::value) {
@@ -1696,8 +1699,10 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int, mixed>|null', [], $previous));
             }
 
-            yield $k => $callback($k, $v);
+            $filtered[$k] = $callback($k, $v);
         }
+
+        return new \ArrayIterator($filtered);
     }
 
     /**
@@ -1765,10 +1770,14 @@ class Filter
             throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<int|string, mixed>|null', [], $previous));
         }
 
+        $filtered = [];
+
         foreach ($value as $k => $v) {
-            /** @phpstan-ignore-next-line */
-            yield $k => $callback($k, $v);
+            // @phpstan-ignore-next-line
+            $filtered[$k] = $callback($k, $v);
         }
+
+        return new \ArrayIterator($filtered);
     }
 
     /**
@@ -1820,17 +1829,10 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1908,15 +1910,7 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -2003,15 +1997,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int, templatevv>|null', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -2075,17 +2061,10 @@ class Filter
         }
 
         foreach ($value as $k => $v) {
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue((string) $k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
+        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -2193,15 +2172,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -2568,15 +2539,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -2666,6 +2629,8 @@ class Filter
             throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
         }
 
+        $filtered = [];
+
         foreach ($value as $k => $v) {
             if (!\is_string($k)) {
                 if ($default !== Undefined::value) {
@@ -2675,19 +2640,10 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>|null', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $filtered[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
-        return $value;
+        return new \ArrayIterator($filtered);
     }
 
     /**
@@ -3025,15 +2981,7 @@ class Filter
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<string, mixed>', [], $previous));
             }
 
-            $expected = $callback($k, $v);
-
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $value[$k] = $callback($k, $v);
         }
 
         /** @phpstan-ignore-next-line */
@@ -3115,6 +3063,8 @@ class Filter
             throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
         }
 
+        $filtered = [];
+
         foreach ($value as $k => $v) {
             if (!\is_string($k)) {
                 if ($default !== Undefined::value) {
@@ -3123,19 +3073,11 @@ class Filter
 
                 throw new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'iterable<string, mixed>', [], $previous));
             }
-            $expected = $callback($k, $v);
 
-            if ($v !== $expected) {
-                if ($default !== Undefined::value) {
-                    return $default;
-                }
-
-                throw new \UnexpectedValueException(Errorf::unexpectedVariableValue($k, $v, Debugf::type($expected), [], $previous));
-            }
+            $filtered[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
-        return $value;
+        return new \ArrayIterator($filtered);
     }
 
     /**
