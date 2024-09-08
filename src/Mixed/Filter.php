@@ -982,14 +982,12 @@ class Filter
     public static function nonFalsyString(mixed $value, Undefined|string $default = Undefined::value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && (bool) $value) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
         $parsed = \filter_var($value);
 
         if ($parsed !== false && (bool) $parsed) {
-            /** @phpstan-ignore-next-line */
             return $parsed;
         }
 
@@ -2187,14 +2185,12 @@ class Filter
     public static function nullableNonFalsyString(mixed $value, Undefined|string|null $default = Undefined::value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && (bool) $value) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
         $parsed = \filter_var($value);
 
         if ($parsed !== false && (bool) $parsed) {
-            /** @phpstan-ignore-next-line */
             return $parsed;
         }
 

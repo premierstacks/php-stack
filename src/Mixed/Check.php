@@ -880,7 +880,6 @@ class Check
     public static function nonFalsyString(mixed $value, \Throwable|string|null $previous = null): string
     {
         if (\is_string($value) && (bool) $value) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1970,7 +1969,6 @@ class Check
     public static function nullableNonFalsyString(mixed $value, \Throwable|string|null $previous = null): string|null
     {
         if ($value === null || \is_string($value) && (bool) $value) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 

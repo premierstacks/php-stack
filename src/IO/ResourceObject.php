@@ -158,7 +158,7 @@ class ResourceObject implements \Stringable, StreamInterface
     }
 
     /**
-     * @param int<0, max> $length
+     * @param int<1, max> $length
      */
     public function fread(int $length): string
     {
@@ -260,7 +260,7 @@ class ResourceObject implements \Stringable, StreamInterface
     #[\Override]
     public function read(int $length): string
     {
-        if ($length < 0) {
+        if ($length < 1) {
             throw new \InvalidArgumentException(Errorf::invalidArgument('length', $length, 'int<0, max>'));
         }
 

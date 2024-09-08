@@ -206,7 +206,7 @@ class Resources
 
     /**
      * @param resource $resource
-     * @param int<0, max> $length
+     * @param int<1, max> $length
      */
     public static function fread(mixed $resource, int $length): string
     {

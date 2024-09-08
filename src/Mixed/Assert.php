@@ -998,7 +998,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -2213,7 +2212,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-falsy-string', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
