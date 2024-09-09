@@ -150,9 +150,11 @@ class Client implements ClientInterface, RequestFactoryInterface, ResponseFactor
         \array_splice($http_response_header, 0, 1);
 
         foreach ($http_response_header as $header) {
-            [$k, $v] = \explode(':', $header, 2);
+            $exploded = \explode(':', $header, 2);
 
-            $headers->set(\trim($k), \trim($v), false);
+            if (isset($exploded[0], $exploded[1])) {
+                $headers->set(\trim($exploded[0]), \trim($exploded[1]), false);
+            }
         }
 
         return new Response($status, \trim($reason), $resource, (string) $protocol, $headers);

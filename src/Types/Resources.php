@@ -135,7 +135,7 @@ class Resources
     {
         $stat = static::fstat($resource);
 
-        if (\is_int($stat['size'])) {
+        if (isset($stat['size']) && \is_int($stat['size'])) {
             return $stat['size'];
         }
 

@@ -138,7 +138,7 @@ class ClientTest extends TestCase
 
         static::assertIsArray($array);
 
-        $data = $array['data'];
+        $data = $array['data'] ?? throw new \LogicException('Data not found');
 
         static::assertIsString($data);
 
@@ -172,7 +172,7 @@ class ClientTest extends TestCase
 
         static::assertIsArray($array);
 
-        $files = $array['files'];
+        $files = $array['files'] ?? throw new \LogicException('Files not found');
 
         static::assertIsArray($files);
         static::assertArrayHasKey('test', $files);
@@ -202,7 +202,7 @@ class ClientTest extends TestCase
 
         static::assertIsArray($array);
 
-        $form = $array['form'];
+        $form = $array['form'] ?? throw new \LogicException('Form not found');
 
         static::assertIsArray($form);
 
