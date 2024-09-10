@@ -17,6 +17,6 @@
  * - Web: https://premierstacks.com
  */
 
-import { configs } from '@premierstacks/prettier-stack';
+import { recommended } from '@premierstacks/prettier-stack';
 
-export default configs.recommended();
+export default recommended();
