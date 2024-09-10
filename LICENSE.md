@@ -31,15 +31,19 @@ For licensing or inquiries, please contact Tomáš Chochola or refer to the GitH
 - Attribution: ⚠️
 - Subscription Fee: ⚠️
 
-## 🤵 The Proprietor: Tomáš Chochola
+## The Author: Tomáš Chochola
 
-Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape.
+_Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape._
 
-- **Role**: The Creator, Proprietor & Project Visionary
-- **Email:** <chocholatom1997@gmail.com>
-- **GitHub:** [https://github.com/tomchochola](https://github.com/tomchochola)
-- **Sponsor & License:** [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
-- **Web**: [https://premierstacks.com](https://premierstacks.com)
+Tomáš Chochola is the creator and project visionary behind this project.<br />
+His expertise and innovative approach have been instrumental in shaping the project's direction and ensuring its success.<br />
+Tomáš Chochola's commitment to excellence and his passion for development are reflected in the quality and reliability of the project.
+
+**E-mail**: <chocholatom1997@gmail.com><br />
+**Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
+**Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
+**Sponsor & License**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)<br />
+**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)
 
 ## License Agreement
 
@@ -59,7 +63,7 @@ This ongoing subscription is essential for the entire duration of the software's
 Payment for the subscription must be made through the GitHub Sponsors platform, which serves as the designated payment gateway for these transactions.<br />
 This platform has been chosen for its reliability and ease of use, offering an accessible means for users to manage their subscriptions.
 
-**Buy license here: [Tomáš Chochola's GitHub Sponsors Page](https://github.com/sponsors/tomchochola)**
+**Buy license here: [Sponsor & License](https://github.com/sponsors/tomchochola)**
 
 Please visit the provided link to select the appropriate subscription plan for your project.<br />
 The GitHub Sponsors platform ensures a secure and straightforward subscription process.

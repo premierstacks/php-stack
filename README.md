@@ -47,12 +47,18 @@ Although the source code may be accessible, it is not free for use without a val
 A valid license, obtainable through proper channels, is required for any software use.<br />
 For licensing or inquiries, please contact Tomáš Chochola or refer to the GitHub Sponsors page.
 
-The full license terms are detailed in the [LICENSE.md](LICENSE.md) file within the source code repository.<br />
+The full license terms are detailed in the LICENSE.md file within the source code repository.<br />
 The terms are subject to changes. Users are encouraged to review them periodically.
+
+**Email:** <chocholatom1997@gmail.com><br />
+**Personal GitHub:** [https://github.com/tomchochola](https://github.com/tomchochola)<br />
+**Premierstacks GitHub:** [https://github.com/premierstacks](https://github.com/premierstacks)<br />
+**Sponsor & License:** [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)<br />
+**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)
 
 ### Acquiring a License
 
-To use this software, you must obtain a valid license available through a monthly subscription on the [GitHub Sponsors platform](https://github.com/sponsors/tomchochola).<br />
+To use this software, you must obtain a valid license available through a monthly subscription on the [Sponsor & License](https://github.com/sponsors/tomchochola).<br />
 This platform has been chosen for its reliability and ease of use, providing a secure and straightforward way to manage your subscription.
 
 ## 🖍️ Highlights
@@ -67,7 +73,7 @@ This platform has been chosen for its reliability and ease of use, providing a s
 
 ### 1️⃣ License Acquisition
 
-Secure your license at [Tomáš Chochola's GitHub Sponsors page](https://github.com/sponsors/tomchochola).
+Secure your license at [Sponsor & License](https://github.com/sponsors/tomchochola).
 
 ### 2️⃣ Package Installation
 
@@ -128,23 +134,28 @@ $resource->fpassthru(); // prints a,b,c
 
 Please ensure to manually give credits to the authors in your project documentation or wherever appropriate, as per the license agreement.
 
-## 🤵 The Proprietor: Tomáš Chochola
+## The Author: Tomáš Chochola
 
-Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape.
+_Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape._
 
-- **Role**: The Creator, Proprietor & Project Visionary
-- **Email:** <chocholatom1997@gmail.com>
-- **GitHub:** [https://github.com/tomchochola](https://github.com/tomchochola)
-- **Sponsor & License:** [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
+Tomáš Chochola is the creator and project visionary behind this project.<br />
+His expertise and innovative approach have been instrumental in shaping the project's direction and ensuring its success.<br />
+Tomáš Chochola's commitment to excellence and his passion for development are reflected in the quality and reliability of the project.
+
+**E-mail**: <chocholatom1997@gmail.com><br />
+**Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
+**Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
+**Sponsor & License**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)<br />
+**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)
 
 ## 🌐 Discover Tomáš Chochola's GitHub Universe
 
-Explore the boundless creativity and innovation in [Tomáš Chochola's GitHub repository](https://github.com/tomchochola). As the epicenter of my digital creations, it offers an extensive collection of avant-garde software packages, refined libraries, and polished templates, meticulously crafted to enhance your development journey. Immerse yourself in a world where efficiency and elegance converge, and elevate your projects with tools that redefine excellence.
+Explore the boundless creativity and innovation in [Personal GitHub](https://github.com/tomchochola). As the epicenter of my digital creations, it offers an extensive collection of avant-garde software packages, refined libraries, and polished templates, meticulously crafted to enhance your development journey. Immerse yourself in a world where efficiency and elegance converge, and elevate your projects with tools that redefine excellence.
 
 ## 💰 Empower Innovation: Support and Subscribe
 
-Your support transcends mere contributions; it's the lifeblood of innovation and growth. By subscribing for premium access or becoming a sponsor, you directly contribute to the advancement of high-caliber software. Embrace the opportunity to be part of a visionary journey by visiting my [GitHub Sponsors profile](https://github.com/sponsors/tomchochola).
+Your support transcends mere contributions; it's the lifeblood of innovation and growth. By subscribing for premium access or becoming a sponsor, you directly contribute to the advancement of high-caliber software. Embrace the opportunity to be part of a visionary journey by visiting my [Sponsor & License](https://github.com/sponsors/tomchochola).
 
 ## 🤝 Join Forces with Tomáš Chochola
 
-Embark on a collaborative venture with a developer whose passion for perfection knows no bounds. Whether it's for groundbreaking startups, global enterprises, or transformative government projects, my arsenal of skills is at your command. Let's merge visions and craftsmanship to forge software that stands a class apart. Connect with me at [chocholatom1997@gmail.com](mailto:chocholatom1997@gmail.com) for collaborations that transcend conventional boundaries.
+Embark on a collaborative venture with a developer whose passion for perfection knows no bounds. Whether it's for groundbreaking startups, global enterprises, or transformative government projects, my arsenal of skills is at your command. Let's merge visions and craftsmanship to forge software that stands a class apart. Connect with me at <chocholatom1997@gmail.com> for collaborations that transcend conventional boundaries.
