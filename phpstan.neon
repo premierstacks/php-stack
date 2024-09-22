@@ -3,5 +3,6 @@ includes:
 
 parameters:
   paths:
+    - ./samples
     - ./src
     - ./tests

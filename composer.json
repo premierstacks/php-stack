@@ -1,6 +1,6 @@
 {
   "name": "premierstacks/php-stack",
-  "description": "php stack",
+  "description": "premierstacks php stack",
   "type": "library",
   "keywords": [
     "premierstacks",
@@ -31,16 +31,15 @@
     }
   ],
   "require": {
-    "php": "^8.3",
-    "psr/http-message": "^2.0",
     "psr/http-client": "^1.0",
     "psr/http-factory": "^1.1",
+    "psr/http-message": "^2.0",
     "symfony/http-foundation": "^7.1"
   },
   "require-dev": {
+    "phpunit/phpunit": "^11.3",
     "premierstacks/php-cs-fixer-stack": "@dev",
     "premierstacks/phpstan-stack": "@dev",
-    "phpunit/phpunit": "^11.3",
     "symfony/mime": "^7.1"
   },
   "autoload": {
@@ -57,12 +56,12 @@
   "prefer-stable": true,
   "repositories": [
     {
-      "type": "git",
-      "url": "https://github.com/premierstacks/php-cs-fixer-stack.git"
+      "type": "path",
+      "url": "../php-cs-fixer-stack"
     },
     {
-      "type": "git",
-      "url": "https://github.com/premierstacks/phpstan-stack.git"
+      "type": "path",
+      "url": "../phpstan-stack"
     }
   ],
   "config": {

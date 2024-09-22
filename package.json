@@ -1,6 +1,6 @@
 {
   "name": "@premierstacks/php-stack",
-  "description": "php stack",
+  "description": "premierstacks php stack",
   "keywords": [
     "premierstacks",
     "php-stack",
@@ -33,8 +33,8 @@
     "url": "https://github.com/premierstacks/php-stack.git"
   },
   "devDependencies": {
-    "@premierstacks/prettier-stack": "github:premierstacks/prettier-stack",
-    "@premierstacks/eslint-stack": "github:premierstacks/eslint-stack"
+    "@premierstacks/eslint-stack": "github:premierstacks/eslint-stack",
+    "@premierstacks/prettier-stack": "github:premierstacks/prettier-stack"
   },
   "private": true,
   "type": "module"

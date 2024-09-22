@@ -2,29 +2,34 @@
 
 **Copyright © 2024+ Tomáš Chochola <chocholatom1997@gmail.com> - All Rights Reserved**
 
-This software is the exclusive property of Tomáš Chochola, protected by copyright laws.<br />
-Although the source code may be accessible, it is not free for use without a valid license.<br />
-A valid license, obtainable through proper channels, is required for any software use.<br />
-For licensing or inquiries, please contact Tomáš Chochola or refer to the GitHub Sponsors page.
+[![License](https://img.shields.io/badge/License-©_Proprietary-blue.svg)](LICENSE.md)
+
+This software is proprietary property of Tomáš Chochola and protected by copyright laws.<br />
+A valid license is required for any use or manipulation of the software or source code.<br />
+The full license terms are detailed in the LICENSE.md file within the source code repository.
+
+One license grants you access to all Premierstacks products, ensuring a unified solution for your development and production needs.
+
+**Purchase a license here**: [GitHub Sponsors](https://github.com/sponsors/tomchochola)
 
 **Permissions:**
 
+- Public use: ✔️
+- Private use: ✔️
 - Commercial use: ✔️
 - Non-commercial use: ✔️
-- Private use: ✔️
-- Public use: ✔️
 
 **Limitations:**
 
+- Warranty: ❌
+- Liability: ❌
+- Shareable: ❌
+- Patent use: ❌
 - Modification: ❌
 - Distribution: ❌
-- Liability: ❌
-- Warranty: ❌
-- Trademark use: ❌
-- Patent use: ❌
 - Transferable: ❌
+- Trademark use: ❌
 - Exclusive use: ❌
-- Shareable: ❌
 
 **Conditions:**
 
@@ -33,17 +38,25 @@ For licensing or inquiries, please contact Tomáš Chochola or refer to the GitH
 
 ## The Author: Tomáš Chochola
 
-_Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape._
+Tomáš Chochola is a leading software developer known for delivering precision-crafted, enterprise-grade solutions. With deep expertise in multiple cutting-edge technologies, Tomáš focuses on ensuring top-tier code quality and efficiency for every project.
 
-Tomáš Chochola is the creator and project visionary behind this project.<br />
-His expertise and innovative approach have been instrumental in shaping the project's direction and ensuring its success.<br />
-Tomáš Chochola's commitment to excellence and his passion for development are reflected in the quality and reliability of the project.
-
-**E-mail**: <chocholatom1997@gmail.com><br />
+**Email**: <chocholatom1997@gmail.com><br />
+**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)<br />
 **Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
 **Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
-**Sponsor & License**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)<br />
-**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)
+**GitHub Sponsors**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
+
+His areas of specialization include:
+
+- DevOps and AWS
+- PHP and Laravel
+- Secure coding practices
+- Code style and best practices
+- Helper functions and libraries
+- TypeScript, React, and Webpack
+- Reusable templates and configuration stacks
+- Development on Windows 11 and Ubuntu 22/24 (WSL2)
+- ESLint, Prettier, PHP CS Fixer, PostCSS, and Stylelint
 
 ## License Agreement
 
@@ -63,7 +76,7 @@ This ongoing subscription is essential for the entire duration of the software's
 Payment for the subscription must be made through the GitHub Sponsors platform, which serves as the designated payment gateway for these transactions.<br />
 This platform has been chosen for its reliability and ease of use, offering an accessible means for users to manage their subscriptions.
 
-**Buy license here: [Sponsor & License](https://github.com/sponsors/tomchochola)**
+**Purchase a license here**: [GitHub Sponsors](https://github.com/sponsors/tomchochola)
 
 Please visit the provided link to select the appropriate subscription plan for your project.<br />
 The GitHub Sponsors platform ensures a secure and straightforward subscription process.
@@ -85,17 +98,17 @@ Subject to the terms of this agreement, the Licensor grants the Licensee a non-e
 
 The Licensee shall not:
 
+- Use the software in any way that could be considered unethical or illegal.
 - Clone, fork, or replicate the software repository without explicit permission.
-- Modify, adapt, merge, or create derivative works of the software, except as necessary for using it as intended under this license.
-- Distribute, sublicense, sell, or otherwise make the software available to any third party, in whole or in part.
 - Use the software in any manner that violates this agreement or applicable laws.
 - Direct distribution of the software's source code with end projects is prohibited.
-- Share the software with other developers or collaborators who have not obtained a valid license.
 - Transfer the license to another individual or entity without the Licensor's consent.
-- Use the software in any way that could be considered competitive with the Licensor's business.
 - Remove or alter any proprietary markings or notices of the Licensor in the software.
 - Use the software in any way that could harm the Licensor's reputation or business interests.
-- Use the software in any way that could be considered unethical or illegal.
+- Use the software in any way that could be considered competitive with the Licensor's business.
+- Share the software with other developers or collaborators who have not obtained a valid license.
+- Distribute, sublicense, sell, or otherwise make the software available to any third party, in whole or in part.
+- Modify, adapt, merge, or create derivative works of the software, except as necessary for using it as intended under this license.
 
 ## Attribution
 

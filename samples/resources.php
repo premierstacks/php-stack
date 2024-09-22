@@ -18,13 +18,13 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpStack\JsonApi;
+require_once __DIR__ . '/vendor/autoload.php';
 
-interface JsonApiResourceIdentifierInterface
-{
-    public function getId(): string|null;
+use Premierstacks\PhpStack\IO\ResourceObject;
+use Premierstacks\PhpStack\Types\Resources;
 
-    public function getSlug(): string|null;
+$resource = new ResourceObject(Resources::temp());
 
-    public function getType(): string|null;
-}
+$resource->fputcsv(['a', 'b', 'c']);
+$resource->rewind();
+$resource->fpassthru();

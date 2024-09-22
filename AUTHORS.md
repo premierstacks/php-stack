@@ -2,16 +2,24 @@
 
 This document recognizes the main contributors to this project and highlights their significant roles and contributions.
 
-## The Author: Tomáš Chochola
+## 👤 The Author: Tomáš Chochola
 
-_Elite developer crafting exclusive, enterprise-grade software, professional packages, and premium templates to elevate your digital landscape._
+Tomáš Chochola is a leading software developer known for delivering precision-crafted, enterprise-grade solutions. With deep expertise in multiple cutting-edge technologies, Tomáš focuses on ensuring top-tier code quality and efficiency for every project.
 
-Tomáš Chochola is the creator and project visionary behind this project.<br />
-His expertise and innovative approach have been instrumental in shaping the project's direction and ensuring its success.<br />
-Tomáš Chochola's commitment to excellence and his passion for development are reflected in the quality and reliability of the project.
-
-**E-mail**: <chocholatom1997@gmail.com><br />
+**Email**: <chocholatom1997@gmail.com><br />
+**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)<br />
 **Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
 **Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
-**Sponsor & License**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)<br />
-**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)
+**GitHub Sponsors**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
+
+His areas of specialization include:
+
+- DevOps and AWS
+- PHP and Laravel
+- Secure coding practices
+- Code style and best practices
+- Helper functions and libraries
+- TypeScript, React, and Webpack
+- Reusable templates and configuration stacks
+- Development on Windows 11 and Ubuntu 22/24 (WSL2)
+- ESLint, Prettier, PHP CS Fixer, PostCSS, and Stylelint

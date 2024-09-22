@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpunit
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-  bootstrap="./vendor/autoload.php"
-  cacheDirectory="./.phpunit.cache"
-  executionOrder="depends,defects"
-  colors="true"
-  failOnRisky="true"
-  failOnWarning="true"
-  failOnDeprecation="true"
-  failOnNotice="true"
   beStrictAboutChangesToGlobalState="true"
   beStrictAboutOutputDuringTests="true"
   beStrictAboutTestsThatDoNotTestAnything="true"
-  requireCoverageMetadata="true"
-  enforceTimeLimit="true"
+  bootstrap="./vendor/autoload.php"
+  cacheDirectory="./.phpunit.cache"
+  colors="true"
   defaultTimeLimit="1"
+  enforceTimeLimit="true"
+  executionOrder="depends,defects"
+  failOnDeprecation="true"
+  failOnNotice="true"
+  failOnRisky="true"
+  failOnWarning="true"
+  requireCoverageMetadata="true"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
 >
   <testsuites>
     <testsuite name="unit">
