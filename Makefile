@@ -38,6 +38,8 @@ check: lint stan test audit
 
 .PHONY: clean
 clean:
+	rm -rf ./vendor
+	rm -rf ./node_modules
 	git clean -Xfd
 
 .PHONY: commit
