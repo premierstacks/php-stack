@@ -1,91 +1,65 @@
 # Proprietary Software License
 
-**Copyright © 2024+ Tomáš Chochola <chocholatom1997@gmail.com> - All Rights Reserved**
+**© 2024–Present Tomáš Chochola <chocholatom1997@gmail.com>. All rights reserved.**
 
 [![License](https://img.shields.io/badge/License-©_Proprietary-blue.svg)](LICENSE.md)
 
-This software is proprietary property of Tomáš Chochola and protected by copyright laws.<br />
-A valid license is required for any use or manipulation of the software or source code.<br />
-The full license terms are detailed in the LICENSE.md file within the source code repository.
+This proprietary software is the exclusive property of **Tomáš Chochola <chocholatom1997@gmail.com>** and is protected by international copyright laws. Usage is permitted only under the terms of a valid license.
 
-One license grants you access to all Premierstacks products, ensuring a unified solution for your development and production needs.
+**Purchase a license here: [Github Sponsors](https://github.com/sponsors/tomchochola)**
 
-**Purchase a license here**: [GitHub Sponsors](https://github.com/sponsors/tomchochola)
+## Permissions
 
-**Permissions:**
+**✅ Public use**<br />
+**✅ Private use**<br />
+**✅ Commercial use**<br />
+**✅ Non-commercial use**<br />
 
-- Public use: ✔️
-- Private use: ✔️
-- Commercial use: ✔️
-- Non-commercial use: ✔️
+## Limitations
 
-**Limitations:**
+**❌ Warranty**<br />
+**❌ Liability**<br />
+**❌ Shareable**<br />
+**❌ Patent use**<br />
+**❌ Modification**<br />
+**❌ Distribution**<br />
+**❌ Transferable**<br />
+**❌ Trademark use**<br />
+**❌ Exclusive use**<br />
+**❌ Sublicense**<br />
+**❌ Fork or Clone**<br />
+**❌ Reverse Engineer**<br />
 
-- Warranty: ❌
-- Liability: ❌
-- Shareable: ❌
-- Patent use: ❌
-- Modification: ❌
-- Distribution: ❌
-- Transferable: ❌
-- Trademark use: ❌
-- Exclusive use: ❌
+## Conditions
 
-**Conditions:**
+**⚠️ Attribution**<br />
+**⚠️ Subscription Fee**<br />
 
-- Attribution: ⚠️
-- Subscription Fee: ⚠️
+## About the Creator
 
-## The Author: Tomáš Chochola
+**Tomáš Chochola** is a software developer and creator of the Premierstacks organization. He specializes in building enterprise-grade packages and templates for PHP, JavaScript, and TypeScript to streamline development workflows and enforce best practices.
 
-Tomáš Chochola is a leading software developer known for delivering precision-crafted, enterprise-grade solutions. With deep expertise in multiple cutting-edge technologies, Tomáš focuses on ensuring top-tier code quality and efficiency for every project.
-
-**Email**: <chocholatom1997@gmail.com><br />
-**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)<br />
-**Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
-**Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
-**GitHub Sponsors**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
-
-His areas of specialization include:
-
-- DevOps and AWS
-- PHP and Laravel
-- Secure coding practices
-- Code style and best practices
-- Helper functions and libraries
-- TypeScript, React, and Webpack
-- Reusable templates and configuration stacks
-- Development on Windows 11 and Ubuntu 22/24 (WSL2)
-- ESLint, Prettier, PHP CS Fixer, PostCSS, and Stylelint
+Tomáš is committed to delivering high-quality, reusable solutions that save developers time and ensure long-term project maintainability. His work focuses on modern software standards, security, and performance.
 
 ## License Agreement
 
-This Proprietary Software License outlines the terms under which the software provided by Tomáš Chochola ("Licensor") may be used.<br />
-By using the software, you ("Licensee") agree to these terms.
+This Proprietary Software License outlines the terms under which the software provided by Tomáš Chochola ("Licensor") may be used. By using the software, you ("Licensee") agree to these terms.
 
 ## Ownership and Use
 
-This software is the proprietary property of Tomáš Chochola and is protected by copyright laws.<br />
-Despite its potential public availability, it remains proprietary and not free or open-source.<br />
-A valid license is required for any use of the software, including, but not limited to, development, deployment, and execution.
+This software is the proprietary property of Tomáš Chochola and is protected by copyright laws. Despite its potential public availability, it remains proprietary and not free or open-source. A valid license is required for any use of the software, including, but not limited to, development, deployment, and execution.
 
 ## License Fee
 
-To obtain and maintain a valid license for the use of this software, the Licensee is required to pay a fee in the form of a monthly subscription.<br />
-This ongoing subscription is essential for the entire duration of the software's use.<br />
-Payment for the subscription must be made through the GitHub Sponsors platform, which serves as the designated payment gateway for these transactions.<br />
-This platform has been chosen for its reliability and ease of use, offering an accessible means for users to manage their subscriptions.
+To obtain and maintain a valid license for the use of this software, the Licensee is required to pay a fee in the form of a monthly subscription. This ongoing subscription is essential for the entire duration of the software's use. Payment for the subscription must be made through the GitHub Sponsors platform, which serves as the designated payment gateway for these transactions. This platform has been chosen for its reliability and ease of use, offering an accessible means for users to manage their subscriptions.
 
-**Purchase a license here**: [GitHub Sponsors](https://github.com/sponsors/tomchochola)
+**Purchase a license here: [Github Sponsors](https://github.com/sponsors/tomchochola)**
 
-Please visit the provided link to select the appropriate subscription plan for your project.<br />
-The GitHub Sponsors platform ensures a secure and straightforward subscription process.
+Please visit the provided link to select the appropriate subscription plan for your project. The GitHub Sponsors platform ensures a secure and straightforward subscription process.
 
 ## Binding to GitHub Account
 
-The license is bound to the Licensee's GitHub account that has the active subscription.<br />
-The software can only be used while the associated GitHub account maintains an active subscription to Tomáš Chochola through GitHub Sponsors.<br />
-Any use of the software without an active subscription linked to a valid GitHub account is strictly prohibited.
+The license is bound to the Licensee's GitHub account that has the active subscription. The software can only be used while the associated GitHub account maintains an active subscription to Tomáš Chochola through GitHub Sponsors. Any use of the software without an active subscription linked to a valid GitHub account is strictly prohibited.
 
 ## Grant of License
 
@@ -120,15 +94,11 @@ Tomáš Chochola reserves the right to modify the terms of this license at any t
 
 ## Termination
 
-This license is effective until terminated.<br />
-It will automatically terminate if the Licensee fails to comply with any term or condition.<br />
-Upon termination, the Licensee must cease all use of the software and destroy all copies.<br />
-Tomáš Chochola reserves the right to terminate this license at any time for any reason.
+This license is effective until terminated. It will automatically terminate if the Licensee fails to comply with any term or condition. Upon termination, the Licensee must cease all use of the software and destroy all copies. Tomáš Chochola reserves the right to terminate this license at any time for any reason.
 
 ## No Warranty
 
-The software is provided "as is," without warranty of any kind, express or implied.<br />
-The Licensor disclaims all warranties, including, without limitation, any implied warranties of merchantability and fitness for a particular purpose.
+The software is provided "as is," without warranty of any kind, express or implied. The Licensor disclaims all warranties, including, without limitation, any implied warranties of merchantability and fitness for a particular purpose.
 
 ## Limitation of Liability
 
@@ -149,3 +119,11 @@ Tomáš Chochola makes no guarantees regarding the software's continuous availab
 ## Disclaimer of Warranty
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+## Contact
+
+**📧 Email: <chocholatom1997@gmail.com>**<br />
+**💻 Website: [https://premierstacks.com](https://premierstacks.com)**<br />
+**👨 GitHub Personal: [https://github.com/tomchochola](https://github.com/tomchochola)**<br />
+**🏢 GitHub Organization: [https://github.com/premierstacks](https://github.com/premierstacks)**<br />
+**💰 GitHub Sponsors: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)**<br />

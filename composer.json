@@ -3,9 +3,9 @@
   "description": "premierstacks php stack",
   "type": "library",
   "keywords": [
+    "tomchochola",
     "premierstacks",
-    "php-stack",
-    "tomchochola"
+    "php-stack"
   ],
   "homepage": "https://github.com/premierstacks/php-stack",
   "readme": "./README.md",
@@ -56,12 +56,12 @@
   "prefer-stable": true,
   "repositories": [
     {
-      "type": "path",
-      "url": "../php-cs-fixer-stack"
+      "type": "git",
+      "url": "https://github.com/premierstacks/php-cs-fixer-stack.git"
     },
     {
-      "type": "path",
-      "url": "../phpstan-stack"
+      "type": "git",
+      "url": "https://github.com/premierstacks/phpstan-stack.git"
     }
   ],
   "config": {

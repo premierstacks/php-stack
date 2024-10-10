@@ -18,27 +18,13 @@
 
 declare(strict_types=1);
 
-namespace Premierstacks\PhpStack\JsonApi;
+require_once __DIR__ . '/vendor/autoload.php';
 
-class JsonApiSource implements JsonApiSourceInterface
-{
-    public function __construct(public string|null $pointer = null, public string|null $header = null, public string|null $parameter = null) {}
+use Premierstacks\PhpStack\IO\ResourceObject;
+use Premierstacks\PhpStack\Types\Resources;
 
-    #[\Override]
-    public function getHeader(): string|null
-    {
-        return $this->header;
-    }
+$resource = new ResourceObject(Resources::temp());
 
-    #[\Override]
-    public function getParameter(): string|null
-    {
-        return $this->parameter;
-    }
-
-    #[\Override]
-    public function getPointer(): string|null
-    {
-        return $this->pointer;
-    }
-}
+$resource->fputcsv(['a', 'b', 'c']);
+$resource->rewind();
+$resource->fpassthru();

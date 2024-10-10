@@ -1,54 +1,74 @@
 # [PHP Stack](https://github.com/premierstacks/php-stack) by [Tomáš Chochola](https://github.com/tomchochola)
 
-## 💡 Idea Behind Premierstacks
+✨ _**Clone and Win!**_
 
-Premierstacks is a comprehensive solution designed to cover both the development environment and the runtime provisioning/release process to production servers.
+The PHP Stack is a versatile set of utility libraries and helper functions for PHP projects, designed to simplify common development tasks and provide robust support for building scalable and maintainable applications. It offers a cohesive set of tools that integrate seamlessly into any PHP project, helping developers work more efficiently.
 
-It includes everything from basic project structures to configurations for unit tests, static analysis, linters, automatic code fixers, and compilation or transpilation. Premierstacks ensures that your entire workflow, from development to production deployment, operates smoothly.
+## What is PHP Stack?
 
-With a single license, you gain access to multiple libraries and guides that allow you to focus on business logic while Premierstacks handles both development and runtime environments.
+The PHP Stack is a specialized set of utility libraries and helper functions designed to optimize the development experience for PHP applications. It provides tools for common tasks like data manipulation, HTTP requests, encoding, and structured data handling, all while maintaining a clean and consistent API.
 
-This software is proprietary and designed for serious developers who value precision and professionalism. Ensure compliance by securing your license today.
+This stack is organized into various modules to cover different development needs. Whether you’re working with JSON APIs, managing file resources, or implementing custom data structures, the PHP Stack offers pre-built solutions that integrate seamlessly into any PHP project. With dedicated components for both backend logic and general-purpose utilities, it ensures your projects remain well-organized and easy to maintain.
 
-## ⚡ Why Choose This Solution?
+Unlike traditional libraries that focus on a narrow set of features, the PHP Stack is built to provide a holistic development experience. It reduces dependency conflicts, enforces best practices, and allows for quick setup, so you can spend less time configuring tools and more time building features.
 
-- **Premier Quality**
+## What is Tomchochola
 
-  Crafted for discerning developers and teams aiming for the highest standards.
+[https://github.com/tomchochola](https://github.com/tomchochola)
 
-- **Expertly Crafted**
+This is my personal GitHub profile, where you’ll find public documentation and sample repositories for proprietary packages and templates from Premierstacks. These public repositories are designed to give you an overview of the best practices and high-quality code I follow in all my projects.
 
-  Built by professionals after hundreds of hours of research and testing.
+## What is Premierstacks
 
-- **Production-Ready**
+[https://github.com/premierstacks](https://github.com/premierstacks)
 
-  Fully tested in real-world production environments.
+Premierstacks is a collection of exclusive, proprietary stacks and templates for PHP, JavaScript, TypeScript, React, and Laravel. It was created to address the common pain points developers face with many open-source projects—quality, consistency, and maintainability. With Premierstacks, you get high-quality tools built with strict attention to detail, designed to help you build and maintain better projects, faster.
 
-- **Efficient Setup**
+## Why Premierstacks?
 
-  Get up and running with minimal effort and immediate results.
+I created Premierstacks because I wasn’t satisfied with the quality of many open-source projects. Maintaining high-quality code and ensuring long-term reliability is challenging when you’re not earning from the product. When you pay for something, it means the creator truly cares about its success and is committed to delivering the best possible outcome.
 
-- **Regular Updates**
+Like Apple’s approach with their closed ecosystem, I believe that true excellence can only be achieved when every detail is under your control. That’s why Premierstacks is proprietary software—it's not just about providing solutions; it’s about ensuring those solutions meet the highest standards.
 
-  Stay aligned with the latest standards and best practices.
+### Why You Should Choose Premierstacks
 
-## 🛡️ License & Usage
+**🚀 Unmatched Quality**
 
-**Copyright © 2024+ Tomáš Chochola <chocholatom1997@gmail.com> - All Rights Reserved**
+Our solutions adhere to the highest standards, ensuring clean and maintainable code.
 
-[![License](https://img.shields.io/badge/License-©_Proprietary-blue.svg)](LICENSE.md)
+**⚙️ No Setup Hassles**
 
-This software is proprietary property of Tomáš Chochola and protected by copyright laws.<br />
-A valid license is required for any use or manipulation of the software or source code.<br />
-The full license terms are detailed in the LICENSE.md file within the source code repository.
+Pre-configured environments let you start coding immediately—no more complex setups.
 
-One license grants you access to all Premierstacks products, ensuring a unified solution for your development and production needs.
+**📦 Reuse Across Projects**
 
-**Purchase a license here**: [GitHub Sponsors](https://github.com/sponsors/tomchochola)
+Each library and template is built to be reusable, reducing long-term maintenance.
 
-**See full terms in**: [LICENSE.md](LICENSE.md)
+**🔒 Exclusive Resources**
 
-## 📦 Module exports
+Premierstacks offers tools you won’t find in typical open-source collections.
+
+**🛠️ Always Up-to-Date**
+
+Receive continuous updates and new features, keeping your projects current.
+
+**💪 Expert Creators**
+
+Developed by experienced professionals dedicated to quality and excellence.
+
+## License
+
+**© 2024–Present Tomáš Chochola <chocholatom1997@gmail.com>. All rights reserved.**
+
+This software is proprietary and licensed under specific terms set by its owner.<br />
+Any form of access, use, or distribution requires a valid and active license.<br />
+For full licensing terms, refer to the LICENSE.md file accompanying this software.<br />
+
+**Purchase a license here: [Github Sponsors](https://github.com/sponsors/tomchochola)**
+
+**See full terms here: [/LICENSE.md](/LICENSE.md)**
+
+## Module exports
 
 Here are the available module exports:
 
@@ -119,17 +139,25 @@ use Premierstacks/PhpStack/Types/Resources;
 use Premierstacks/PhpStack/Types/Strings;
 ```
 
-## 🚀 Getting Started
+## Samples
 
-1️⃣ **Review the documentation and license**
+Explore the samples in the [/samples](/samples) directory to see how to use the package in various scenarios.
+
+**[/samples/json_api_errors.php](/samples/json_api_errors.php)**<br />
+**[/samples/json_api_resources.php](/samples/json_api_resources.php)**<br />
+**[/samples/io.php](/samples/io.php)**<br />
+
+## Getting Started
+
+**1. Review the documentation and license**
 
 Ensure this package fits your needs and that you agree with the terms.
 
-2️⃣ **Purchase a license**
+**2. Obtain a license**
 
-Obtain a valid license through [GitHub Sponsors](https://github.com/sponsors/tomchochola).
+**Purchase a license here: [Github Sponsors](https://github.com/sponsors/tomchochola)**
 
-3️⃣ **Install the package**
+**3. Install the package**
 
 Setup composer repostory:
 
@@ -143,45 +171,43 @@ Install using composer:
 composer require --dev premierstacks/php-stack:@dev
 ```
 
-4️⃣ **Use the package**
+**4. See the samples**
+
+Explore the samples in the [/samples](/samples) directory to see how to use the package in various scenarios.
+
+**5. Use the package**
 
 Start using the package in your project.
 
-## 👤 The Author: Tomáš Chochola
+## About the Creator
 
-Tomáš Chochola is a leading software developer known for delivering precision-crafted, enterprise-grade solutions. With deep expertise in multiple cutting-edge technologies, Tomáš focuses on ensuring top-tier code quality and efficiency for every project.
+I'm Tomáš Chochola, a software developer dedicated to creating exclusive, enterprise-grade software solutions. I specialize in building packages and templates for PHP, JavaScript, and TypeScript, tailored to streamline development workflows, enforce best practices, and save you time.
 
-**Email**: <chocholatom1997@gmail.com><br />
-**Premierstacks website**: [https://premierstacks.com](https://premierstacks.com)<br />
-**Personal GitHub**: [https://github.com/tomchochola](https://github.com/tomchochola)<br />
-**Premierstacks GitHub**: [https://github.com/premierstacks](https://github.com/premierstacks)<br />
-**GitHub Sponsors**: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)
+My mission is to develop reusable solutions that enhance code quality, boost productivity, and ensure that projects remain maintainable and scalable over the long term.
 
-His areas of specialization include:
+### Specializations
 
-- DevOps and AWS
-- PHP and Laravel
-- Secure coding practices
-- Code style and best practices
-- Helper functions and libraries
-- TypeScript, React, and Webpack
-- Reusable templates and configuration stacks
-- Development on Windows 11 and Ubuntu 22/24 (WSL2)
-- ESLint, Prettier, PHP CS Fixer, PostCSS, and Stylelint
+**Backend Development:** Expert in PHP and Laravel<br />
+**Frontend Development:** Mastery in TypeScript, React, and JavaScript<br />
+**DevOps:** Proficient in managing Ubuntu and AWS environments<br />
+**Security:** Focused on implementing best practices and enforcing code standards<br />
+**Tooling:** Extensive experience with ESLint, Prettier, PHP CS Fixer, Stylelint, and PHPStan<br />
+**Reusable Solutions:** Creating templates and configuration stacks for optimized development<br />
+**Development Environments:** Fluent in Windows 11 and Ubuntu (WSL2)<br />
 
-## 💼 Hire Me
+## Contact
 
-Whether you need short-term code assistance, in-depth analysis, or help integrating premium packages, I'm available for collaboration. Let's take your project to the next level.
+**📧 Email: <chocholatom1997@gmail.com>**<br />
+**💻 Website: [https://premierstacks.com](https://premierstacks.com)**<br />
+**👨 GitHub Personal: [https://github.com/tomchochola](https://github.com/tomchochola)**<br />
+**🏢 GitHub Organization: [https://github.com/premierstacks](https://github.com/premierstacks)**<br />
+**💰 GitHub Sponsors: [https://github.com/sponsors/tomchochola](https://github.com/sponsors/tomchochola)**<br />
 
-You can also support my work by becoming a sponsor through [GitHub Sponsors](https://github.com/sponsors/tomchochola).
+## Tree
 
-If you're interested in hiring me for any of the above or for solving IT issues, feel free to reach out. I'm open to collaboration, whether it's for new packages, ongoing projects, or quick IT fixes.
+The following is a breakdown of the folder and file structure within this repository. It provides an overview of how the code is organized and where to find key components.
 
-## 🌳 Project Structure (Tree)
-
-Below is an example of the project structure you will receive upon purchasing the stack. This allows you to see what’s included and know exactly what you are paying for:
-
-```sh
+```bash
 .
 ├── AUTHORS.md
 ├── LICENSE.md
@@ -194,9 +220,9 @@ Below is an example of the project structure you will receive upon purchasing th
 ├── phpunit.xml
 ├── prettier.config.js
 ├── samples
+│   ├── io.php
 │   ├── json_api_errors.php
-│   ├── json_api_resources.php
-│   └── resources.php
+│   └── json_api_resources.php
 ├── src
 │   ├── Debug
 │   │   ├── Debugf.php

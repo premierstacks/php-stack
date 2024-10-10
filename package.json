@@ -2,9 +2,9 @@
   "name": "@premierstacks/php-stack",
   "description": "premierstacks php stack",
   "keywords": [
+    "tomchochola",
     "premierstacks",
-    "php-stack",
-    "tomchochola"
+    "php-stack"
   ],
   "homepage": "https://github.com/premierstacks/php-stack",
   "bugs": {
