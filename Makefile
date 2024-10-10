@@ -149,7 +149,7 @@ tree: clean
 	echo '```' >> README.md
 
 .PHONY: update
-update: update_npm
+update: update_npm update_composer
 
 .PHONY: update_composer
 update_composer:
