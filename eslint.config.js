@@ -15,6 +15,6 @@
  * @see {@link https://github.com/sponsors/tomchochola} GitHub Sponsors
  */
 
-import { ignores, node, configs } from '@premierstacks/eslint-stack';
+import { configs, ignores, node } from '@premierstacks/eslint-stack';
 
 export default [...ignores(), ...node(), ...configs()];
