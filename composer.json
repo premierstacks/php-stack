@@ -68,11 +68,9 @@
     "allow-plugins": {
       "phpstan/extension-installer": true
     },
-    "preferred-install": "dist",
     "audit": {
       "abandoned": "fail"
     },
-    "optimize-autoloader": true,
     "platform-check": true
   }
 }
