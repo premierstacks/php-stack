@@ -54,7 +54,6 @@ class Check
     public static function array(mixed $value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -211,7 +210,6 @@ class Check
     public static function countable(mixed $value, \Throwable|string|null $previous = null): \Countable|array
     {
         if (\is_countable($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -617,7 +615,6 @@ class Check
     public static function nonEmptyArray(mixed $value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value) && $value !== []) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -653,7 +650,6 @@ class Check
             }
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1091,7 +1087,6 @@ class Check
     public static function nullableArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1252,7 +1247,6 @@ class Check
     public static function nullableCountable(mixed $value, \Throwable|string|null $previous = null): \Countable|array|null
     {
         if ($value === null || \is_countable($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1682,7 +1676,6 @@ class Check
     public static function nullableNonEmptyArray(mixed $value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value) && $value !== []) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1722,7 +1715,6 @@ class Check
             }
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 

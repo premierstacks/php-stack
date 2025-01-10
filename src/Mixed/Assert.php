@@ -58,7 +58,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -229,7 +228,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -689,7 +687,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1221,7 +1218,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'array<int|string, mixed>|null', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1396,7 +1392,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'countable|null', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1879,7 +1874,6 @@ class Assert
             new \InvalidArgumentException(Errorf::invalidArgument('value', $value, 'non-empty-array<int|string, mixed>|null', [], $previous)),
         );
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 

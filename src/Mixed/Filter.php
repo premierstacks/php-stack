@@ -56,7 +56,6 @@ class Filter
     public static function array(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -114,7 +113,6 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -236,7 +234,6 @@ class Filter
     public static function countable(mixed $value, \Countable|Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): \Countable|array
     {
         if (\is_countable($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -680,7 +677,6 @@ class Filter
     public static function nonEmptyArray(mixed $value, Undefined|array $default = Undefined::value, \Throwable|string|null $previous = null): array
     {
         if (\is_array($value) && $value !== []) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -721,7 +717,6 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1199,7 +1194,6 @@ class Filter
     public static function nullableArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1261,7 +1255,6 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
@@ -1383,7 +1376,6 @@ class Filter
     public static function nullableCountable(mixed $value, \Countable|Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): \Countable|array|null
     {
         if ($value === null || \is_countable($value)) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1859,7 +1851,6 @@ class Filter
     public static function nullableNonEmptyArray(mixed $value, Undefined|array|null $default = Undefined::value, \Throwable|string|null $previous = null): array|null
     {
         if ($value === null || \is_array($value) && $value !== []) {
-            /** @phpstan-ignore-next-line */
             return $value;
         }
 
@@ -1904,7 +1895,6 @@ class Filter
             $value[$k] = $callback($k, $v);
         }
 
-        /** @phpstan-ignore-next-line */
         return $value;
     }
 
