@@ -168,21 +168,21 @@ The following is a breakdown of the folder and file structure within this reposi
 
 ```bash
 .
+├── AUTHORS.md
+├── composer.json
 ├── .editorconfig
+├── eslint.config.js
 ├── .gitattributes
 ├── .gitignore
-├── .php-cs-fixer.php
-├── .prettierignore
-├── AUTHORS.md
-├── LICENSE.md
+├── LICENSE
 ├── Makefile
-├── README.md
-├── composer.json
-├── eslint.config.js
 ├── package.json
+├── .php-cs-fixer.php
 ├── phpstan.neon
 ├── phpunit.xml
 ├── prettier.config.js
+├── .prettierignore
+├── README.md
 ├── samples
 │   ├── io.php
 │   ├── json_api_errors.php
@@ -214,39 +214,39 @@ The following is a breakdown of the folder and file structure within this reposi
 │   ├── IO
 │   │   └── ResourceObject.php
 │   ├── JsonApi
-│   │   ├── JsonApi.php
 │   │   ├── JsonApiAttributes.php
-│   │   ├── JsonApiDocument.php
 │   │   ├── JsonApiDocumentInterface.php
-│   │   ├── JsonApiError.php
+│   │   ├── JsonApiDocument.php
 │   │   ├── JsonApiErrorInterface.php
+│   │   ├── JsonApiError.php
 │   │   ├── JsonApiErrors.php
 │   │   ├── JsonApiInterface.php
-│   │   ├── JsonApiLink.php
 │   │   ├── JsonApiLinkInterface.php
+│   │   ├── JsonApiLink.php
 │   │   ├── JsonApiLinks.php
 │   │   ├── JsonApiMeta.php
-│   │   ├── JsonApiRelationship.php
+│   │   ├── JsonApi.php
 │   │   ├── JsonApiRelationshipInterface.php
+│   │   ├── JsonApiRelationship.php
 │   │   ├── JsonApiRelationships.php
-│   │   ├── JsonApiResource.php
-│   │   ├── JsonApiResourceIdentifier.php
 │   │   ├── JsonApiResourceIdentifierInterface.php
+│   │   ├── JsonApiResourceIdentifier.php
 │   │   ├── JsonApiResourceInterface.php
+│   │   ├── JsonApiResource.php
 │   │   ├── JsonApiSerializer.php
-│   │   ├── JsonApiSource.php
 │   │   ├── JsonApiSourceInterface.php
+│   │   ├── JsonApiSource.php
 │   │   ├── NullInterface.php
 │   │   ├── NullJsonApiLink.php
-│   │   ├── NullJsonApiResource.php
 │   │   ├── NullJsonApiResourceIdentifier.php
+│   │   ├── NullJsonApiResource.php
 │   │   ├── ThrowableDebugJsonApiMeta.php
 │   │   ├── ThrowableJsonApiError.php
 │   │   └── ThrowableJsonApiErrors.php
 │   ├── Mixed
 │   │   ├── Assert.php
-│   │   ├── Check.php
 │   │   ├── Filter.php
+│   │   ├── Check.php
 │   │   └── Is.php
 │   ├── Random
 │   │   └── Random.php
@@ -283,5 +283,5 @@ The following is a breakdown of the folder and file structure within this reposi
         │   └── StructTest.php
         └── TestCase.php
 
-20 directories, 94 files
+21 directories, 94 files
 ```
