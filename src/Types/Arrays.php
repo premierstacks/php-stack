@@ -2,7 +2,7 @@
 
 /**
  * @author Tomáš Chochola <chocholatom1997@gmail.com>
- * @copyright © 2025, Tomáš Chochola <chocholatom1997@gmail.com>. Some rights reserved.
+ * @copyright © 2025 Tomáš Chochola <chocholatom1997@gmail.com>
  *
  * @license CC-BY-ND-4.0
  *
@@ -29,7 +29,7 @@ class Arrays
     public static function nullableTrim(array $array): array
     {
         \array_walk_recursive($array, static function (mixed &$value): void {
-            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
+            if (\is_string($value) && ($value === '' || \mb_trim($value) === '')) {
                 $value = null;
             }
         });
@@ -48,7 +48,7 @@ class Arrays
     public static function trim(array $array): array
     {
         \array_walk_recursive($array, static function (mixed &$value): void {
-            if (\is_string($value) && ($value === '' || \trim($value) === '')) {
+            if (\is_string($value) && ($value === '' || \mb_trim($value) === '')) {
                 $value = '';
             }
         });

@@ -2,7 +2,7 @@
 
 /**
  * @author Tomáš Chochola <chocholatom1997@gmail.com>
- * @copyright © 2025, Tomáš Chochola <chocholatom1997@gmail.com>. Some rights reserved.
+ * @copyright © 2025 Tomáš Chochola <chocholatom1997@gmail.com>
  *
  * @license CC-BY-ND-4.0
  *
@@ -26,7 +26,7 @@ class Strings
             return null;
         }
 
-        if ($trim && \trim($value) === '') {
+        if ($trim && \mb_trim($value) === '') {
             return null;
         }
 
@@ -51,12 +51,12 @@ class Strings
     /**
      * @return iterable<int, string>
      */
-    public static function pregSplit(string $string, string $pattern = '/\s+/', int $limit = -1, int $flags = \PREG_SPLIT_NO_EMPTY): iterable
+    public static function pregSplit(string $string, string $pattern = '/\s+/', int $limit = -1): iterable
     {
-        $splited = \preg_split($pattern, $string, $limit, $flags);
+        $splited = \preg_split($pattern, $string, $limit, \PREG_SPLIT_NO_EMPTY);
 
         if ($splited === false) {
-            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('preg_split', [$pattern, $string, $limit, $flags]));
+            throw new \UnexpectedValueException(Errorf::unexpectedCallableError('preg_split', [$pattern, $string, $limit, \PREG_SPLIT_NO_EMPTY]));
         }
 
         return $splited;

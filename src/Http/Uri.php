@@ -2,7 +2,7 @@
 
 /**
  * @author Tomáš Chochola <chocholatom1997@gmail.com>
- * @copyright © 2025, Tomáš Chochola <chocholatom1997@gmail.com>. Some rights reserved.
+ * @copyright © 2025 Tomáš Chochola <chocholatom1997@gmail.com>
  *
  * @license CC-BY-ND-4.0
  *
@@ -50,7 +50,7 @@ class Uri implements UriInterface
         $path = $this->path;
 
         if ($authority !== '' && $path !== '') {
-            $path = '/' . \ltrim($path, '/');
+            $path = '/' . \mb_ltrim($path, '/');
         }
 
         $uri .= $path;

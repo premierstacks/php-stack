@@ -2,7 +2,7 @@
 
 /**
  * @author Tomáš Chochola <chocholatom1997@gmail.com>
- * @copyright © 2025, Tomáš Chochola <chocholatom1997@gmail.com>. Some rights reserved.
+ * @copyright © 2025 Tomáš Chochola <chocholatom1997@gmail.com>
  *
  * @license CC-BY-ND-4.0
  *
@@ -146,10 +146,10 @@ class Client implements ClientInterface, RequestFactoryInterface, ResponseFactor
             $exploded = \explode(':', $header, 2);
 
             if (isset($exploded[0], $exploded[1])) {
-                $headers->set(\trim($exploded[0]), \trim($exploded[1]), false);
+                $headers->set(\mb_trim($exploded[0]), \mb_trim($exploded[1]), false);
             }
         }
 
-        return new Response($status, \trim($reason), $resource, (string) $protocol, $headers);
+        return new Response($status, \mb_trim($reason), $resource, (string) $protocol, $headers);
     }
 }

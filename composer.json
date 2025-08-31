@@ -5,7 +5,10 @@
   "keywords": [
     "tomchochola",
     "tomaschochola",
+    "Tomas Chochola",
+    "Tomáš Chochola",
     "premierstacks",
+    "Premierstacks",
     "php-stack"
   ],
   "homepage": "https://github.com/premierstacks/php-stack",
@@ -32,16 +35,16 @@
     }
   ],
   "require": {
-    "psr/http-client": "^1.0",
-    "psr/http-factory": "^1.1",
-    "psr/http-message": "^2.0",
-    "symfony/http-foundation": "^7.1"
+    "psr/http-client": "^1.0.3",
+    "psr/http-factory": "^1.1.0",
+    "psr/http-message": "^2.0.0",
+    "symfony/http-foundation": "^7.3.3"
   },
   "require-dev": {
-    "phpunit/phpunit": "^11.4",
+    "phpunit/phpunit": "^12.3.7",
     "premierstacks/php-cs-fixer-stack": "@dev",
     "premierstacks/phpstan-stack": "@dev",
-    "symfony/mime": "^7.1"
+    "symfony/mime": "^7.3.2"
   },
   "autoload": {
     "psr-4": {
@@ -75,5 +78,19 @@
       "abandoned": "fail"
     },
     "platform-check": true
+  },
+  "scripts": {
+    "composer:audit": "@composer audit",
+    "composer:install": "@composer install",
+    "composer:platform": "@composer check-platform-reqs",
+    "composer:update": "@composer update",
+    "composer:validate": "@composer validate --strict --no-check-all",
+    "dump:development": "@composer dump-autoload -o --dev --strict-psr",
+    "dump:production": "@composer dump-autoload -a --no-dev --strict-psr",
+    "fix:php-cs-fixer": "php-cs-fixer fix",
+    "lint:php-cs-fixer": "php-cs-fixer fix --dry-run --diff",
+    "stan:phpstan": "phpstan analyse",
+    "test:coverage": "@php -S 0.0.0.0:8000 -t ./.phpunit.coverage/html",
+    "test:phpunit": "phpunit"
   }
 }
